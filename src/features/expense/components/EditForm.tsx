@@ -27,86 +27,89 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FieldValues, useForm } from "react-hook-form";
-import { getCategories } from "../../category/api/get-categories";
-import { getTypes } from "../../type/api/get-types";
-import { getCards } from "../../card/api/get-cards";
-import { createExpense } from "../api/create-expense";
+import { useData } from "@/context/DataContext";
 import { Expense } from "../types/expense";
-import { toast } from "sonner";
+import { editExpense } from "../api/edit-expense";
+import { useToast } from "@/hooks/use-toast"
+import { formatCurrency } from "@/utils/mask-real";
 
-export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () => void }) {
-    const [categories, setCategories] = useState<any[]>([]);
-    const [types, setTypes] = useState<any[]>([]);
-    const [cards, setCards] = useState<any[]>([]);
-    const [isSheetOpen, setIsSheetOpen] = useState(false)
+export default function EditForm({ expense, expenseId }: { expense: Expense; expenseId: string }) {
+    const { categories } = useData();
+    const { types } = useData();
+    const { cards } = useData();
+    const [isSheetOpen, setIsSheetOpen] = useState(false);
+    const { toast } = useToast();
     const form = useForm({
         defaultValues: {
-            expense: "",
-            description: "",
-            amount: "",
-            date: "",
-            category_id: "",
-            type_id: "",
-            card_id: "",
+            expense: expense.expense,
+            description: expense.description,
+            amount: formatCurrency(expense.amount),
+            date: expense.date,
+            category_id: expense.category_id,
+            type_id: expense.type_id,
+            card_id: expense.card_id,
         },
     });
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const data = await getCategories();
-                setCategories(data);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        };
-
-        const fetchTypes = async () => {
-            try {
-                const data = await getTypes();
-                setTypes(data);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        };
-
-        const fetchCards = async () => {
-            try {
-                const data = await getCards();
-                setCards(data);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        };
-
-        fetchCategories();
-        fetchTypes();
-        fetchCards();
-    }, []);
-
+    const handleAmountChange = (
+        e: React.ChangeEvent<HTMLInputElement>, // Event type
+        field: any // Field object
+      ) => {
+        const input = e.target;
+        const { value } = input;
+      
+        // Detect cursor position before formatting
+        const selectionStart = input.selectionStart;
+        const isBackspace = e.nativeEvent.inputType === "deleteContentBackward";
+      
+        // Strip non-numeric characters except commas
+        let rawValue = value.replace(/[^\d,]/g, "");
+      
+        if (isBackspace && selectionStart !== null && value[selectionStart - 1] === ",") {
+          // Handle backspace directly after a comma
+          rawValue = rawValue.slice(0, -1); // Remove the last character
+        }
+      
+        // Replace commas for numeric parsing, then format
+        const numericValue = parseFloat(rawValue.replace(",", ".")) || 0;
+        const formattedValue = formatCurrency(numericValue);
+      
+        // Update the field value
+        field.onChange(formattedValue);
+      
+        // Reapply the cursor position
+        window.requestAnimationFrame(() => {
+          if (selectionStart !== null) {
+            input.setSelectionRange(selectionStart, selectionStart);
+          }
+        });
+      };
 
     function onSubmit(data: FieldValues) {
         const expenseData = data as Expense;
-        createExpense(expenseData);
+        expenseData.id = expenseId;
+        editExpense(expenseData);
 
         form.reset();
         form.setValue("category_id", "");
         form.setValue("type_id", "");
         form.setValue("card_id", "");
 
-        toast("Despesa criada com sucesso.")
-
-        onExpenseCreated();
+        toast({
+            variant: "default",
+            title: "Sucesso!",
+            description: "Despesa editada com sucesso!",
+        });
 
         setIsSheetOpen(false);
     }
 
     return (
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger className="bg-neutral-950 p-2 rounded-md text-white font-bold hover:bg-neutral-800">Cadastrar</SheetTrigger>
+            <SheetTrigger className="bg-neutral-950 p-2 rounded-md text-white font-bold hover:bg-neutral-800">Editar</SheetTrigger>
             <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
                 <SheetHeader>
-                    <SheetTitle>Cadasto de Despesa</SheetTitle>
+                    <SheetTitle>Editar Despesa</SheetTitle>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <FormField
@@ -148,7 +151,11 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                     <FormItem>
                                         <FormLabel>Valor</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input
+                                                {...field}
+                                                value={field.value} // Ensure controlled input
+                                                onChange={(e) => handleAmountChange(e, field)} // Format user input
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             Este é o valor da sua despesa.
@@ -179,7 +186,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Categorias</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Selecione a categoria da despesa" />
@@ -206,7 +213,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Tipos</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Selecione o tipo da despesa" />
@@ -233,7 +240,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Cartão</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Selecione o cartão da despesa" />
@@ -254,7 +261,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit">Cadastrar</Button>
+                            <Button type="submit">Editar</Button>
                         </form>
                     </Form>
                 </SheetHeader>

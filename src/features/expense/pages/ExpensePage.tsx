@@ -5,14 +5,22 @@ import { getExpenses } from "@/features/expense/action/get-expenses";
 import { columns } from "../components/Columns";
 import { DataTable } from "@/components/ui/data-table";
 import CreateForm from "../components/CreateForm";
+import Loader from "@/components/loading";
 
 const ExpensePage = () => {
   const [expenses, setExpenses] = useState<any[]>([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchUsers = async () => {
-      const data = await getExpenses();
-      setExpenses(data);
+      try {
+        setIsLoading(true);
+        const data = await getExpenses();
+        setExpenses(data);
+      } catch (error) {
+        console.error("Erro ao carregar os dados:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchUsers();
@@ -30,10 +38,16 @@ const ExpensePage = () => {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Gestão de Despesas</h1>
-      <div className="text-right">
-        <CreateForm onExpenseCreated={reloadExpenses}/>
-      </div>
-      <DataTable columns={columns} data={expenses} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div>
+          <div className="text-right">
+            <CreateForm onExpenseCreated={reloadExpenses} />
+          </div>
+          <DataTable columns={columns} data={expenses} />
+        </div>
+      )}
     </div>
   );
 };

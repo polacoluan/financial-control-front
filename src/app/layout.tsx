@@ -4,6 +4,8 @@
 import '@/styles/globals.css';
 import { MainLayout } from '@/layouts/MainLayout';
 import { usePathname } from 'next/navigation';
+import { Toaster } from "@/components/ui/toaster";
+import { DataProvider } from "@/context/DataContext";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -18,7 +20,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {isExcluded ? (
           children
         ) : (
-          <MainLayout>{children}</MainLayout>
+          <div>
+            <DataProvider>
+              <MainLayout>{children}</MainLayout>
+            </DataProvider>
+            <Toaster />
+          </div>
         )}
       </body>
     </html>

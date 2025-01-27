@@ -1,9 +1,12 @@
 "use client";
 
+import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Expense } from "../types/expense";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Edit } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import EditForm from "./EditForm";
+import { formatCurrency } from "@/utils/mask-real";
 
 export const columns: ColumnDef<Expense>[] = [
     {
@@ -34,11 +37,11 @@ export const columns: ColumnDef<Expense>[] = [
             )
         },
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amount"))
+            const amount = parseFloat(row.getValue("amount"));
             const formatted = new Intl.NumberFormat("pt-BR", {
                 style: "currency",
                 currency: "BRL",
-            }).format(amount)
+            }).format(amount);
 
             return <div className="text-center font-medium">{formatted}</div>
         },
@@ -112,5 +115,17 @@ export const columns: ColumnDef<Expense>[] = [
                 </Button>
             )
         },
+    },
+    {
+        id: "actions",
+        cell: ({ row }) => {
+            const expense = row.original as Expense;
+
+            return (
+                <div>
+                    <EditForm expense={expense} expenseId={expense.id} />
+                </div>
+            )
+        }
     },
 ];
