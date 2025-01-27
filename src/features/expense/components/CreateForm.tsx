@@ -103,7 +103,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
 
     return (
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger className="bg-sky-700 hover:bg-sky-900">Cadastrar</SheetTrigger>
+            <SheetTrigger className="bg-neutral-950 p-2 rounded text-white hover:bg-neutral-700">Cadastrar</SheetTrigger>
             <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
                 <SheetHeader>
                     <SheetTitle>Cadasto de Despesa</SheetTitle>
