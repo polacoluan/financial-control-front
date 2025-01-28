@@ -1,21 +1,21 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getExpenses } from "@/features/expense/api/get-expenses";
+import { getCategories } from "@/features/category/api/get-categories";
 import { columns } from "../components/Columns";
-import { DataTable } from "@/components/ui/data-table";
+import { DataTable } from "../components/DataTable";
 import CreateForm from "../components/CreateForm";
 import Loader from "@/components/loading";
 
-const ExpensePage = () => {
-  const [expenses, setExpenses] = useState<any[]>([]);
+const CategoryPage = () => {
+  const [categories, setCategories] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         setIsLoading(true);
-        const data = await getExpenses();
-        setExpenses(data);
+        const data = await getCategories();
+        setCategories(data);
       } catch (error) {
         console.error("Erro ao carregar os dados:", error);
       } finally {
@@ -26,30 +26,30 @@ const ExpensePage = () => {
     fetchUsers();
   }, []);
 
-  const reloadExpenses = async () => {
+  const reloadCategories = async () => {
     try {
-      const data = await getExpenses();
-      setExpenses(data);
+      const data = await getCategories();
+      setCategories(data);
     } catch (error) {
-      console.error("Error reloading expenses:", error);
+      console.error("Error reloading categories:", error);
     }
   };
   
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Gestão de Despesas</h1>
+      <h1 className="text-2xl font-bold mb-6">Gestão de Categorias</h1>
       {isLoading ? (
         <Loader />
       ) : (
         <div>
           <div className="text-right">
-            <CreateForm onExpenseCreated={reloadExpenses} />
+            <CreateForm onCategoryCreated={reloadCategories} />
           </div>
-          <DataTable columns={columns} data={expenses} reloadExpenses={reloadExpenses} />
+          <DataTable columns={columns} data={categories} reloadCategories={reloadCategories} />
         </div>
       )}
     </div>
   );
 };
 
-export default ExpensePage;
+export default CategoryPage;
