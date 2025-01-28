@@ -20,33 +20,32 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FieldValues, useForm } from "react-hook-form";
-import { useData } from "@/context/DataContext";
-import { Category } from "../types/category";
-import { editCategory } from "../api/edit-category";
+import { Type } from "../types/type";
+import { editType } from "../api/edit-type";
 import { useToast } from "@/hooks/use-toast";
 
-export default function EditForm({ category, categoryId, reloadCategories }: { category: Category; categoryId: string; reloadCategories?: () => void; }) {
+export default function EditForm({ type, typeId, reloadTypes }: { type: Type; typeId: string; reloadTypes?: () => void; }) {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const { toast } = useToast();
     const form = useForm({
         defaultValues: {
-            category: category.category,
-            description: category.description,
+            type: type.type,
+            description: type.description,
         },
     });
 
     function onSubmit(data: FieldValues) {
-        const categoryData = data as Category;
-        categoryData.id = categoryId;
-        editCategory(categoryData);
+        const typeData = data as Type;
+        typeData.id = typeId;
+        editType(typeData);
 
         toast({
             variant: "default",
             title: "Sucesso!",
-            description: "Despesa editada com sucesso!",
+            description: "Tipo editado com sucesso!",
         });
 
-        reloadCategories?.();
+        reloadTypes?.();
 
         setIsSheetOpen(false);
     }
@@ -56,20 +55,20 @@ export default function EditForm({ category, categoryId, reloadCategories }: { c
             <SheetTrigger className="bg-neutral-950 p-2 rounded-md text-white font-bold hover:bg-neutral-800">Editar</SheetTrigger>
             <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
                 <SheetHeader>
-                    <SheetTitle>Editar Categoria</SheetTitle>
+                    <SheetTitle>Editar Tipo</SheetTitle>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <FormField
                                 control={form.control}
-                                name="category"
+                                name="type"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Categoria</FormLabel>
+                                        <FormLabel>Tipo</FormLabel>
                                         <FormControl>
                                             <Input {...field} />
                                         </FormControl>
                                         <FormDescription>
-                                            Este é o nome da sua categoria.
+                                            Este é o nome do seu tipo.
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
@@ -85,7 +84,7 @@ export default function EditForm({ category, categoryId, reloadCategories }: { c
                                             <Input {...field} />
                                         </FormControl>
                                         <FormDescription>
-                                            Este é a descrição da sua categoria.
+                                            Este é a descrição do seu tipo.
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>

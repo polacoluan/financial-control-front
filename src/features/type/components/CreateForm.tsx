@@ -20,56 +20,51 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FieldValues, useForm } from "react-hook-form";
-import { useData } from "@/context/DataContext";
-import { Category } from "../types/category";
-import { editCategory } from "../api/edit-category";
-import { useToast } from "@/hooks/use-toast";
+import { createType } from "../api/create-type";
+import { Type } from "../types/type";
+import { toast } from "sonner";
 
-export default function EditForm({ category, categoryId, reloadCategories }: { category: Category; categoryId: string; reloadCategories?: () => void; }) {
-    const [isSheetOpen, setIsSheetOpen] = useState(false);
-    const { toast } = useToast();
+export default function CreateForm({ onTypeCreated }: { onTypeCreated: () => void }) {
+    const [isSheetOpen, setIsSheetOpen] = useState(false)
     const form = useForm({
         defaultValues: {
-            category: category.category,
-            description: category.description,
+            type: "",
+            description: "",
         },
     });
 
     function onSubmit(data: FieldValues) {
-        const categoryData = data as Category;
-        categoryData.id = categoryId;
-        editCategory(categoryData);
+        const typeData = data as Type;
+        createType(typeData);
 
-        toast({
-            variant: "default",
-            title: "Sucesso!",
-            description: "Despesa editada com sucesso!",
-        });
+        form.reset();
 
-        reloadCategories?.();
+        toast("Tipo criado com sucesso.")
+
+        onTypeCreated();
 
         setIsSheetOpen(false);
     }
 
     return (
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger className="bg-neutral-950 p-2 rounded-md text-white font-bold hover:bg-neutral-800">Editar</SheetTrigger>
+            <SheetTrigger className="bg-neutral-950 p-2 rounded-md text-white font-bold hover:bg-neutral-800">Cadastrar</SheetTrigger>
             <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
                 <SheetHeader>
-                    <SheetTitle>Editar Categoria</SheetTitle>
+                    <SheetTitle>Cadasto de Tipo</SheetTitle>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <FormField
                                 control={form.control}
-                                name="category"
+                                name="type"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Categoria</FormLabel>
+                                        <FormLabel>Tipo</FormLabel>
                                         <FormControl>
                                             <Input {...field} />
                                         </FormControl>
                                         <FormDescription>
-                                            Este é o nome da sua categoria.
+                                            Este é o nome do seu tipo.
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
@@ -85,13 +80,13 @@ export default function EditForm({ category, categoryId, reloadCategories }: { c
                                             <Input {...field} />
                                         </FormControl>
                                         <FormDescription>
-                                            Este é a descrição da sua categoria.
+                                            Este é a descrição do seu tipo.
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            />
-                            <Button type="submit">Editar</Button>
+                            />                           
+                            <Button type="submit">Cadastrar</Button>
                         </form>
                     </Form>
                 </SheetHeader>

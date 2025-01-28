@@ -1,4 +1,4 @@
-import { Home, HandCoins, ChartBarStacked } from "lucide-react"
+import { Home, HandCoins, ChartBarStacked, Type } from "lucide-react"
 
 import {
   Sidebar,
@@ -27,6 +27,11 @@ const items = [
     title: "Categorias",
     url: "category",
     icon: ChartBarStacked,
+  },
+  {
+    title: "Tipos",
+    url: "type",
+    icon: Type,
   },
 ]
 

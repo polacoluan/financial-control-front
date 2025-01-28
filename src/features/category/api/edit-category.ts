@@ -7,7 +7,7 @@ export async function editCategory(data: Category): Promise<any> {
         const API_URL = '/categories/'+data.id;
 
         await httpPatch(API_URL, {
-            expense: data.category,
+            category: data.category,
             description: data.description,
         });
 

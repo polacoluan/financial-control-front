@@ -59,7 +59,7 @@ export default function CreateForm({ onCategoryCreated }: { onCategoryCreated: (
                                 name="category"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Despesa</FormLabel>
+                                        <FormLabel>Categoria</FormLabel>
                                         <FormControl>
                                             <Input {...field} />
                                         </FormControl>
