@@ -33,6 +33,7 @@ import { getCards } from "../../card/api/get-cards";
 import { createExpense } from "../api/create-expense";
 import { Expense } from "../types/expense";
 import { toast } from "sonner";
+import MoneyInput from "@/components/money-input";
 
 export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () => void }) {
     const [categories, setCategories] = useState<any[]>([]);
@@ -141,21 +142,12 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                     </FormItem>
                                 )}
                             />
-                            <FormField
-                                control={form.control}
+                            <MoneyInput
+                                form={form}
+                                label="Valor Teste"
                                 name="amount"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Valor</FormLabel>
-                                        <FormControl>
-                                            <Input {...field} />
-                                        </FormControl>
-                                        <FormDescription>
-                                            Este é o valor da sua despesa.
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder=""
+                                description="Este é o valor da sua despesa."
                             />
                             <FormField
                                 control={form.control}

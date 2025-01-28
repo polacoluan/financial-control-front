@@ -2,8 +2,14 @@ export const formatCurrency = (value: number | string): string => {
   if (!value) return "R$ 0,00";
   const numericValue = typeof value === "string" ? parseFloat(value) : value;
 
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
+  const moneyFormatter = Intl.NumberFormat("pt-BR", {
     currency: "BRL",
-  }).format(numericValue);
+    currencyDisplay: "symbol",
+    currencySign: "standard",
+    style: "currency",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  return moneyFormatter.format(numericValue);
 };

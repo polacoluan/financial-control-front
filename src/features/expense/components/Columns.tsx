@@ -1,14 +1,18 @@
 "use client";
 
 import React from "react";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, CellContext } from "@tanstack/react-table";
 import { Expense } from "../types/expense";
-import { ArrowUpDown, Edit } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import EditForm from "./EditForm";
-import { formatCurrency } from "@/utils/mask-real";
+import DeleteDialog from "./DeleteDialog";
 
-export const columns: ColumnDef<Expense>[] = [
+interface CustomCellContext<TData> extends CellContext<TData, unknown> {
+    reloadExpenses?: () => void;
+}
+
+export const columns: ColumnDef<Expense, unknown>[] = [
     {
         accessorKey: "expense",
         header: ({ column }) => {
@@ -118,12 +122,13 @@ export const columns: ColumnDef<Expense>[] = [
     },
     {
         id: "actions",
-        cell: ({ row }) => {
+        cell: ({ row, reloadExpenses }: CustomCellContext<Expense>) => {
             const expense = row.original as Expense;
 
             return (
                 <div>
-                    <EditForm expense={expense} expenseId={expense.id} />
+                    <EditForm expense={expense} expenseId={expense.id} reloadExpenses={reloadExpenses} />
+                    <DeleteDialog expense={expense} expenseId={expense.id} reloadExpenses={reloadExpenses} />
                 </div>
             )
         }

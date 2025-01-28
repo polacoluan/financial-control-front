@@ -34,7 +34,7 @@ const ExpensePage = () => {
       console.error("Error reloading expenses:", error);
     }
   };
-
+  
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Gestão de Despesas</h1>
@@ -45,7 +45,7 @@ const ExpensePage = () => {
           <div className="text-right">
             <CreateForm onExpenseCreated={reloadExpenses} />
           </div>
-          <DataTable columns={columns} data={expenses} />
+          <DataTable columns={columns} data={expenses} reloadExpenses={reloadExpenses} />
         </div>
       )}
     </div>

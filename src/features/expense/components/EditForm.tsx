@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     Sheet,
     SheetContent,
@@ -30,10 +30,10 @@ import { FieldValues, useForm } from "react-hook-form";
 import { useData } from "@/context/DataContext";
 import { Expense } from "../types/expense";
 import { editExpense } from "../api/edit-expense";
-import { useToast } from "@/hooks/use-toast"
-import { formatCurrency } from "@/utils/mask-real";
+import { useToast } from "@/hooks/use-toast";
+import MoneyInput from "@/components/money-input";
 
-export default function EditForm({ expense, expenseId }: { expense: Expense; expenseId: string }) {
+export default function EditForm({ expense, expenseId, reloadExpenses }: { expense: Expense; expenseId: string; reloadExpenses?: () => void; }) {
     const { categories } = useData();
     const { types } = useData();
     const { cards } = useData();
@@ -43,7 +43,7 @@ export default function EditForm({ expense, expenseId }: { expense: Expense; exp
         defaultValues: {
             expense: expense.expense,
             description: expense.description,
-            amount: formatCurrency(expense.amount),
+            amount: expense.amount,
             date: expense.date,
             category_id: expense.category_id,
             type_id: expense.type_id,
@@ -51,55 +51,18 @@ export default function EditForm({ expense, expenseId }: { expense: Expense; exp
         },
     });
 
-    const handleAmountChange = (
-        e: React.ChangeEvent<HTMLInputElement>, // Event type
-        field: any // Field object
-      ) => {
-        const input = e.target;
-        const { value } = input;
-      
-        // Detect cursor position before formatting
-        const selectionStart = input.selectionStart;
-        const isBackspace = e.nativeEvent.inputType === "deleteContentBackward";
-      
-        // Strip non-numeric characters except commas
-        let rawValue = value.replace(/[^\d,]/g, "");
-      
-        if (isBackspace && selectionStart !== null && value[selectionStart - 1] === ",") {
-          // Handle backspace directly after a comma
-          rawValue = rawValue.slice(0, -1); // Remove the last character
-        }
-      
-        // Replace commas for numeric parsing, then format
-        const numericValue = parseFloat(rawValue.replace(",", ".")) || 0;
-        const formattedValue = formatCurrency(numericValue);
-      
-        // Update the field value
-        field.onChange(formattedValue);
-      
-        // Reapply the cursor position
-        window.requestAnimationFrame(() => {
-          if (selectionStart !== null) {
-            input.setSelectionRange(selectionStart, selectionStart);
-          }
-        });
-      };
-
     function onSubmit(data: FieldValues) {
         const expenseData = data as Expense;
         expenseData.id = expenseId;
         editExpense(expenseData);
-
-        form.reset();
-        form.setValue("category_id", "");
-        form.setValue("type_id", "");
-        form.setValue("card_id", "");
 
         toast({
             variant: "default",
             title: "Sucesso!",
             description: "Despesa editada com sucesso!",
         });
+
+        reloadExpenses?.();
 
         setIsSheetOpen(false);
     }
@@ -144,25 +107,12 @@ export default function EditForm({ expense, expenseId }: { expense: Expense; exp
                                     </FormItem>
                                 )}
                             />
-                            <FormField
-                                control={form.control}
+                            <MoneyInput
+                                form={form}
+                                label="Valor Teste"
                                 name="amount"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Valor</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                {...field}
-                                                value={field.value} // Ensure controlled input
-                                                onChange={(e) => handleAmountChange(e, field)} // Format user input
-                                            />
-                                        </FormControl>
-                                        <FormDescription>
-                                            Este é o valor da sua despesa.
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder=""
+                                description="Este é o valor da sua despesa."
                             />
                             <FormField
                                 control={form.control}

@@ -1,20 +1,52 @@
-"use client";
+import { Home, HandCoins } from "lucide-react"
 
-import React from "react";
-import Link from "next/link";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar"
 
-export const Sidebar = () => {
-    return (
-        <div className="w-64 bg-gray-900 text-white flex flex-col p-4">
-            <h2 className="text-lg font-bold mb-6">Menu</h2>
-            <nav className="space-y-2">
-                <Link href="/dashboard" className="block w-full text-left py-2 px-4 rounded hover:bg-gray-700">
-                    Dashboard
-                </Link>
-                <Link href="/settings" className="block w-full text-left py-2 px-4 rounded hover:bg-gray-700">
-                    Settings
-                </Link>
-            </nav>
-        </div>
-    );
-};
+// Menu items.
+const items = [
+  {
+    title: "Inicio",
+    url: "#",
+    icon: Home,
+  },
+  {
+    title: "Despesas",
+    url: "expense",
+    icon: HandCoins,
+  },
+]
+
+export function AppSidebar() {
+  return (
+    <Sidebar>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Aplicação</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+  )
+}

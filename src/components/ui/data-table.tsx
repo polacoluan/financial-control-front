@@ -35,7 +35,8 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
     columns,
     data,
-}: DataTableProps<TData, TValue>) {
+    reloadExpenses,
+}: DataTableProps<TData, TValue> & { reloadExpenses?: () => void }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
@@ -53,7 +54,7 @@ export function DataTable<TData, TValue>({
         state: {
             sorting,
             columnFilters,
-        }
+        },
     })
 
     return (
@@ -80,7 +81,10 @@ export function DataTable<TData, TValue>({
                                                 ? null
                                                 : flexRender(
                                                     header.column.columnDef.header,
-                                                    header.getContext()
+                                                    {
+                                                        ...header.getContext(),
+                                                        reloadExpenses, // Add reloadExpenses to header context
+                                                    }
                                                 )}
                                         </TableHead>
                                     )
@@ -97,7 +101,10 @@ export function DataTable<TData, TValue>({
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            {flexRender(cell.column.columnDef.cell, {
+                                                ...cell.getContext(),
+                                                reloadExpenses, // Add reloadExpenses to cell context
+                                            })}
                                         </TableCell>
                                     ))}
                                 </TableRow>
@@ -105,7 +112,7 @@ export function DataTable<TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
+                                    Sem resultados.
                                 </TableCell>
                             </TableRow>
                         )}
