@@ -49,6 +49,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
             category_id: "",
             type_id: "",
             card_id: "",
+            installments: "1",
         },
     });
 
@@ -241,6 +242,22 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                         </Select>
                                         <FormDescription>
                                             Este é o cartão da sua despesa
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="installments"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Parcelas</FormLabel>
+                                        <FormControl>
+                                            <Input type="number" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Este é quantidade de parcelas da sua despesa.
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>

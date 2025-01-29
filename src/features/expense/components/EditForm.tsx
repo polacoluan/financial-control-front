@@ -48,6 +48,7 @@ export default function EditForm({ expense, expenseId, reloadExpenses }: { expen
             category_id: expense.category_id,
             type_id: expense.type_id,
             card_id: expense.card_id,
+            installments: expense.installments,
         },
     });
 
@@ -206,6 +207,22 @@ export default function EditForm({ expense, expenseId, reloadExpenses }: { expen
                                         </Select>
                                         <FormDescription>
                                             Este é o cartão da sua despesa
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="installments"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Parcelas</FormLabel>
+                                        <FormControl>
+                                            <Input type="number" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Este é quantidade de parcelas da sua despesa.
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>

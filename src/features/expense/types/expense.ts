@@ -7,5 +7,5 @@ export type Expense = {
     category_id: string;
     type_id: string;
     card_id: string;
-    installments: string;
+    installments: Number;
 }
