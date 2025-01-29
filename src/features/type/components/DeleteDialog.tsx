@@ -24,7 +24,7 @@ export default function DeleteDialog({ type, typeId, reloadTypes }: { type: Type
         toast({
             variant: "default",
             title: "Sucesso!",
-            description: "Tipo removida com sucesso!",
+            description: "Tipo removido com sucesso!",
         });
     }
 

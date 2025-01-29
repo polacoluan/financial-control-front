@@ -1,4 +1,4 @@
-import { Home, HandCoins, ChartBarStacked, Type } from "lucide-react"
+import { Home, HandCoins, ChartBarStacked, Type, CreditCard } from "lucide-react"
 
 import {
   Sidebar,
@@ -32,6 +32,11 @@ const items = [
     title: "Tipos",
     url: "type",
     icon: Type,
+  },
+  {
+    title: "Cartões",
+    url: "card",
+    icon: CreditCard,
   },
 ]
 

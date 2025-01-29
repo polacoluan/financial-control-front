@@ -35,8 +35,8 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
     columns,
     data,
-    reloadCategories,
-}: DataTableProps<TData, TValue> & { reloadCategories?: () => void }) {
+    reloadExpenses,
+}: DataTableProps<TData, TValue> & { reloadExpenses?: () => void }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
@@ -83,7 +83,7 @@ export function DataTable<TData, TValue>({
                                                     header.column.columnDef.header,
                                                     {
                                                         ...header.getContext(),
-                                                        reloadCategories,
+                                                        reloadExpenses,
                                                     }
                                                 )}
                                         </TableHead>
@@ -103,7 +103,7 @@ export function DataTable<TData, TValue>({
                                         <TableCell key={cell.id}>
                                             {flexRender(cell.column.columnDef.cell, {
                                                 ...cell.getContext(),
-                                                reloadCategories,
+                                                reloadExpenses,
                                             })}
                                         </TableCell>
                                     ))}
