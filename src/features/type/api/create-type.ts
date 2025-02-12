@@ -8,7 +8,9 @@ export async function createType(data: Type): Promise<any> {
 
         await httpPost(API_URL, {
             type: data.type,
-            description: data.description
+            description: data.description,
+            is_default: data.is_default,
+            installments: data.installments,
         });
 
         return {

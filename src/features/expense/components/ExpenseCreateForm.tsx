@@ -27,64 +27,72 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FieldValues, useForm } from "react-hook-form";
-import { getCategories } from "../../category/api/get-categories";
-import { getTypes } from "../../type/api/get-types";
-import { getCards } from "../../card/api/get-cards";
+import { useData } from "@/context/DataContext";
 import { createExpense } from "../api/create-expense";
 import { Expense } from "../types/expense";
 import { toast } from "sonner";
 import MoneyInput from "@/components/money-input";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CirclePlus } from "lucide-react";
+
+const formSchema = z.object({
+    expense: z.string().min(2, {
+        message: "Tipo precisa ter ao menos 2 caracteres.",
+    }),
+    description: z.string().min(2, {
+        message: "Descrição precisa ter ao menos 2 caracteres.",
+    }),
+    amount: z.number(),
+    date: z.string(),
+    category_id: z.string(),
+    type_id: z.string(),
+    card_id: z.string(),
+    installments: z.number(),
+});
 
 export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () => void }) {
-    const [categories, setCategories] = useState<any[]>([]);
-    const [types, setTypes] = useState<any[]>([]);
-    const [cards, setCards] = useState<any[]>([]);
+    const [installmentsEnabled, setInstallmentsEnabled] = useState(false);
+    const [defaultTypeId, setDefaultTypeId] = useState("");
+    const [defaultCardId, setDefaultCardId] = useState("");
+    const { categories } = useData();
+    const { types } = useData();
+    const { cards } = useData();
     const [isSheetOpen, setIsSheetOpen] = useState(false)
-    const form = useForm({
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
         defaultValues: {
             expense: "",
             description: "",
-            amount: "",
+            amount: 0,
             date: "",
             category_id: "",
             type_id: "",
             card_id: "",
-            installments: "1",
+            installments: 1,
         },
     });
 
     useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const data = await getCategories();
-                setCategories(data);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        };
+        const defaultType = types.find((type) => type.is_default);
+        const defaultCard = cards.find((card) => card.is_default);
 
-        const fetchTypes = async () => {
-            try {
-                const data = await getTypes();
-                setTypes(data);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        };
+        if (defaultType) {
+            setDefaultTypeId(defaultType.id);
+            form.setValue('type_id', defaultType.id);
+        }
 
-        const fetchCards = async () => {
-            try {
-                const data = await getCards();
-                setCards(data);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        };
+        if (defaultCard) {
+            setDefaultCardId(defaultCard.id); 
+            form.setValue('card_id', defaultCard.id); 
+        }
+    }, [types, cards]);
 
-        fetchCategories();
-        fetchTypes();
-        fetchCards();
-    }, []);
+    const handleTypeChange = (selectedTypeId: string) => {
+        const selectedType = types.find((type) => type.id === selectedTypeId);
+        setInstallmentsEnabled(selectedType?.installments === true);
+        form.setValue('type_id', selectedTypeId);
+    };
 
 
     function onSubmit(data: FieldValues) {
@@ -105,7 +113,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
 
     return (
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger className="bg-neutral-950 p-2 rounded-md text-white font-bold hover:bg-neutral-800">Cadastrar</SheetTrigger>
+            <SheetTrigger className="bg-green-600 rounded-full p-2 mr-2"><p className="flex text-white font-medium"><CirclePlus color="#ffffff" height={20} /> Cadastrar</p></SheetTrigger>
             <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
                 <SheetHeader>
                     <SheetTitle>Cadasto de Despesa</SheetTitle>
@@ -118,7 +126,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                     <FormItem>
                                         <FormLabel>Despesa</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input required {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             Este é o nome da sua despesa.
@@ -134,7 +142,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                     <FormItem>
                                         <FormLabel>Descrição</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input required {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             Este é a descrição da sua despesa.
@@ -145,7 +153,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                             />
                             <MoneyInput
                                 form={form}
-                                label="Valor Teste"
+                                label="Valor"
                                 name="amount"
                                 placeholder=""
                                 description="Este é o valor da sua despesa."
@@ -157,7 +165,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                     <FormItem>
                                         <FormLabel>Date</FormLabel>
                                         <FormControl>
-                                            <Input type='date' {...field} />
+                                            <Input required type='date' {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             Esta é a data da sua despesa.
@@ -172,7 +180,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Categorias</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select required onValueChange={field.onChange} defaultValue={field.value}>
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Selecione a categoria da despesa" />
@@ -199,7 +207,14 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Tipos</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select
+                                            required
+                                            onValueChange={(value) => {
+                                                field.onChange(value);
+                                                handleTypeChange(value);
+                                            }}
+                                            defaultValue={defaultTypeId || field.value}
+                                        >
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Selecione o tipo da despesa" />
@@ -226,7 +241,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Cartão</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={(value) => field.onChange(value)} defaultValue={defaultCardId || field.value}>
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Selecione o cartão da despesa" />
@@ -254,7 +269,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                     <FormItem>
                                         <FormLabel>Parcelas</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <Input type="number" {...field} disabled={!installmentsEnabled} />
                                         </FormControl>
                                         <FormDescription>
                                             Este é quantidade de parcelas da sua despesa.
@@ -263,7 +278,7 @@ export default function CreateForm({ onExpenseCreated }: { onExpenseCreated: () 
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit">Cadastrar</Button>
+                            <Button type="submit" className="bg-green-600 rounded-full p-2 mr-2"><p className="flex text-white font-medium"><CirclePlus color="#ffffff" height={20} /> Cadastrar</p></Button>
                         </form>
                     </Form>
                 </SheetHeader>

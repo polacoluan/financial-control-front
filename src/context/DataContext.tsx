@@ -2,22 +2,9 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { getCategories } from "@/features/category/api/get-categories";
 import { getTypes } from "@/features/type/api/get-types";
 import { getCards } from "@/features/card/api/get-cards";
-
-interface Category {
-  id: string;
-  category: string;
-}
-
-interface Type {
-  id: string;
-  type: string;
-}
-
-interface Card {
-  id: string;
-  card: string;
-}
-
+import { Category } from "@/features/category/types/category";
+import { Type } from "@/features/type/types/type";
+import { Card } from "@/features/card/types/card";
 interface DataContextValue {
   categories: Category[];
   types: Type[];

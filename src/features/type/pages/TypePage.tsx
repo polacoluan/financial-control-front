@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { getTypes } from "@/features/type/api/get-types";
-import { columns } from "../components/Columns";
-import { DataTable } from "../components/DataTable";
-import CreateForm from "../components/CreateForm";
+import { columns } from "../components/TypeColumns";
+import { DataTable } from "../components/TypeDataTable";
+import CreateForm from "../components/TypeCreateForm";
 import Loader from "@/components/loading";
 
 const TypePage = () => {

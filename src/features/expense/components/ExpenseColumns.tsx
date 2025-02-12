@@ -5,8 +5,8 @@ import { ColumnDef, CellContext } from "@tanstack/react-table";
 import { Expense } from "../types/expense";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import EditForm from "./EditForm";
-import DeleteDialog from "./DeleteDialog";
+import EditForm from "./ExpenseEditForm";
+import DeleteDialog from "./ExpenseDeleteDialog";
 
 interface CustomCellContext<TData> extends CellContext<TData, unknown> {
     reloadExpenses?: () => void;

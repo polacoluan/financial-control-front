@@ -8,7 +8,8 @@ export async function createCard(data: Card): Promise<any> {
 
         await httpPost(API_URL, {
             card: data.card,
-            description: data.description
+            description: data.description,
+            is_default: data.is_default,
         });
 
         return {

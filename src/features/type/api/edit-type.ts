@@ -4,11 +4,13 @@ import { Type } from '../types/type';
 
 export async function editType(data: Type): Promise<any> {
     try {
-        const API_URL = '/types/'+data.id;
+        const API_URL = '/types/' + data.id;
 
         await httpPatch(API_URL, {
             type: data.type,
             description: data.description,
+            is_default: data.is_default,
+            installments: data.installments,
         });
 
         return {

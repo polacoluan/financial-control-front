@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { getCategories } from "@/features/category/api/get-categories";
-import { columns } from "../components/Columns";
-import { DataTable } from "../components/DataTable";
-import CreateForm from "../components/CreateForm";
+import { columns } from "../components/CategoryColumns";
+import { DataTable } from "../components/CategoryDataTable";
+import CreateForm from "../components/CategoruCreateForm";
 import Loader from "@/components/loading";
 
 const CategoryPage = () => {

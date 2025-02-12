@@ -13,6 +13,7 @@ import { Expense } from "../types/expense";
 import { formatCurrency } from "@/utils/mask-real";
 import { useToast } from "@/hooks/use-toast";
 import { deleteExpense } from "../api/delete-expense";
+import { Trash } from "lucide-react";
 
 export default function DeleteDialog({ expense, expenseId, reloadExpenses }: { expense: Expense; expenseId: string; reloadExpenses?: () => void; }) {
     const { toast } = useToast();
@@ -31,7 +32,7 @@ export default function DeleteDialog({ expense, expenseId, reloadExpenses }: { e
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger>Excluir</AlertDialogTrigger>
+            <AlertDialogTrigger className="bg-red-500 rounded-full p-2"><p className="flex text-white font-medium"><Trash color="#ffffff" height={15}/> Excluir</p></AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>

@@ -9,6 +9,7 @@ export async function editCard(data: Card): Promise<any> {
         await httpPatch(API_URL, {
             card: data.card,
             description: data.description,
+            is_default: data.is_default,
         });
 
         return {

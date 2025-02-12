@@ -31,15 +31,35 @@ import { useData } from "@/context/DataContext";
 import { Expense } from "../types/expense";
 import { editExpense } from "../api/edit-expense";
 import { useToast } from "@/hooks/use-toast";
+import { Pencil } from "lucide-react";
 import MoneyInput from "@/components/money-input";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+    expense: z.string().min(2, {
+        message: "Tipo precisa ter ao menos 2 caracteres.",
+    }),
+    description: z.string().min(2, {
+        message: "Descrição precisa ter ao menos 2 caracteres.",
+    }),
+    amount: z.number(),
+    date: z.string(),
+    category_id: z.string(),
+    type_id: z.string(),
+    card_id: z.string(),
+    installments: z.number(),
+});
 
 export default function EditForm({ expense, expenseId, reloadExpenses }: { expense: Expense; expenseId: string; reloadExpenses?: () => void; }) {
+    const [installmentsEnabled, setInstallmentsEnabled] = useState(false);
     const { categories } = useData();
     const { types } = useData();
     const { cards } = useData();
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const { toast } = useToast();
-    const form = useForm({
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
         defaultValues: {
             expense: expense.expense,
             description: expense.description,
@@ -68,9 +88,15 @@ export default function EditForm({ expense, expenseId, reloadExpenses }: { expen
         setIsSheetOpen(false);
     }
 
+    const handleTypeChange = (selectedTypeId: string) => {
+        const selectedType = types.find((type) => type.id === selectedTypeId);
+        setInstallmentsEnabled(selectedType?.installments === true);
+        form.setValue('type_id', selectedTypeId);
+    };
+
     return (
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger className="bg-neutral-950 p-2 rounded-md text-white font-bold hover:bg-neutral-800">Editar</SheetTrigger>
+            <SheetTrigger className="bg-blue-600 rounded-full p-2 mr-2"><p className="flex text-white font-medium"><Pencil color="#ffffff" height={15} /> Editar</p></SheetTrigger>
             <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
                 <SheetHeader>
                     <SheetTitle>Editar Despesa</SheetTitle>
@@ -110,7 +136,7 @@ export default function EditForm({ expense, expenseId, reloadExpenses }: { expen
                             />
                             <MoneyInput
                                 form={form}
-                                label="Valor Teste"
+                                label="Valor"
                                 name="amount"
                                 placeholder=""
                                 description="Este é o valor da sua despesa."
@@ -164,7 +190,13 @@ export default function EditForm({ expense, expenseId, reloadExpenses }: { expen
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Tipos</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                                        <Select
+                                            onValueChange={(value) => {
+                                                field.onChange(value);
+                                                handleTypeChange(value);
+                                            }}
+                                            defaultValue={field.value || ""}
+                                        >
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Selecione o tipo da despesa" />
@@ -219,7 +251,7 @@ export default function EditForm({ expense, expenseId, reloadExpenses }: { expen
                                     <FormItem>
                                         <FormLabel>Parcelas</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <Input type="number" {...field} disabled={!installmentsEnabled} />
                                         </FormControl>
                                         <FormDescription>
                                             Este é quantidade de parcelas da sua despesa.
@@ -228,7 +260,7 @@ export default function EditForm({ expense, expenseId, reloadExpenses }: { expen
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit">Editar</Button>
+                            <Button type="submit" className="bg-blue-600 rounded-full p-2 mr-2"><p className="flex text-white font-medium"><Pencil color="#ffffff" height={15} /> Editar</p></Button>
                         </form>
                     </Form>
                 </SheetHeader>

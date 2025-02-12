@@ -12,6 +12,7 @@ import {
 import { Card } from "../types/card";
 import { useToast } from "@/hooks/use-toast";
 import { deleteCard } from "../api/delete-card";
+import { Trash } from "lucide-react";
 
 export default function DeleteDialog({ card, cardId, reloadCards }: { card: Card; cardId: string; reloadCards?: () => void; }) {
     const { toast } = useToast();
@@ -30,7 +31,7 @@ export default function DeleteDialog({ card, cardId, reloadCards }: { card: Card
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger>Excluir</AlertDialogTrigger>
+            <AlertDialogTrigger className="bg-red-500 rounded-full p-2"><p className="flex text-white font-medium"><Trash color="#ffffff" height={15}/> Excluir</p></AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>

@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { getExpenses } from "@/features/expense/api/get-expenses";
-import { columns } from "../components/Columns";
-import { DataTable } from "../components/DataTable";
-import CreateForm from "../components/CreateForm";
+import { columns } from "../components/ExpenseColumns";
+import { DataTable } from "../components/ExpenseDataTable";
+import CreateForm from "../components/ExpenseCreateForm";
 import Loader from "@/components/loading";
 
 const ExpensePage = () => {

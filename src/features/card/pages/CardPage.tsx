@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { getCards } from "@/features/card/api/get-cards";
-import { columns } from "../components/Columns";
-import { DataTable } from "../components/DataTable";
-import CreateForm from "../components/CreateForm";
+import { columns } from "../components/CardColumns";
+import { DataTable } from "../components/CardDataTable";
+import CreateForm from "../components/CardCreateForm";
 import Loader from "@/components/loading";
 
 const CardPage = () => {

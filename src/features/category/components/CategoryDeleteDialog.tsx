@@ -12,6 +12,7 @@ import {
 import { Category } from "../types/category";
 import { useToast } from "@/hooks/use-toast";
 import { deleteCategory } from "../api/delete-category";
+import { Trash } from "lucide-react";
 
 export default function DeleteDialog({ category, categoryId, reloadCategories }: { category: Category; categoryId: string; reloadCategories?: () => void; }) {
     const { toast } = useToast();
@@ -30,7 +31,7 @@ export default function DeleteDialog({ category, categoryId, reloadCategories }:
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger>Excluir</AlertDialogTrigger>
+            <AlertDialogTrigger className="bg-red-500 rounded-full p-2"><p className="flex text-white font-medium"><Trash color="#ffffff" height={15}/> Excluir</p></AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>

@@ -12,6 +12,7 @@ import {
 import { Type } from "../types/type";
 import { useToast } from "@/hooks/use-toast";
 import { deleteType } from "../api/delete-type";
+import { Trash } from "lucide-react";
 
 export default function DeleteDialog({ type, typeId, reloadTypes }: { type: Type; typeId: string; reloadTypes?: () => void; }) {
     const { toast } = useToast();
@@ -30,7 +31,7 @@ export default function DeleteDialog({ type, typeId, reloadTypes }: { type: Type
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger>Excluir</AlertDialogTrigger>
+            <AlertDialogTrigger className="bg-red-500 rounded-full p-2"><p className="flex text-white font-medium"><Trash color="#ffffff" height={15}/> Excluir</p></AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>

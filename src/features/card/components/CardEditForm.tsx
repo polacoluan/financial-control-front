@@ -23,14 +23,30 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Card } from "../types/card";
 import { editCard } from "../api/edit-card";
 import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Pencil } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+
+const formSchema = z.object({
+    card: z.string().min(2, {
+        message: "Cartão precisa ter ao menos 2 caracteres.",
+    }),
+    description: z.string().min(2, {
+        message: "Descrição precisa ter ao menos 2 caracteres.",
+    }),
+    is_default: z.boolean(),
+});
 
 export default function EditForm({ card, cardId, reloadCards }: { card: Card; cardId: string; reloadCards?: () => void; }) {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const { toast } = useToast();
-    const form = useForm({
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
         defaultValues: {
             card: card.card,
             description: card.description,
+            is_default: card.is_default,
         },
     });
 
@@ -52,7 +68,7 @@ export default function EditForm({ card, cardId, reloadCards }: { card: Card; ca
 
     return (
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger className="bg-neutral-950 p-2 rounded-md text-white font-bold hover:bg-neutral-800">Editar</SheetTrigger>
+            <SheetTrigger className="bg-blue-600 rounded-full p-2 mr-2"><p className="flex text-white font-medium"><Pencil color="#ffffff" height={15}/> Editar</p></SheetTrigger>
             <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
                 <SheetHeader>
                     <SheetTitle>Editar Cartão</SheetTitle>
@@ -65,7 +81,7 @@ export default function EditForm({ card, cardId, reloadCards }: { card: Card; ca
                                     <FormItem>
                                         <FormLabel>Tipo</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input required {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             Este é o nome do seu cartão.
@@ -81,7 +97,7 @@ export default function EditForm({ card, cardId, reloadCards }: { card: Card; ca
                                     <FormItem>
                                         <FormLabel>Descrição</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input required {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             Este é a descrição do seu cartão.
@@ -90,7 +106,26 @@ export default function EditForm({ card, cardId, reloadCards }: { card: Card; ca
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit">Editar</Button>
+                            <FormField
+                                control={form.control}
+                                name="is_default"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Opção Padrão<br /></FormLabel>
+                                        <FormControl>
+                                            <Switch
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Isso define se a opção virá pré selecionada.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit" className="bg-blue-600 rounded-full p-2 mr-2"><p className="flex text-white font-medium"><Pencil color="#ffffff" height={15}/> Editar</p></Button>
                         </form>
                     </Form>
                 </SheetHeader>
