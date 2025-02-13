@@ -14,6 +14,7 @@ export async function editExpense(data: Expense): Promise<any> {
             category_id: data.category_id,
             type_id: data.type_id,
             card_id: data.card_id,
+            installments: data.installments,
         });
 
         return {
