@@ -28,6 +28,20 @@ export const columns: ColumnDef<Income, unknown>[] = [
         },
     },
     {
+        accessorKey: "description",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Descrição
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+    },
+    {
         accessorKey: "amount",
         header: ({ column }) => {
             return (

@@ -45,7 +45,6 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-
 export const useData = () => {
   const context = useContext(DataContext);
 
@@ -53,5 +52,5 @@ export const useData = () => {
     throw new Error("useData must be used within a DataProvider");
   }
 
-  return context; // Now it's guaranteed not to be null
+  return context;
 };

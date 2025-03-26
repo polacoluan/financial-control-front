@@ -1,4 +1,4 @@
-import { Home, HandCoins, ChartBarStacked, Type, CreditCard } from "lucide-react"
+import { Home, HandCoins, ChartBarStacked, Type, CreditCard, Wallet } from "lucide-react"
 
 import {
   Sidebar,
@@ -16,13 +16,18 @@ import Link from "next/link"
 const items = [
   {
     title: "Inicio",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
     title: "Despesas",
     url: "expense",
     icon: HandCoins,
+  },
+  {
+    title: "Entradas",
+    url: "income",
+    icon: Wallet,
   },
   {
     title: "Categorias",

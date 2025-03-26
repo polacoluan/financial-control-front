@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { getCategories } from "@/features/category/api/get-categories";
 import { columns } from "../components/CategoryColumns";
 import { DataTable } from "../components/CategoryDataTable";
-import CreateForm from "../components/CategoruCreateForm";
+import CreateForm from "../components/CategoryCreateForm";
 import Loader from "@/components/loading";
 
 const CategoryPage = () => {
@@ -34,7 +34,7 @@ const CategoryPage = () => {
       console.error("Error reloading categories:", error);
     }
   };
-  
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Gestão de Categorias</h1>
@@ -45,7 +45,11 @@ const CategoryPage = () => {
           <div className="text-right">
             <CreateForm onCategoryCreated={reloadCategories} />
           </div>
-          <DataTable columns={columns} data={categories} reloadCategories={reloadCategories} />
+          <DataTable
+            columns={columns}
+            data={categories}
+            reloadCategories={reloadCategories}
+          />
         </div>
       )}
     </div>
