@@ -6,7 +6,7 @@ import { MainLayout } from "@/layouts/MainLayout";
 import { usePathname } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
 import { DataProvider } from "@/context/DataContext";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/common/theme-provider";
 
 export default function RootLayout({
   children,

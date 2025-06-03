@@ -1,6 +1,6 @@
 import { Pen } from "lucide-react";
 import { forwardRef } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const EditButton = forwardRef<
   HTMLButtonElement,

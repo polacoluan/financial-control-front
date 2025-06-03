@@ -14,7 +14,7 @@ import {
 import { Objective } from "../types/objective";
 import { deleteObjective } from "../api/delete-objective";
 import { useToast } from "@/hooks/use-toast";
-import DeleteButton from "@/components/delete-button";
+import DeleteButton from "@/components/common/delete-button";
 
 export default function DeleteDialog({
   objective,

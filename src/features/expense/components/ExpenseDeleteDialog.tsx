@@ -13,7 +13,7 @@ import { Expense } from "../types/expense";
 import { formatCurrency } from "@/utils/mask-real";
 import { useToast } from "@/hooks/use-toast";
 import { deleteExpense } from "../api/delete-expense";
-import DeleteButton from "@/components/delete-button";
+import DeleteButton from "@/components/common/delete-button";
 
 export default function DeleteDialog({
   expense,

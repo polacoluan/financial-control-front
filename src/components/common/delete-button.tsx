@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { forwardRef } from "react";
 
 const DeleteButton = forwardRef<

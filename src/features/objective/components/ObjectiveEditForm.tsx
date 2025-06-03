@@ -26,8 +26,8 @@ import { useToast } from "@/hooks/use-toast";
 import { Pencil } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import EditButton from "@/components/edit-button";
-import MoneyInput from "@/components/money-input";
+import EditButton from "@/components/common/edit-button";
+import MoneyInput from "@/components/common/money-input";
 
 const formSchema = z.object({
   objective: z.string().min(2, {

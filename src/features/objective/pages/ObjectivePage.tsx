@@ -5,7 +5,7 @@ import { getObjectives } from "@/features/objective/api/get-objectives";
 import { columns } from "../components/ObjectiveColumns";
 import { DataTable } from "../components/ObjectiveDataTable";
 import CreateForm from "../components/ObjectiveCreateForm";
-import Loader from "@/components/loading";
+import Loader from "@/components/common/loading";
 
 const ObjectivePage = () => {
   const [objectives, setObjectives] = useState<any[]>([]);

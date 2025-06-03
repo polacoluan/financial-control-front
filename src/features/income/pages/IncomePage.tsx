@@ -5,7 +5,7 @@ import { getIncomes } from "@/features/income/api/get-incomes";
 import { columns } from "../components/IncomeColumns";
 import { DataTable } from "../components/IncomeDataTable";
 import CreateForm from "../components/IncomeCreateForm";
-import Loader from "@/components/loading";
+import Loader from "@/components/common/loading";
 
 const IncomePage = () => {
   const [encomes, setIncomes] = useState<any[]>([]);
@@ -34,7 +34,7 @@ const IncomePage = () => {
       console.error("Error reloading encomes:", error);
     }
   };
-  
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Gestão de Entradas</h1>
@@ -45,7 +45,11 @@ const IncomePage = () => {
           <div className="text-right">
             <CreateForm onIncomeCreated={reloadIncomes} />
           </div>
-          <DataTable columns={columns} data={encomes} reloadIncomes={reloadIncomes} />
+          <DataTable
+            columns={columns}
+            data={encomes}
+            reloadIncomes={reloadIncomes}
+          />
         </div>
       )}
     </div>

@@ -1,16 +1,16 @@
 "use client";
 
-import { MonthSelect } from "@/components/month-select";
+import { MonthSelect } from "@/components/common/month-select";
 import { SpentMoney } from "../components/SpentMoney";
 import { SpentPerCardChart } from "../components/SpentPerCardChart";
 import { SpentPerCategoryChart } from "../components/SpentPerCategoryChart";
 import { SpentPerDateChart } from "../components/SpentPerDateChart";
 import { SpentPerTypeChart } from "../components/SpentPerTypeChart";
-import { YearSelect } from "@/components/year-select";
+import { YearSelect } from "@/components/common/year-select";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 import { getExpensesPerMonth } from "../api/get-expenses-per-month";
-import Loader from "@/components/loading";
+import Loader from "@/components/common/loading";
 import { useState, useEffect } from "react";
 import { IncomeMoney } from "../components/IncomeMoney";
 import { MonthBalance } from "../components/MonthBalance";

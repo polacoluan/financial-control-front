@@ -26,7 +26,7 @@ import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil } from "lucide-react";
-import EditButton from "@/components/edit-button";
+import EditButton from "@/components/common/edit-button";
 
 const formSchema = z.object({
   category: z.string().min(2, {

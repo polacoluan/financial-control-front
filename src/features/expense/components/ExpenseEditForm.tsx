@@ -32,10 +32,10 @@ import { Expense } from "../types/expense";
 import { editExpense } from "../api/edit-expense";
 import { useToast } from "@/hooks/use-toast";
 import { Pencil } from "lucide-react";
-import MoneyInput from "@/components/money-input";
+import MoneyInput from "@/components/common/money-input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import EditButton from "@/components/edit-button";
+import EditButton from "@/components/common/edit-button";
 
 const formSchema = z.object({
   expense: z.string().min(2, {

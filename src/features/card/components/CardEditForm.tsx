@@ -27,7 +27,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import EditButton from "@/components/edit-button";
+import EditButton from "@/components/common/edit-button";
 
 const formSchema = z.object({
   card: z.string().min(2, {

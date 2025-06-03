@@ -27,7 +27,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CirclePlus } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import CreateButton from "@/components/create-button";
+import CreateButton from "@/components/common/create-button";
 
 const formSchema = z.object({
   type: z.string().min(2, {

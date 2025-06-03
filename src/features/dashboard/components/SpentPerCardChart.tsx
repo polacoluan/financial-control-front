@@ -20,7 +20,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { getExpensesPerMonth } from "../api/get-expenses-per-month";
-import Loader from "@/components/loading";
+import Loader from "@/components/common/loading";
 
 const chartConfig = {
   amount: {

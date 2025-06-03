@@ -13,7 +13,7 @@ import { Category } from "../types/category";
 import { useToast } from "@/hooks/use-toast";
 import { deleteCategory } from "../api/delete-category";
 import { Trash } from "lucide-react";
-import DeleteButton from "@/components/delete-button";
+import DeleteButton from "@/components/common/delete-button";
 
 export default function DeleteDialog({
   category,

@@ -5,7 +5,7 @@ import { getCards } from "@/features/card/api/get-cards";
 import { columns } from "../components/CardColumns";
 import { DataTable } from "../components/CardDataTable";
 import CreateForm from "../components/CardCreateForm";
-import Loader from "@/components/loading";
+import Loader from "@/components/common/loading";
 
 const CardPage = () => {
   const [cards, setCards] = useState<any[]>([]);
@@ -34,7 +34,7 @@ const CardPage = () => {
       console.error("Error reloading cards:", error);
     }
   };
-  
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Gestão de Cartões</h1>

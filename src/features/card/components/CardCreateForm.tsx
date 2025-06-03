@@ -27,7 +27,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CirclePlus } from "lucide-react";
-import CreateButton from "@/components/create-button";
+import CreateButton from "@/components/common/create-button";
 
 const formSchema = z.object({
   card: z.string().min(2, {

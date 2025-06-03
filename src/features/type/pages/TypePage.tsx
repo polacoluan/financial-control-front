@@ -5,7 +5,7 @@ import { getTypes } from "@/features/type/api/get-types";
 import { columns } from "../components/TypeColumns";
 import { DataTable } from "../components/TypeDataTable";
 import CreateForm from "../components/TypeCreateForm";
-import Loader from "@/components/loading";
+import Loader from "@/components/common/loading";
 
 const TypePage = () => {
   const [types, setTypes] = useState<any[]>([]);
@@ -34,7 +34,7 @@ const TypePage = () => {
       console.error("Error reloading types:", error);
     }
   };
-  
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Gestão de Tipos</h1>

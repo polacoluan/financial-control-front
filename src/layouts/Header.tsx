@@ -3,7 +3,7 @@
 
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ModeToggle } from "@/components/theme-toggle";
+import { ModeToggle } from "@/components/common/theme-toggle";
 
 export const Header = () => {
   return (

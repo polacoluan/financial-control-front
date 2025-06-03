@@ -5,7 +5,7 @@ import { getCategories } from "@/features/category/api/get-categories";
 import { columns } from "../components/CategoryColumns";
 import { DataTable } from "../components/CategoryDataTable";
 import CreateForm from "../components/CategoryCreateForm";
-import Loader from "@/components/loading";
+import Loader from "@/components/common/loading";
 
 const CategoryPage = () => {
   const [categories, setCategories] = useState<any[]>([]);

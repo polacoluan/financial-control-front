@@ -31,11 +31,11 @@ import { useData } from "@/context/DataContext";
 import { createExpense } from "../api/create-expense";
 import { Expense } from "../types/expense";
 import { toast } from "sonner";
-import MoneyInput from "@/components/money-input";
+import MoneyInput from "@/components/common/money-input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CirclePlus } from "lucide-react";
-import CreateButton from "@/components/create-button";
+import CreateButton from "@/components/common/create-button";
 
 const formSchema = z.object({
   expense: z.string().min(2, {
