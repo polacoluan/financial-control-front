@@ -26,6 +26,7 @@ import { toast } from "sonner";
 import { CirclePlus } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import CreateButton from "@/components/create-button";
 
 const formSchema = z.object({
   category: z.string().min(2, {
@@ -65,10 +66,8 @@ export default function CreateForm({
 
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-      <SheetTrigger className="bg-green-600 rounded-full p-2 mr-2">
-        <p className="flex text-white font-medium">
-          <CirclePlus color="#ffffff" height={20} /> Cadastrar
-        </p>
+      <SheetTrigger asChild>
+        <CreateButton />
       </SheetTrigger>
       <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
         <SheetHeader>

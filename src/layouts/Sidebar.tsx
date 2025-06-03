@@ -1,4 +1,12 @@
-import { Home, HandCoins, ChartBarStacked, Type, CreditCard, Wallet } from "lucide-react"
+import {
+  Home,
+  HandCoins,
+  ChartBarStacked,
+  Type,
+  CreditCard,
+  Wallet,
+  Crosshair,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -9,8 +17,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import Link from "next/link"
+} from "@/components/ui/sidebar";
+import Link from "next/link";
 
 // Menu items.
 const items = [
@@ -44,7 +52,12 @@ const items = [
     url: "card",
     icon: CreditCard,
   },
-]
+  {
+    title: "Objetivos",
+    url: "objectives",
+    icon: Crosshair,
+  },
+];
 
 export function AppSidebar() {
   return (
@@ -69,5 +82,5 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

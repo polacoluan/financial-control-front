@@ -12,6 +12,9 @@ import { SearchIcon } from "lucide-react";
 import { getExpensesPerMonth } from "../api/get-expenses-per-month";
 import Loader from "@/components/loading";
 import { useState, useEffect } from "react";
+import { IncomeMoney } from "../components/IncomeMoney";
+import { MonthBalance } from "../components/MonthBalance";
+import { SavedMoney } from "../components/SavedMoney";
 
 interface chartData {
   cards: any;
@@ -25,7 +28,7 @@ const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [totalSpent, setTotalSpent] = useState(0);
   const [year, setYear] = useState<number>(new Date().getFullYear());
-  const [month, setMonth] = useState<number>(new Date().getMonth());
+  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
 
   const fetchChartData = async () => {
     try {
@@ -46,43 +49,50 @@ const DashboardPage = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-2 m-2 w-fit">
-        <MonthSelect month={month} setMonth={setMonth} />
-        <YearSelect year={year} setYear={setYear} />
-        <Button variant={"outline"} onClick={() => fetchChartData()}>
-          <SearchIcon /> Buscar
-        </Button>
+      <div className="flex justify-end items-center m-2">
+        <div className="grid grid-cols-3 gap-2 m-2 w-fit">
+          <MonthSelect month={month} setMonth={setMonth} />
+          <YearSelect year={year} setYear={setYear} />
+          <Button variant={"outline"} onClick={() => fetchChartData()}>
+            <SearchIcon /> Buscar
+          </Button>
+        </div>
       </div>
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="grid grid-cols-3 gap-4 m-2">
-          <div>
-            <SpentPerCategoryChart
-              chartData={chartData?.categories}
-              totalSpent={totalSpent}
-            />
-          </div>
-          <div>
-            <SpentPerTypeChart
-              chartData={chartData?.types}
-              totalSpent={totalSpent}
-            />
-          </div>
-          <div>
-            <SpentPerCardChart
-              chartData={chartData?.cards}
-              totalSpent={totalSpent}
-            />
-          </div>
-          <div>
-            <SpentPerDateChart
-              chartData={chartData?.dates}
-              totalSpent={totalSpent}
-            />
-          </div>
-          <div className="grid gap-4">
+        <div className="m-2">
+          <div className="grid grid-cols-4 gap-4 m-2">
             <SpentMoney chartData={chartData} />
+            <IncomeMoney chartData={chartData} />
+            <MonthBalance chartData={chartData} />
+            <SavedMoney chartData={chartData} />
+          </div>
+          <div className="grid grid-cols-2 gap-4 m-2">
+            <div>
+              <SpentPerCategoryChart
+                chartData={chartData?.categories}
+                totalSpent={totalSpent}
+              />
+            </div>
+            <div>
+              <SpentPerTypeChart
+                chartData={chartData?.types}
+                totalSpent={totalSpent}
+              />
+            </div>
+            <div>
+              <SpentPerCardChart
+                chartData={chartData?.cards}
+                totalSpent={totalSpent}
+              />
+            </div>
+            <div>
+              <SpentPerDateChart
+                chartData={chartData?.dates}
+                totalSpent={totalSpent}
+              />
+            </div>
           </div>
         </div>
       )}

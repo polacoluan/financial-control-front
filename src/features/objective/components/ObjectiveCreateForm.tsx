@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -17,63 +17,56 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FieldValues, useForm } from "react-hook-form";
-import { useData } from "@/context/DataContext";
-import { createIncome } from "../api/create-income";
-import { Income } from "../types/income";
+import { createObjective } from "../api/create-objective";
+import { Objective } from "../types/objective";
 import { toast } from "sonner";
-import MoneyInput from "@/components/money-input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CirclePlus } from "lucide-react";
 import CreateButton from "@/components/create-button";
+import MoneyInput from "@/components/money-input";
 
 const formSchema = z.object({
-  income: z.string().min(2, {
-    message: "Tipo precisa ter ao menos 2 caracteres.",
+  objective: z.string().min(2, {
+    message: "Objetivo precisa ter ao menos 2 caracteres.",
   }),
-  description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
-  }),
-  amount: z.number(),
-  date: z.string(),
+  description: z
+    .string()
+    .min(2, {
+      message: "Descrição precisa ter ao menos 2 caracteres.",
+    })
+    .optional(),
+  target_value: z.number().min(0).optional(),
+  saved_amount: z.number().min(0).optional(),
 });
 
 export default function CreateForm({
-  onIncomeCreated,
+  onObjectiveCreated,
 }: {
-  onIncomeCreated: () => void;
+  onObjectiveCreated: () => void;
 }) {
-  const { cards } = useData();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      income: "",
+      objective: "",
       description: "",
-      amount: 0,
-      date: "",
+      target_value: undefined,
+      saved_amount: undefined,
     },
   });
 
   function onSubmit(data: FieldValues) {
-    const incomeData = data as Income;
-    createIncome(incomeData);
+    const objectiveData = data as Objective;
+    createObjective(objectiveData);
 
     form.reset();
 
-    toast("Entrada criada com sucesso.");
+    toast("Objetivo criado com sucesso.");
 
-    onIncomeCreated();
+    onObjectiveCreated();
 
     setIsSheetOpen(false);
   }
@@ -85,20 +78,20 @@ export default function CreateForm({
       </SheetTrigger>
       <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
         <SheetHeader>
-          <SheetTitle>Cadasto de Entrada</SheetTitle>
+          <SheetTitle>Cadastro de Objetivo</SheetTitle>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
-                name="income"
+                name="objective"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Entrada</FormLabel>
+                    <FormLabel>Objetivo</FormLabel>
                     <FormControl>
                       <Input required {...field} />
                     </FormControl>
                     <FormDescription>
-                      Este é o nome da sua entrada.
+                      Este é o nome do seu objetivo.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -114,43 +107,49 @@ export default function CreateForm({
                       <Input required {...field} />
                     </FormControl>
                     <FormDescription>
-                      Este é a descrição da sua entrada.
+                      Esta é a descrição do seu objetivo.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
-              />
-              <MoneyInput
-                form={form}
-                label="Valor"
-                name="amount"
-                placeholder=""
-                description="Este é o valor da sua entrada."
               />
               <FormField
                 control={form.control}
-                name="date"
+                name="target_value"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Date</FormLabel>
                     <FormControl>
-                      <Input required type="date" {...field} />
+                      <MoneyInput
+                        form={form}
+                        name="target_value"
+                        label="Valor Alvo"
+                        placeholder=""
+                        description="Este é o valor que você deseja alcançar."
+                      />
                     </FormControl>
-                    <FormDescription>
-                      Esta é a data da sua entrada.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button
-                type="submit"
-                className="bg-green-600 rounded-full p-2 mr-2"
-              >
-                <p className="flex text-white font-medium">
-                  <CirclePlus color="#ffffff" height={20} /> Cadastrar
-                </p>
-              </Button>
+              <FormField
+                control={form.control}
+                name="saved_amount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <MoneyInput
+                        form={form}
+                        name="saved_amount"
+                        label="Valor Economizado"
+                        placeholder=""
+                        description="Este é o valor que você já economizou."
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Criar</Button>
             </form>
           </Form>
         </SheetHeader>

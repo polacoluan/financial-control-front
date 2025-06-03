@@ -19,55 +19,63 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { Category } from "../types/category";
-import { editCategory } from "../api/edit-category";
+import { FieldValues, useForm } from "react-hook-form";
+import { editObjective } from "../api/edit-objective";
+import { Objective } from "../types/objective";
 import { useToast } from "@/hooks/use-toast";
+import { Pencil } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Pencil } from "lucide-react";
 import EditButton from "@/components/edit-button";
+import MoneyInput from "@/components/money-input";
 
 const formSchema = z.object({
-  category: z.string().min(2, {
-    message: "Categoria precisa ter ao menos 2 caracteres.",
+  objective: z.string().min(2, {
+    message: "Objetivo precisa ter ao menos 2 caracteres.",
   }),
-  description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
-  }),
+  description: z
+    .string()
+    .min(2, {
+      message: "Descrição precisa ter ao menos 2 caracteres.",
+    })
+    .optional(),
+  target_value: z.number().min(0).optional(),
+  saved_amount: z.number().min(0).optional(),
 });
 
 export default function EditForm({
-  category,
-  categoryId,
-  reloadCategories,
+  objective,
+  objectiveId,
+  reloadObjectives,
 }: {
-  category: Category;
-  categoryId: string;
-  reloadCategories?: () => void;
+  objective: Objective;
+  objectiveId: string;
+  reloadObjectives?: () => void;
 }) {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      category: category.category,
-      description: category.description,
+      objective: objective.objective,
+      description: objective.description,
+      target_value: objective.target_value,
+      saved_amount: objective.saved_amount,
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const categoryData = values as Category;
-    categoryData.id = categoryId;
-    editCategory(categoryData);
+  function onSubmit(data: FieldValues) {
+    const objectiveData = data as Objective;
+    objectiveData.id = objectiveId;
+    editObjective(objectiveData);
 
     toast({
       variant: "default",
       title: "Sucesso!",
-      description: "Despesa editada com sucesso!",
+      description: "Objetivo editado com sucesso!",
     });
 
-    reloadCategories?.();
+    reloadObjectives?.();
 
     setIsSheetOpen(false);
   }
@@ -79,20 +87,20 @@ export default function EditForm({
       </SheetTrigger>
       <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
         <SheetHeader>
-          <SheetTitle>Editar Categoria</SheetTitle>
+          <SheetTitle>Editar Objetivo</SheetTitle>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
-                name="category"
+                name="objective"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Categoria</FormLabel>
+                    <FormLabel>Objetivo</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      Este é o nome da sua categoria.
+                      Este é o nome do seu objetivo.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -108,8 +116,44 @@ export default function EditForm({
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      Este é a descrição da sua categoria.
+                      Esta é a descrição do seu objetivo.
                     </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="target_value"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <MoneyInput
+                        form={form}
+                        name="target_value"
+                        label="Valor Alvo"
+                        placeholder=""
+                        description="Este é o valor que você deseja alcançar."
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="saved_amount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <MoneyInput
+                        form={form}
+                        name="saved_amount"
+                        label="Valor Economizado"
+                        placeholder=""
+                        description="Este é o valor que você já economizou."
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
