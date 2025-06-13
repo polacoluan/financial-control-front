@@ -76,7 +76,7 @@ export default function CreateForm({
       </SheetTrigger>
       <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
         <SheetHeader>
-          <SheetTitle>Cadasto de Tipo</SheetTitle>
+          <SheetTitle>Cadastro de Tipo</SheetTitle>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
