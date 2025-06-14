@@ -5,11 +5,13 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { ArrowDownLeft, ArrowUpRight, Calendar, HandCoins } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, HandCoins, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import IncomeCreateModal from "@/features/income/components/IncomeCreateModal";
 
 export default function TransactionsCard() {
   return (
@@ -47,6 +49,13 @@ export default function TransactionsCard() {
             </div>
           </div>
         </CardContent>
+        <CardFooter className="gap-2">
+          <IncomeCreateModal />
+          <Button className="w-32">
+            <Plus />
+            Despesa
+          </Button>
+        </CardFooter>
       </Card>
     </div>
   );

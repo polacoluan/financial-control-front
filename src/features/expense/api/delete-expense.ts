@@ -1,10 +1,9 @@
-// src/app/actions/signin.tsx
 import { httpDelete } from "@/services/api/http";
 import { Expense } from "../types/expense";
 
-export async function deleteExpense(exepenseId: String): Promise<any> {
+export async function deleteExpense(expenseId: String): Promise<any> {
   try {
-    const API_URL = "/expenses/" + exepenseId;
+    const API_URL = "/expenses/" + expenseId;
 
     await httpDelete(API_URL);
 

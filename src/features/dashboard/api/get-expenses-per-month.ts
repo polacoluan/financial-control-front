@@ -1,4 +1,3 @@
-// src/app/actions/get-expenses.ts
 import { httpGet } from "@/services/api/http";
 
 export async function getExpensesPerMonth(

@@ -1,16 +1,15 @@
-// src/app/actions/signin.tsx
-import { httpDelete } from '@/services/api/http';
+import { httpDelete } from "@/services/api/http";
 
 export async function deleteType(typeId: String): Promise<any> {
-    try {
-        const API_URL = '/types/'+typeId;
+  try {
+    const API_URL = "/types/" + typeId;
 
-        await httpDelete(API_URL);
+    await httpDelete(API_URL);
 
-        return {
-            message: 'Tipo deletado com sucesso.'
-        }
-    } catch (error) {
-        throw new Error('Falha ao deletar Tipo');
-    }
+    return {
+      message: "Tipo deletado com sucesso.",
+    };
+  } catch (error) {
+    throw new Error("Falha ao deletar Tipo");
+  }
 }

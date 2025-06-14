@@ -1,6 +1,5 @@
-// src/app/actions/signin.tsx
-import { httpPost } from '@/services/api/http';
-import Cookies from 'js-cookie';
+import { httpPost } from "@/services/api/http";
+import Cookies from "js-cookie";
 
 interface SigninData {
   email: string;
@@ -9,7 +8,7 @@ interface SigninData {
 
 export async function signin(data: SigninData): Promise<any> {
   try {
-    const API_URL = '/clients/web/login';
+    const API_URL = "/clients/web/login";
 
     const response: any = await httpPost(API_URL, {
       email: data.email,
@@ -20,22 +19,22 @@ export async function signin(data: SigninData): Promise<any> {
 
     if (!accessToken) {
       return {
-        message: 'Token não encontrado no retorno.'
-      }
+        message: "Token não encontrado no retorno.",
+      };
     }
 
-    Cookies.set('access_token', accessToken, {
-      path: '/',
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+    Cookies.set("access_token", accessToken, {
+      path: "/",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
       httpOnly: false,
       expires: 1,
     });
 
     return {
-      message: 'Login realizado com sucesso.'
-    }
+      message: "Login realizado com sucesso.",
+    };
   } catch (error) {
-    throw new Error('Falha ao realizar login');
+    throw new Error("Falha ao realizar login");
   }
 }
