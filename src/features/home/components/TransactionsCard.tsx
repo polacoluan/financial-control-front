@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { ArrowDownLeft, ArrowUpRight, HandCoins, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import IncomeCreateModal from "@/features/income/components/IncomeCreateModal";
+import IncomeCreateForm from "@/features/income/components/IncomeCreateForm";
 
 export default function TransactionsCard() {
   return (
@@ -50,7 +50,7 @@ export default function TransactionsCard() {
           </div>
         </CardContent>
         <CardFooter className="gap-2">
-          <IncomeCreateModal />
+          <IncomeCreateForm />
           <Button className="w-32">
             <Plus />
             Despesa
