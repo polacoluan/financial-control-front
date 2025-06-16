@@ -26,7 +26,7 @@ import {
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from "@radix-ui/react-dialog";
+} from "@/components/ui/dialog";
 import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
 
@@ -136,7 +136,9 @@ export default function CreateForm() {
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
-              <Button type="submit">Salvar</Button>
+              <Button type="submit" onClick={onSubmit}>
+                Salvar
+              </Button>
             </DialogFooter>
           </DialogContent>
         </form>
