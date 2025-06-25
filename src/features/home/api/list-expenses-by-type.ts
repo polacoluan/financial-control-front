@@ -6,7 +6,7 @@ export async function listExpensesByType(
   year: number,
 ): Promise<any> {
   try {
-    const API_URL = `types/${typeId}/expenses/${month}/${year}`;
+    const API_URL = `types/${typeId}/expenses/${year}/${month}`;
 
     const response: any = await httpGet(API_URL);
 
