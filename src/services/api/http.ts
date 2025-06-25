@@ -1,4 +1,4 @@
-import { api } from "../../lib/axios";
+import { api } from '../../lib/axios';
 
 export async function httpGet<T>(url: string): Promise<T> {
   try {
@@ -46,8 +46,8 @@ export async function httpDelete<T>(url: string): Promise<T> {
 }
 
 function handleError(error: any): never {
-  console.error("Erro da API:", error);
+  console.error('Erro da API:', error);
   throw new Error(
-    error.response?.data?.message || "Um erro desconhecido ocorreu"
+    error.response?.data?.message || 'Um erro desconhecido ocorreu',
   );
 }

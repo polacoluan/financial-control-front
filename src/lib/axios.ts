@@ -1,17 +1,19 @@
 import axios from 'axios';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  transformRequest: [(data, headers) => {
-    if (headers['Content-Type'] === 'application/json') {
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
+  transformRequest: [
+    (data, headers) => {
+      if (headers['Content-Type'] === 'application/json') {
+        return JSON.stringify(data);
+      }
+      return data;
+    },
+  ],
 });
 
 api.interceptors.request.use(
@@ -22,7 +24,7 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 export { api };

@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { BanknoteArrowDown } from "lucide-react";
+} from '@/components/ui/card';
+import { BanknoteArrowDown } from 'lucide-react';
 
 export default function IncomeCard() {
   return (

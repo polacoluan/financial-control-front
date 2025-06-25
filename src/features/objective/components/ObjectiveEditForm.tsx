@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -16,27 +16,27 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
-import { editObjective } from "../api/edit-objective";
-import { Objective } from "../types/objective";
-import { useToast } from "@/hooks/use-toast";
-import { Pencil } from "lucide-react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import EditButton from "@/components/common/edit-button";
-import MoneyInput from "@/components/common/money-input";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FieldValues, useForm } from 'react-hook-form';
+import { editObjective } from '../api/edit-objective';
+import { Objective } from '../types/objective';
+import { useToast } from '@/hooks/use-toast';
+import { Pencil } from 'lucide-react';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import EditButton from '@/components/common/edit-button';
+import MoneyInput from '@/components/common/money-input';
 
 const formSchema = z.object({
   objective: z.string().min(2, {
-    message: "Objetivo precisa ter ao menos 2 caracteres.",
+    message: 'Objetivo precisa ter ao menos 2 caracteres.',
   }),
   description: z
     .string()
     .min(2, {
-      message: "Descrição precisa ter ao menos 2 caracteres.",
+      message: 'Descrição precisa ter ao menos 2 caracteres.',
     })
     .optional(),
   target_value: z.number().min(0).optional(),
@@ -70,9 +70,9 @@ export default function EditForm({
     editObjective(objectiveData);
 
     toast({
-      variant: "default",
-      title: "Sucesso!",
-      description: "Objetivo editado com sucesso!",
+      variant: 'default',
+      title: 'Sucesso!',
+      description: 'Objetivo editado com sucesso!',
     });
 
     reloadObjectives?.();

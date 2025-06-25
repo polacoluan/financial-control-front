@@ -45,7 +45,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
    ```bash
    npm run dev
    ```
-The app will be available at http://localhost:3000.
+   The app will be available at http://localhost:3000.
 
 ## Build
 

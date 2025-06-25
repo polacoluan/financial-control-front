@@ -1,10 +1,10 @@
-import { httpPost } from "@/services/api/http";
-import { Expense } from "../types/expense";
-import { MessageResponse } from "@/services/api/types";
+import { httpPost } from '@/services/api/http';
+import { Expense } from '../types/expense';
+import { MessageResponse } from '@/services/api/types';
 
 export async function createExpense(data: Expense): Promise<MessageResponse> {
   try {
-    const API_URL = "/expenses";
+    const API_URL = '/expenses';
 
     await httpPost(API_URL, {
       expense: data.expense,
@@ -18,9 +18,9 @@ export async function createExpense(data: Expense): Promise<MessageResponse> {
     });
 
     return {
-      message: "Despesa criada com sucesso.",
+      message: 'Despesa criada com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao realizar criar despesa");
+    throw new Error('Falha ao realizar criar despesa');
   }
 }

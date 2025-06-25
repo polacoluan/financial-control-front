@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -16,25 +16,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { useForm } from "react-hook-form";
-import { createCard } from "../api/create-card";
-import { Card } from "../types/card";
-import { toast } from "sonner";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CirclePlus } from "lucide-react";
-import CreateButton from "@/components/common/create-button";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
+import { useForm } from 'react-hook-form';
+import { createCard } from '../api/create-card';
+import { Card } from '../types/card';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CirclePlus } from 'lucide-react';
+import CreateButton from '@/components/common/create-button';
 
 const formSchema = z.object({
   card: z.string().min(2, {
-    message: "Cartão precisa ter ao menos 2 caracteres.",
+    message: 'Cartão precisa ter ao menos 2 caracteres.',
   }),
   description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
+    message: 'Descrição precisa ter ao menos 2 caracteres.',
   }),
   is_default: z.boolean(),
 });
@@ -48,8 +48,8 @@ export default function CreateForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      card: "",
-      description: "",
+      card: '',
+      description: '',
       is_default: false,
     },
   });
@@ -60,7 +60,7 @@ export default function CreateForm({
 
     form.reset();
 
-    toast("Cartão criado com sucesso.");
+    toast('Cartão criado com sucesso.');
 
     onCardCreated();
 

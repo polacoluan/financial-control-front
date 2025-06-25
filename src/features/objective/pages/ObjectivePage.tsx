@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { getObjectives } from "@/features/objective/api/get-objectives";
-import { Objective } from "../types/objective";
-import { columns } from "../components/ObjectiveColumns";
-import { DataTable } from "../components/ObjectiveDataTable";
-import CreateForm from "../components/ObjectiveCreateForm";
-import Loader from "@/components/common/loading";
+import React, { useEffect, useState } from 'react';
+import { getObjectives } from '@/features/objective/api/get-objectives';
+import { Objective } from '../types/objective';
+import { columns } from '../components/ObjectiveColumns';
+import { DataTable } from '../components/ObjectiveDataTable';
+import CreateForm from '../components/ObjectiveCreateForm';
+import Loader from '@/components/common/loading';
 
 const ObjectivePage = () => {
   const [objectives, setObjectives] = useState<Objective[]>([]);
@@ -19,7 +19,7 @@ const ObjectivePage = () => {
         const data = await getObjectives();
         setObjectives(data);
       } catch (error) {
-        console.error("Erro ao carregar os dados:", error);
+        console.error('Erro ao carregar os dados:', error);
       } finally {
         setIsLoading(false);
       }
@@ -33,7 +33,7 @@ const ObjectivePage = () => {
       const data = await getObjectives();
       setObjectives(data);
     } catch (error) {
-      console.error("Error reloading objectives:", error);
+      console.error('Error reloading objectives:', error);
     }
   };
 

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { getTypes } from "@/features/type/api/get-types";
-import { Type } from "../types/type";
-import { columns } from "../components/TypeColumns";
-import { DataTable } from "../components/TypeDataTable";
-import CreateForm from "../components/TypeCreateForm";
-import Loader from "@/components/common/loading";
+import React, { useEffect, useState } from 'react';
+import { getTypes } from '@/features/type/api/get-types';
+import { Type } from '../types/type';
+import { columns } from '../components/TypeColumns';
+import { DataTable } from '../components/TypeDataTable';
+import CreateForm from '../components/TypeCreateForm';
+import Loader from '@/components/common/loading';
 
 const TypePage = () => {
   const [types, setTypes] = useState<Type[]>([]);
@@ -18,7 +18,7 @@ const TypePage = () => {
         const data = await getTypes();
         setTypes(data);
       } catch (error) {
-        console.error("Erro ao carregar os dados:", error);
+        console.error('Erro ao carregar os dados:', error);
       } finally {
         setIsLoading(false);
       }
@@ -32,7 +32,7 @@ const TypePage = () => {
       const data = await getTypes();
       setTypes(data);
     } catch (error) {
-      console.error("Error reloading types:", error);
+      console.error('Error reloading types:', error);
     }
   };
 

@@ -1,19 +1,19 @@
-"use client";
-import { useState, useEffect } from "react";
+'use client';
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { HandCoins, SearchIcon } from "lucide-react";
-import { listTopCategories } from "../api/list-top-categories";
-import { TopCategory } from "../types/home";
-import { MonthSelect } from "@/components/common/month-select";
-import { YearSelect } from "@/components/common/year-select";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { HandCoins, SearchIcon } from 'lucide-react';
+import { listTopCategories } from '../api/list-top-categories';
+import { TopCategory } from '../types/home';
+import { MonthSelect } from '@/components/common/month-select';
+import { YearSelect } from '@/components/common/year-select';
+import { Button } from '@/components/ui/button';
 
 export default function BalanceCard() {
   const [categories, setCategories] = useState<TopCategory[]>([]);
@@ -27,7 +27,7 @@ export default function BalanceCard() {
       const data = await listTopCategories(limit, month, year);
       setCategories(data);
     } catch (error) {
-      console.error("Erro ao carregar os dados:", error);
+      console.error('Erro ao carregar os dados:', error);
     } finally {
       setIsLoading(false);
     }

@@ -2,13 +2,13 @@ import { httpGet } from '@/services/api/http';
 import { TypeResponse } from '../types/type';
 
 export async function getTypes(): Promise<TypeResponse> {
-    try {
-        const API_URL = '/types';
+  try {
+    const API_URL = '/types';
 
-        const response = await httpGet<TypeResponse>(API_URL);
+    const response = await httpGet<TypeResponse>(API_URL);
 
-        return response;
-    } catch (error) {
-        throw new Error('Falha ao buscar os tipos');
-    }
+    return response;
+  } catch (error) {
+    throw new Error('Falha ao buscar os tipos');
+  }
 }

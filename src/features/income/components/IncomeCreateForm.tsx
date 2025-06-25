@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 import {
   Form,
   FormControl,
@@ -9,16 +9,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
-import { createIncome } from "../api/create-income";
-import { Income } from "../types/income";
-import { toast } from "sonner";
-import MoneyInput from "@/components/common/money-input";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FieldValues, useForm } from 'react-hook-form';
+import { createIncome } from '../api/create-income';
+import { Income } from '../types/income';
+import { toast } from 'sonner';
+import MoneyInput from '@/components/common/money-input';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Dialog,
   DialogClose,
@@ -26,16 +26,16 @@ import {
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
-import { Plus } from "lucide-react";
+} from '@/components/ui/dialog';
+import { DialogFooter, DialogHeader } from '@/components/ui/dialog';
+import { Plus } from 'lucide-react';
 
 const formSchema = z.object({
   income: z.string().min(2, {
-    message: "Tipo precisa ter ao menos 2 caracteres.",
+    message: 'Tipo precisa ter ao menos 2 caracteres.',
   }),
   description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
+    message: 'Descrição precisa ter ao menos 2 caracteres.',
   }),
   amount: z.number(),
   date: z.string(),
@@ -45,10 +45,10 @@ export default function CreateForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      income: "",
-      description: "",
+      income: '',
+      description: '',
       amount: 0,
-      date: "",
+      date: '',
     },
   });
 
@@ -58,7 +58,7 @@ export default function CreateForm() {
 
     form.reset();
 
-    toast("Entrada criada com sucesso.");
+    toast('Entrada criada com sucesso.');
   }
 
   return (

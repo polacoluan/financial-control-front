@@ -1,10 +1,10 @@
-import { httpPost } from "@/services/api/http";
-import { Type } from "../types/type";
-import { MessageResponse } from "@/services/api/types";
+import { httpPost } from '@/services/api/http';
+import { Type } from '../types/type';
+import { MessageResponse } from '@/services/api/types';
 
 export async function createType(data: Type): Promise<MessageResponse> {
   try {
-    const API_URL = "/types";
+    const API_URL = '/types';
 
     await httpPost(API_URL, {
       type: data.type,
@@ -14,9 +14,9 @@ export async function createType(data: Type): Promise<MessageResponse> {
     });
 
     return {
-      message: "Tipo criado com sucesso.",
+      message: 'Tipo criado com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao criar Tipo");
+    throw new Error('Falha ao criar Tipo');
   }
 }

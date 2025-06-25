@@ -1,10 +1,10 @@
 // src/layouts/Header.tsx
-"use client";
+'use client';
 
-import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ModeToggle } from "@/components/common/theme-toggle";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import React from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ModeToggle } from '@/components/common/theme-toggle';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export const Header = () => {
   return (

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -16,33 +16,33 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
-import { useData } from "@/context/DataContext";
-import { Expense } from "../types/expense";
-import { editExpense } from "../api/edit-expense";
-import { useToast } from "@/hooks/use-toast";
-import { Pencil } from "lucide-react";
-import MoneyInput from "@/components/common/money-input";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import EditButton from "@/components/common/edit-button";
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FieldValues, useForm } from 'react-hook-form';
+import { useData } from '@/context/DataContext';
+import { Expense } from '../types/expense';
+import { editExpense } from '../api/edit-expense';
+import { useToast } from '@/hooks/use-toast';
+import { Pencil } from 'lucide-react';
+import MoneyInput from '@/components/common/money-input';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import EditButton from '@/components/common/edit-button';
 
 const formSchema = z.object({
   expense: z.string().min(2, {
-    message: "Tipo precisa ter ao menos 2 caracteres.",
+    message: 'Tipo precisa ter ao menos 2 caracteres.',
   }),
   description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
+    message: 'Descrição precisa ter ao menos 2 caracteres.',
   }),
   amount: z.number(),
   date: z.string(),
@@ -87,9 +87,9 @@ export default function EditForm({
     editExpense(expenseData);
 
     toast({
-      variant: "default",
-      title: "Sucesso!",
-      description: "Despesa editada com sucesso!",
+      variant: 'default',
+      title: 'Sucesso!',
+      description: 'Despesa editada com sucesso!',
     });
 
     reloadExpenses?.();
@@ -100,7 +100,7 @@ export default function EditForm({
   const handleTypeChange = (selectedTypeId: string) => {
     const selectedType = types.find((type) => type.id === selectedTypeId);
     setInstallmentsEnabled(selectedType?.installments === true);
-    form.setValue("type_id", selectedTypeId);
+    form.setValue('type_id', selectedTypeId);
   };
 
   return (
@@ -176,7 +176,7 @@ export default function EditForm({
                     <FormLabel>Categorias</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value || ""}
+                      defaultValue={field.value || ''}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -209,7 +209,7 @@ export default function EditForm({
                         field.onChange(value);
                         handleTypeChange(value);
                       }}
-                      defaultValue={field.value || ""}
+                      defaultValue={field.value || ''}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -239,7 +239,7 @@ export default function EditForm({
                     <FormLabel>Cartão</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value || ""}
+                      defaultValue={field.value || ''}
                     >
                       <FormControl>
                         <SelectTrigger>

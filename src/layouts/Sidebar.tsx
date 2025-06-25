@@ -6,7 +6,7 @@ import {
   CreditCard,
   Wallet,
   Crosshair,
-} from "lucide-react";
+} from 'lucide-react';
 
 import {
   Sidebar,
@@ -18,44 +18,44 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import Link from "next/link";
+} from '@/components/ui/sidebar';
+import Link from 'next/link';
 
 // Menu items.
 const items = [
   {
-    title: "Inicio",
-    url: "/",
+    title: 'Inicio',
+    url: '/',
     icon: Home,
   },
   {
-    title: "Despesas",
-    url: "expense",
+    title: 'Despesas',
+    url: 'expense',
     icon: HandCoins,
   },
   {
-    title: "Entradas",
-    url: "income",
+    title: 'Entradas',
+    url: 'income',
     icon: Wallet,
   },
   {
-    title: "Categorias",
-    url: "category",
+    title: 'Categorias',
+    url: 'category',
     icon: ChartBarStacked,
   },
   {
-    title: "Tipos",
-    url: "type",
+    title: 'Tipos',
+    url: 'type',
     icon: Type,
   },
   {
-    title: "Cartões",
-    url: "card",
+    title: 'Cartões',
+    url: 'card',
     icon: CreditCard,
   },
   {
-    title: "Objetivos",
-    url: "objectives",
+    title: 'Objetivos',
+    url: 'objectives',
     icon: Crosshair,
   },
 ];

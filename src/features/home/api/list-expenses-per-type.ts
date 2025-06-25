@@ -1,9 +1,9 @@
-import { httpGet } from "@/services/api/http";
-import { ExpensesPerTypeResponse } from "../types/home";
+import { httpGet } from '@/services/api/http';
+import { ExpensesPerTypeResponse } from '../types/home';
 
 export async function listExpensesPerType(
   month: number,
-  year: number
+  year: number,
 ): Promise<ExpensesPerTypeResponse> {
   try {
     const API_URL = `types/top-expenses/${year}/${month}`;
@@ -12,6 +12,6 @@ export async function listExpensesPerType(
 
     return response;
   } catch (error) {
-    throw new Error("Falha ao buscar as despesas por tipo");
+    throw new Error('Falha ao buscar as despesas por tipo');
   }
 }

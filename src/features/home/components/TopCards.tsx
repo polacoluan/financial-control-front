@@ -1,8 +1,8 @@
-import BalanceCard from "./BalanceCard";
-import CategoriesCard from "./CategoriesCard";
-import ExpenseCard from "./ExpenseCard";
-import IncomeCard from "./IncomeCard";
-import TransactionsCard from "./TransactionsCard";
+import BalanceCard from './BalanceCard';
+import CategoriesCard from './CategoriesCard';
+import ExpenseCard from './ExpenseCard';
+import IncomeCard from './IncomeCard';
+import TransactionsCard from './TransactionsCard';
 
 export default function TopCards() {
   return (

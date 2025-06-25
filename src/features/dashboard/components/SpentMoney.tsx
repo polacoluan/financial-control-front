@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/utils/mask-real";
-import { HandCoins } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatCurrency } from '@/utils/mask-real';
+import { HandCoins } from 'lucide-react';
 
 export function SpentMoney({ chartData }: { chartData: any }) {
   return (

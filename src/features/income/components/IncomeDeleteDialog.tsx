@@ -8,13 +8,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Income } from "../types/income";
-import { formatCurrency } from "@/utils/mask-real";
-import { useToast } from "@/hooks/use-toast";
-import { deleteIncome } from "../api/delete-income";
-import { Trash } from "lucide-react";
-import DeleteButton from "@/components/common/delete-button";
+} from '@/components/ui/alert-dialog';
+import { Income } from '../types/income';
+import { formatCurrency } from '@/utils/mask-real';
+import { useToast } from '@/hooks/use-toast';
+import { deleteIncome } from '../api/delete-income';
+import { Trash } from 'lucide-react';
+import DeleteButton from '@/components/common/delete-button';
 
 export default function DeleteDialog({
   income,
@@ -33,9 +33,9 @@ export default function DeleteDialog({
     reloadIncomes?.();
 
     toast({
-      variant: "default",
-      title: "Sucesso!",
-      description: "Entrada removida com sucesso!",
+      variant: 'default',
+      title: 'Sucesso!',
+      description: 'Entrada removida com sucesso!',
     });
   }
 

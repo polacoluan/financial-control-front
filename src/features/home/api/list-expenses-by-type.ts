@@ -1,5 +1,5 @@
-import { httpGet } from "@/services/api/http";
-import { ExpensesByTypeResponse } from "../types/home";
+import { httpGet } from '@/services/api/http';
+import { ExpensesByTypeResponse } from '../types/home';
 
 export async function listExpensesByType(
   typeId: string,
@@ -13,6 +13,6 @@ export async function listExpensesByType(
 
     return response;
   } catch (error) {
-    throw new Error("Falha ao buscar as despesas do tipo");
+    throw new Error('Falha ao buscar as despesas do tipo');
   }
 }

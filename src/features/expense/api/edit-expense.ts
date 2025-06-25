@@ -1,10 +1,10 @@
-import { httpPatch } from "@/services/api/http";
-import { Expense } from "../types/expense";
-import { MessageResponse } from "@/services/api/types";
+import { httpPatch } from '@/services/api/http';
+import { Expense } from '../types/expense';
+import { MessageResponse } from '@/services/api/types';
 
 export async function editExpense(data: Expense): Promise<MessageResponse> {
   try {
-    const API_URL = "/expenses/" + data.id;
+    const API_URL = '/expenses/' + data.id;
 
     await httpPatch(API_URL, {
       expense: data.expense,
@@ -18,9 +18,9 @@ export async function editExpense(data: Expense): Promise<MessageResponse> {
     });
 
     return {
-      message: "Despesa criada com sucesso.",
+      message: 'Despesa criada com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao realizar criar despesa");
+    throw new Error('Falha ao realizar criar despesa');
   }
 }

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -16,25 +16,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
-import { Type } from "../types/type";
-import { editType } from "../api/edit-type";
-import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Pencil } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import EditButton from "@/components/common/edit-button";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FieldValues, useForm } from 'react-hook-form';
+import { Type } from '../types/type';
+import { editType } from '../api/edit-type';
+import { useToast } from '@/hooks/use-toast';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Pencil } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import EditButton from '@/components/common/edit-button';
 
 const formSchema = z.object({
   type: z.string().min(2, {
-    message: "Tipo precisa ter ao menos 2 caracteres.",
+    message: 'Tipo precisa ter ao menos 2 caracteres.',
   }),
   description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
+    message: 'Descrição precisa ter ao menos 2 caracteres.',
   }),
   installments: z.boolean(),
   is_default: z.boolean(),
@@ -67,9 +67,9 @@ export default function EditForm({
     editType(typeData);
 
     toast({
-      variant: "default",
-      title: "Sucesso!",
-      description: "Tipo editado com sucesso!",
+      variant: 'default',
+      title: 'Sucesso!',
+      description: 'Tipo editado com sucesso!',
     });
 
     reloadTypes?.();

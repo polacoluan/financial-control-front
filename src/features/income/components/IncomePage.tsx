@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { getIncomes } from "@/features/income/api/get-incomes";
-import { Income } from "../types/income";
-import { columns } from "../components/IncomeColumns";
-import { DataTable } from "../components/IncomeDataTable";
-import CreateForm from "../components/IncomeCreateForm";
-import Loader from "@/components/common/loading";
+import React, { useEffect, useState } from 'react';
+import { getIncomes } from '@/features/income/api/get-incomes';
+import { Income } from '../types/income';
+import { columns } from '../components/IncomeColumns';
+import { DataTable } from '../components/IncomeDataTable';
+import CreateForm from '../components/IncomeCreateForm';
+import Loader from '@/components/common/loading';
 
 const IncomePage = () => {
   const [encomes, setIncomes] = useState<Income[]>([]);
@@ -18,7 +18,7 @@ const IncomePage = () => {
         const data = await getIncomes();
         setIncomes(data);
       } catch (error) {
-        console.error("Erro ao carregar os dados:", error);
+        console.error('Erro ao carregar os dados:', error);
       } finally {
         setIsLoading(false);
       }
@@ -32,7 +32,7 @@ const IncomePage = () => {
       const data = await getIncomes();
       setIncomes(data);
     } catch (error) {
-      console.error("Error reloading encomes:", error);
+      console.error('Error reloading encomes:', error);
     }
   };
 

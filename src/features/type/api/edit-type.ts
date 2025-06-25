@@ -1,10 +1,10 @@
-import { httpPatch } from "@/services/api/http";
-import { Type } from "../types/type";
-import { MessageResponse } from "@/services/api/types";
+import { httpPatch } from '@/services/api/http';
+import { Type } from '../types/type';
+import { MessageResponse } from '@/services/api/types';
 
 export async function editType(data: Type): Promise<MessageResponse> {
   try {
-    const API_URL = "/types/" + data.id;
+    const API_URL = '/types/' + data.id;
 
     await httpPatch(API_URL, {
       type: data.type,
@@ -14,9 +14,9 @@ export async function editType(data: Type): Promise<MessageResponse> {
     });
 
     return {
-      message: "Tipo criado com sucesso.",
+      message: 'Tipo criado com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao editar Tipo");
+    throw new Error('Falha ao editar Tipo');
   }
 }

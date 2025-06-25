@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { getCards } from "@/features/card/api/get-cards";
-import { Card as CardType } from "../types/card";
-import { columns } from "../components/CardColumns";
-import { DataTable } from "../components/CardDataTable";
-import CreateForm from "../components/CardCreateForm";
-import Loader from "@/components/common/loading";
+import React, { useEffect, useState } from 'react';
+import { getCards } from '@/features/card/api/get-cards';
+import { Card as CardType } from '../types/card';
+import { columns } from '../components/CardColumns';
+import { DataTable } from '../components/CardDataTable';
+import CreateForm from '../components/CardCreateForm';
+import Loader from '@/components/common/loading';
 
 const CardPage = () => {
   const [cards, setCards] = useState<CardType[]>([]);
@@ -18,7 +18,7 @@ const CardPage = () => {
         const data = await getCards();
         setCards(data);
       } catch (error) {
-        console.error("Erro ao carregar os dados:", error);
+        console.error('Erro ao carregar os dados:', error);
       } finally {
         setIsLoading(false);
       }
@@ -32,7 +32,7 @@ const CardPage = () => {
       const data = await getCards();
       setCards(data);
     } catch (error) {
-      console.error("Error reloading cards:", error);
+      console.error('Error reloading cards:', error);
     }
   };
 

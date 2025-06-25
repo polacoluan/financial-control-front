@@ -1,10 +1,12 @@
-import { httpPost } from "@/services/api/http";
-import { Objective } from "../types/objective";
-import { MessageResponse } from "@/services/api/types";
+import { httpPost } from '@/services/api/http';
+import { Objective } from '../types/objective';
+import { MessageResponse } from '@/services/api/types';
 
-export async function createObjective(data: Objective): Promise<MessageResponse> {
+export async function createObjective(
+  data: Objective,
+): Promise<MessageResponse> {
   try {
-    const API_URL = "/objectives";
+    const API_URL = '/objectives';
 
     await httpPost(API_URL, {
       objective: data.objective,
@@ -14,9 +16,9 @@ export async function createObjective(data: Objective): Promise<MessageResponse>
     });
 
     return {
-      message: "Objetivo criado com sucesso.",
+      message: 'Objetivo criado com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao criar objetivo");
+    throw new Error('Falha ao criar objetivo');
   }
 }

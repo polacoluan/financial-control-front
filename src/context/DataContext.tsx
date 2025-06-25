@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { getCategories } from "@/features/category/api/get-categories";
-import { getTypes } from "@/features/type/api/get-types";
-import { getCards } from "@/features/card/api/get-cards";
-import { Category } from "@/features/category/types/category";
-import { Type } from "@/features/type/types/type";
-import { Card } from "@/features/card/types/card";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { getCategories } from '@/features/category/api/get-categories';
+import { getTypes } from '@/features/type/api/get-types';
+import { getCards } from '@/features/card/api/get-cards';
+import { Category } from '@/features/category/types/category';
+import { Type } from '@/features/type/types/type';
+import { Card } from '@/features/card/types/card';
 interface DataContextValue {
   categories: Category[];
   types: Type[];
@@ -31,7 +31,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setTypes(typesData);
         setCards(cardsData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -49,7 +49,7 @@ export const useData = () => {
   const context = useContext(DataContext);
 
   if (!context) {
-    throw new Error("useData must be used within a DataProvider");
+    throw new Error('useData must be used within a DataProvider');
   }
 
   return context;

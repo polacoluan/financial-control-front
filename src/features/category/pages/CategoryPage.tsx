@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { getCategories } from "@/features/category/api/get-categories";
-import { Category } from "../types/category";
-import { columns } from "../components/CategoryColumns";
-import { DataTable } from "../components/CategoryDataTable";
-import CreateForm from "../components/CategoryCreateForm";
-import Loader from "@/components/common/loading";
+import React, { useEffect, useState } from 'react';
+import { getCategories } from '@/features/category/api/get-categories';
+import { Category } from '../types/category';
+import { columns } from '../components/CategoryColumns';
+import { DataTable } from '../components/CategoryDataTable';
+import CreateForm from '../components/CategoryCreateForm';
+import Loader from '@/components/common/loading';
 
 const CategoryPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -18,7 +18,7 @@ const CategoryPage = () => {
         const data = await getCategories();
         setCategories(data);
       } catch (error) {
-        console.error("Erro ao carregar os dados:", error);
+        console.error('Erro ao carregar os dados:', error);
       } finally {
         setIsLoading(false);
       }
@@ -32,7 +32,7 @@ const CategoryPage = () => {
       const data = await getCategories();
       setCategories(data);
     } catch (error) {
-      console.error("Error reloading categories:", error);
+      console.error('Error reloading categories:', error);
     }
   };
 

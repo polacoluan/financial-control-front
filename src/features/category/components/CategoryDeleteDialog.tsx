@@ -8,12 +8,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Category } from "../types/category";
-import { useToast } from "@/hooks/use-toast";
-import { deleteCategory } from "../api/delete-category";
-import { Trash } from "lucide-react";
-import DeleteButton from "@/components/common/delete-button";
+} from '@/components/ui/alert-dialog';
+import { Category } from '../types/category';
+import { useToast } from '@/hooks/use-toast';
+import { deleteCategory } from '../api/delete-category';
+import { Trash } from 'lucide-react';
+import DeleteButton from '@/components/common/delete-button';
 
 export default function DeleteDialog({
   category,
@@ -32,9 +32,9 @@ export default function DeleteDialog({
     reloadCategories?.();
 
     toast({
-      variant: "default",
-      title: "Sucesso!",
-      description: "Categoria removida com sucesso!",
+      variant: 'default',
+      title: 'Sucesso!',
+      description: 'Categoria removida com sucesso!',
     });
   }
 

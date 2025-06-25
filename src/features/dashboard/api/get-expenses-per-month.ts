@@ -1,9 +1,9 @@
-import { httpGet } from "@/services/api/http";
-import { DashboardResponse } from "../types/dashboard";
+import { httpGet } from '@/services/api/http';
+import { DashboardResponse } from '../types/dashboard';
 
 export async function getExpensesPerMonth(
   year: number,
-  month: number
+  month: number,
 ): Promise<DashboardResponse> {
   const API_URL = `/charts/money-spent-per-month/${year}/${month}`;
 

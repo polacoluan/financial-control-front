@@ -1,13 +1,13 @@
-"use client";
-import React, { useState } from "react";
-import { signup } from "@/features/auth/api/signup";
-import { useRouter } from "next/navigation";
+'use client';
+import React, { useState } from 'react';
+import { signup } from '@/features/auth/api/signup';
+import { useRouter } from 'next/navigation';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +21,7 @@ const SignupForm = () => {
     e.preventDefault();
     const response = await signup(formData);
     alert(response.message);
-    router.push("/");
+    router.push('/');
   };
 
   return (

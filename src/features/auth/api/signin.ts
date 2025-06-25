@@ -1,6 +1,6 @@
-import { httpPost } from "@/services/api/http";
-import Cookies from "js-cookie";
-import { MessageResponse } from "@/services/api/types";
+import { httpPost } from '@/services/api/http';
+import Cookies from 'js-cookie';
+import { MessageResponse } from '@/services/api/types';
 
 interface SigninData {
   email: string;
@@ -9,7 +9,7 @@ interface SigninData {
 
 export async function signin(data: SigninData): Promise<MessageResponse> {
   try {
-    const API_URL = "/clients/web/login";
+    const API_URL = '/clients/web/login';
 
     const response: any = await httpPost(API_URL, {
       email: data.email,
@@ -20,22 +20,22 @@ export async function signin(data: SigninData): Promise<MessageResponse> {
 
     if (!accessToken) {
       return {
-        message: "Token não encontrado no retorno.",
+        message: 'Token não encontrado no retorno.',
       };
     }
 
-    Cookies.set("access_token", accessToken, {
-      path: "/",
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+    Cookies.set('access_token', accessToken, {
+      path: '/',
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
       httpOnly: false,
       expires: 1,
     });
 
     return {
-      message: "Login realizado com sucesso.",
+      message: 'Login realizado com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao realizar login");
+    throw new Error('Falha ao realizar login');
   }
 }

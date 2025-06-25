@@ -8,12 +8,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Type } from "../types/type";
-import { useToast } from "@/hooks/use-toast";
-import { deleteType } from "../api/delete-type";
-import { Trash } from "lucide-react";
-import DeleteButton from "@/components/common/delete-button";
+} from '@/components/ui/alert-dialog';
+import { Type } from '../types/type';
+import { useToast } from '@/hooks/use-toast';
+import { deleteType } from '../api/delete-type';
+import { Trash } from 'lucide-react';
+import DeleteButton from '@/components/common/delete-button';
 
 export default function DeleteDialog({
   type,
@@ -32,9 +32,9 @@ export default function DeleteDialog({
     reloadTypes?.();
 
     toast({
-      variant: "default",
-      title: "Sucesso!",
-      description: "Tipo removido com sucesso!",
+      variant: 'default',
+      title: 'Sucesso!',
+      description: 'Tipo removido com sucesso!',
     });
   }
 

@@ -1,12 +1,12 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useData } from "@/context/DataContext";
+} from '@/components/ui/select';
+import { useData } from '@/context/DataContext';
 
 export function TypeSelect({
   typeId,

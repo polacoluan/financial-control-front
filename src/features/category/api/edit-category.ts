@@ -1,10 +1,10 @@
-import { httpPatch } from "@/services/api/http";
-import { Category } from "../types/category";
-import { MessageResponse } from "@/services/api/types";
+import { httpPatch } from '@/services/api/http';
+import { Category } from '../types/category';
+import { MessageResponse } from '@/services/api/types';
 
 export async function editCategory(data: Category): Promise<MessageResponse> {
   try {
-    const API_URL = "/categories/" + data.id;
+    const API_URL = '/categories/' + data.id;
 
     await httpPatch(API_URL, {
       category: data.category,
@@ -12,9 +12,9 @@ export async function editCategory(data: Category): Promise<MessageResponse> {
     });
 
     return {
-      message: "Categoria criada com sucesso.",
+      message: 'Categoria criada com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao editar Categoria");
+    throw new Error('Falha ao editar Categoria');
   }
 }

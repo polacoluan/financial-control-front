@@ -1,35 +1,34 @@
-"use client";
-import { useState, useEffect } from "react";
+'use client';
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { HandCoins, SearchIcon } from "lucide-react";
-import { listExpensesPerType } from "../api/list-expenses-per-type";
-import { listExpensesByType } from "../api/list-expenses-by-type";
-import {
-  ExpensesPerTypeItem,
-  ExpensesByTypeItem,
-} from "../types/home";
-import Loader from "@/components/common/loading";
-import { MonthSelect } from "@/components/common/month-select";
-import { YearSelect } from "@/components/common/year-select";
-import { TypeSelect } from "@/components/common/type-select";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { HandCoins, SearchIcon } from 'lucide-react';
+import { listExpensesPerType } from '../api/list-expenses-per-type';
+import { listExpensesByType } from '../api/list-expenses-by-type';
+import { ExpensesPerTypeItem, ExpensesByTypeItem } from '../types/home';
+import Loader from '@/components/common/loading';
+import { MonthSelect } from '@/components/common/month-select';
+import { YearSelect } from '@/components/common/year-select';
+import { TypeSelect } from '@/components/common/type-select';
+import { Button } from '@/components/ui/button';
 
 export default function ExpensePerType() {
   const [types, setTypes] = useState<ExpensesPerTypeItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
   const [year, setYear] = useState<number>(new Date().getFullYear());
-  const [selectedType, setSelectedType] = useState<ExpensesPerTypeItem | null>(null);
+  const [selectedType, setSelectedType] = useState<ExpensesPerTypeItem | null>(
+    null,
+  );
   const [typeExpenses, setTypeExpenses] = useState<ExpensesByTypeItem[]>([]);
   const [isTypeLoading, setIsTypeLoading] = useState(false);
-  const [selectedTypeId, setSelectedTypeId] = useState<string>("");
+  const [selectedTypeId, setSelectedTypeId] = useState<string>('');
 
   const fetchTypes = async () => {
     try {
@@ -37,7 +36,7 @@ export default function ExpensePerType() {
       const data = await listExpensesPerType(month, year);
       setTypes(data);
     } catch (error) {
-      console.error("Erro ao carregar os dados:", error);
+      console.error('Erro ao carregar os dados:', error);
     } finally {
       setIsLoading(false);
     }
@@ -50,7 +49,7 @@ export default function ExpensePerType() {
       const data = await listExpensesByType(type.id, month, year);
       setTypeExpenses(data);
     } catch (error) {
-      console.error("Erro ao carregar as despesas:", error);
+      console.error('Erro ao carregar as despesas:', error);
     } finally {
       setIsTypeLoading(false);
     }

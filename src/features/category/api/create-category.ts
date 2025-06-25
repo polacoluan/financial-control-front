@@ -1,10 +1,10 @@
-import { httpPost } from "@/services/api/http";
-import { Category } from "../types/category";
-import { MessageResponse } from "@/services/api/types";
+import { httpPost } from '@/services/api/http';
+import { Category } from '../types/category';
+import { MessageResponse } from '@/services/api/types';
 
 export async function createCategory(data: Category): Promise<MessageResponse> {
   try {
-    const API_URL = "/categories";
+    const API_URL = '/categories';
 
     await httpPost(API_URL, {
       category: data.category,
@@ -12,9 +12,9 @@ export async function createCategory(data: Category): Promise<MessageResponse> {
     });
 
     return {
-      message: "Categoria criada com sucesso.",
+      message: 'Categoria criada com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao criar Categoria");
+    throw new Error('Falha ao criar Categoria');
   }
 }

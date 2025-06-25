@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Card,
@@ -6,14 +6,16 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { ArrowDownLeft, ArrowUpRight, HandCoins } from "lucide-react";
-import { listRecentTransactions } from "../api/list-recent-transactions";
-import { RecentTransaction } from "../types/home";
-import { useEffect, useState } from "react";
+} from '@/components/ui/card';
+import { ArrowDownLeft, ArrowUpRight, HandCoins } from 'lucide-react';
+import { listRecentTransactions } from '../api/list-recent-transactions';
+import { RecentTransaction } from '../types/home';
+import { useEffect, useState } from 'react';
 
 export default function TransactionsCard() {
-  const [recentTransactions, setRecentTransaction] = useState<RecentTransaction[]>([]);
+  const [recentTransactions, setRecentTransaction] = useState<
+    RecentTransaction[]
+  >([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -22,7 +24,7 @@ export default function TransactionsCard() {
         const data = await listRecentTransactions();
         setRecentTransaction(data);
       } catch (error) {
-        console.error("Erro ao carregar os dados:", error);
+        console.error('Erro ao carregar os dados:', error);
       } finally {
         setIsLoading(false);
       }
@@ -46,13 +48,13 @@ export default function TransactionsCard() {
                 <span>{recentTransaction.name}</span>
                 <div
                   className={`flex items-center gap-2 flex-nowrap  ${
-                    recentTransaction.transaction_type == "income"
-                      ? "text-green-600"
-                      : "text-red-600"
+                    recentTransaction.transaction_type == 'income'
+                      ? 'text-green-600'
+                      : 'text-red-600'
                   } `}
                 >
                   <span>R$ {recentTransaction.amount}</span>
-                  {recentTransaction.transaction_type == "income" ? (
+                  {recentTransaction.transaction_type == 'income' ? (
                     <ArrowDownLeft className="w-4 h-4" />
                   ) : (
                     <ArrowUpRight className="w-4 h-4" />

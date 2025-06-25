@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -16,25 +16,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
-import { Card } from "../types/card";
-import { editCard } from "../api/edit-card";
-import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Pencil } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import EditButton from "@/components/common/edit-button";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FieldValues, useForm } from 'react-hook-form';
+import { Card } from '../types/card';
+import { editCard } from '../api/edit-card';
+import { useToast } from '@/hooks/use-toast';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Pencil } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import EditButton from '@/components/common/edit-button';
 
 const formSchema = z.object({
   card: z.string().min(2, {
-    message: "Cartão precisa ter ao menos 2 caracteres.",
+    message: 'Cartão precisa ter ao menos 2 caracteres.',
   }),
   description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
+    message: 'Descrição precisa ter ao menos 2 caracteres.',
   }),
   is_default: z.boolean(),
 });
@@ -65,9 +65,9 @@ export default function EditForm({
     editCard(cardData);
 
     toast({
-      variant: "default",
-      title: "Sucesso!",
-      description: "Cartão editado com sucesso!",
+      variant: 'default',
+      title: 'Sucesso!',
+      description: 'Cartão editado com sucesso!',
     });
 
     reloadCards?.();

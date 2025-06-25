@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/utils/mask-real";
-import { Banknote } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatCurrency } from '@/utils/mask-real';
+import { Banknote } from 'lucide-react';
 
 export function IncomeMoney({ chartData }: { chartData: any }) {
   return (

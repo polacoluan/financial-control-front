@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -16,25 +16,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
-import { createType } from "../api/create-type";
-import { Type } from "../types/type";
-import { toast } from "sonner";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CirclePlus } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import CreateButton from "@/components/common/create-button";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FieldValues, useForm } from 'react-hook-form';
+import { createType } from '../api/create-type';
+import { Type } from '../types/type';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CirclePlus } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import CreateButton from '@/components/common/create-button';
 
 const formSchema = z.object({
   type: z.string().min(2, {
-    message: "Tipo precisa ter ao menos 2 caracteres.",
+    message: 'Tipo precisa ter ao menos 2 caracteres.',
   }),
   description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
+    message: 'Descrição precisa ter ao menos 2 caracteres.',
   }),
   installments: z.boolean(),
   is_default: z.boolean(),
@@ -49,8 +49,8 @@ export default function CreateForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      type: "",
-      description: "",
+      type: '',
+      description: '',
       installments: false,
       is_default: false,
     },
@@ -62,7 +62,7 @@ export default function CreateForm({
 
     form.reset();
 
-    toast("Tipo criado com sucesso.");
+    toast('Tipo criado com sucesso.');
 
     onTypeCreated();
 

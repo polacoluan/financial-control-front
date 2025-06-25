@@ -1,12 +1,12 @@
 // src/app/layout.tsx
-"use client";
+'use client';
 
-import "@/styles/globals.css";
-import { MainLayout } from "@/layouts/MainLayout";
-import { usePathname } from "next/navigation";
-import { Toaster } from "@/components/ui/toaster";
-import { DataProvider } from "@/context/DataContext";
-import { ThemeProvider } from "@/components/common/theme-provider";
+import '@/styles/globals.css';
+import { MainLayout } from '@/layouts/MainLayout';
+import { usePathname } from 'next/navigation';
+import { Toaster } from '@/components/ui/toaster';
+import { DataProvider } from '@/context/DataContext';
+import { ThemeProvider } from '@/components/common/theme-provider';
 
 export default function RootLayout({
   children,
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
 
-  const excludedRoutes = ["/auth/signin", "/auth/signup"];
+  const excludedRoutes = ['/auth/signin', '/auth/signup'];
 
   const isExcluded = excludedRoutes.includes(pathname);
 

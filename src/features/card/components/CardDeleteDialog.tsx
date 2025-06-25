@@ -8,12 +8,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Card } from "../types/card";
-import { useToast } from "@/hooks/use-toast";
-import { deleteCard } from "../api/delete-card";
-import { Trash } from "lucide-react";
-import DeleteButton from "@/components/common/delete-button";
+} from '@/components/ui/alert-dialog';
+import { Card } from '../types/card';
+import { useToast } from '@/hooks/use-toast';
+import { deleteCard } from '../api/delete-card';
+import { Trash } from 'lucide-react';
+import DeleteButton from '@/components/common/delete-button';
 
 export default function DeleteDialog({
   card,
@@ -32,9 +32,9 @@ export default function DeleteDialog({
     reloadCards?.();
 
     toast({
-      variant: "default",
-      title: "Sucesso!",
-      description: "Cartão removido com sucesso!",
+      variant: 'default',
+      title: 'Sucesso!',
+      description: 'Cartão removido com sucesso!',
     });
   }
 

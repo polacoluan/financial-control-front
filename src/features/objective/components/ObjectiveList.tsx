@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { getObjectives } from "@/features/objective/api/get-objectives";
-import { Objective } from "../types/objective";
-import { columns } from "./ObjectiveColumns";
-import { DataTable } from "./ObjectiveDataTable";
-import Loader from "@/components/common/loading";
+import React, { useEffect, useState } from 'react';
+import { getObjectives } from '@/features/objective/api/get-objectives';
+import { Objective } from '../types/objective';
+import { columns } from './ObjectiveColumns';
+import { DataTable } from './ObjectiveDataTable';
+import Loader from '@/components/common/loading';
 
 export default function ObjectiveList() {
   const [objectives, setObjectives] = useState<Objective[]>([]);
@@ -18,7 +18,7 @@ export default function ObjectiveList() {
         const data = await getObjectives();
         setObjectives(data);
       } catch (error) {
-        console.error("Erro ao carregar os dados:", error);
+        console.error('Erro ao carregar os dados:', error);
       } finally {
         setIsLoading(false);
       }
@@ -32,7 +32,7 @@ export default function ObjectiveList() {
       const data = await getObjectives();
       setObjectives(data);
     } catch (error) {
-      console.error("Error reloading objectives:", error);
+      console.error('Error reloading objectives:', error);
     }
   };
 

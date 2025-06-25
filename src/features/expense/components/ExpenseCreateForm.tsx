@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -16,33 +16,33 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
-import { useData } from "@/context/DataContext";
-import { createExpense } from "../api/create-expense";
-import { Expense } from "../types/expense";
-import { toast } from "sonner";
-import MoneyInput from "@/components/common/money-input";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CirclePlus } from "lucide-react";
-import CreateButton from "@/components/common/create-button";
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FieldValues, useForm } from 'react-hook-form';
+import { useData } from '@/context/DataContext';
+import { createExpense } from '../api/create-expense';
+import { Expense } from '../types/expense';
+import { toast } from 'sonner';
+import MoneyInput from '@/components/common/money-input';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CirclePlus } from 'lucide-react';
+import CreateButton from '@/components/common/create-button';
 
 const formSchema = z.object({
   expense: z.string().min(2, {
-    message: "Tipo precisa ter ao menos 2 caracteres.",
+    message: 'Tipo precisa ter ao menos 2 caracteres.',
   }),
   description: z.string().min(2, {
-    message: "Descrição precisa ter ao menos 2 caracteres.",
+    message: 'Descrição precisa ter ao menos 2 caracteres.',
   }),
   amount: z.number(),
   date: z.string(),
@@ -58,8 +58,8 @@ export default function CreateForm({
   onExpenseCreated: () => void;
 }) {
   const [installmentsEnabled, setInstallmentsEnabled] = useState(false);
-  const [defaultTypeId, setDefaultTypeId] = useState("");
-  const [defaultCardId, setDefaultCardId] = useState("");
+  const [defaultTypeId, setDefaultTypeId] = useState('');
+  const [defaultCardId, setDefaultCardId] = useState('');
   const { categories } = useData();
   const { types } = useData();
   const { cards } = useData();
@@ -67,13 +67,13 @@ export default function CreateForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      expense: "",
-      description: "",
+      expense: '',
+      description: '',
       amount: 0,
-      date: "",
-      category_id: "",
-      type_id: "",
-      card_id: "",
+      date: '',
+      category_id: '',
+      type_id: '',
+      card_id: '',
       installments: 1,
     },
   });
@@ -84,19 +84,19 @@ export default function CreateForm({
 
     if (defaultType) {
       setDefaultTypeId(defaultType.id);
-      form.setValue("type_id", defaultType.id);
+      form.setValue('type_id', defaultType.id);
     }
 
     if (defaultCard) {
       setDefaultCardId(defaultCard.id);
-      form.setValue("card_id", defaultCard.id);
+      form.setValue('card_id', defaultCard.id);
     }
   }, [types, cards]);
 
   const handleTypeChange = (selectedTypeId: string) => {
     const selectedType = types.find((type) => type.id === selectedTypeId);
     setInstallmentsEnabled(selectedType?.installments === true);
-    form.setValue("type_id", selectedTypeId);
+    form.setValue('type_id', selectedTypeId);
   };
 
   function onSubmit(data: FieldValues) {
@@ -104,11 +104,11 @@ export default function CreateForm({
     createExpense(expenseData);
 
     form.reset();
-    form.setValue("category_id", "");
-    form.setValue("type_id", "");
-    form.setValue("card_id", "");
+    form.setValue('category_id', '');
+    form.setValue('type_id', '');
+    form.setValue('card_id', '');
 
-    toast("Despesa criada com sucesso.");
+    toast('Despesa criada com sucesso.');
 
     onExpenseCreated();
 

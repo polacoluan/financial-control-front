@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import * as React from "react";
-import { TrendingUp } from "lucide-react";
-import { Label, Pie, PieChart } from "recharts";
+import { useState, useEffect } from 'react';
+import * as React from 'react';
+import { TrendingUp } from 'lucide-react';
+import { Label, Pie, PieChart } from 'recharts';
 
 import {
   Card,
@@ -12,20 +12,20 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
-import { getExpensesPerMonth } from "../api/get-expenses-per-month";
-import Loader from "@/components/common/loading";
+} from '@/components/ui/chart';
+import { getExpensesPerMonth } from '../api/get-expenses-per-month';
+import Loader from '@/components/common/loading';
 
 const chartConfig = {
   amount: {
-    label: "Valor",
-    color: "hsl(var(--chart-4))",
+    label: 'Valor',
+    color: 'hsl(var(--chart-4))',
   },
 } satisfies ChartConfig;
 
@@ -59,7 +59,7 @@ export function SpentPerCardChart({
               >
                 <Label
                   content={({ viewBox }) => {
-                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
                       return (
                         <text
                           x={viewBox.cx}

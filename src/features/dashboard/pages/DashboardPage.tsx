@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { MonthSelect } from "@/components/common/month-select";
-import { SpentMoney } from "../components/SpentMoney";
-import { SpentPerCardChart } from "../components/SpentPerCardChart";
-import { SpentPerCategoryChart } from "../components/SpentPerCategoryChart";
-import { SpentPerDateChart } from "../components/SpentPerDateChart";
-import { SpentPerTypeChart } from "../components/SpentPerTypeChart";
-import { YearSelect } from "@/components/common/year-select";
-import { Button } from "@/components/ui/button";
-import { SearchIcon } from "lucide-react";
-import { getExpensesPerMonth } from "../api/get-expenses-per-month";
-import Loader from "@/components/common/loading";
-import { useState, useEffect } from "react";
-import { IncomeMoney } from "../components/IncomeMoney";
-import { MonthBalance } from "../components/MonthBalance";
-import { SavedMoney } from "../components/SavedMoney";
+import { MonthSelect } from '@/components/common/month-select';
+import { SpentMoney } from '../components/SpentMoney';
+import { SpentPerCardChart } from '../components/SpentPerCardChart';
+import { SpentPerCategoryChart } from '../components/SpentPerCategoryChart';
+import { SpentPerDateChart } from '../components/SpentPerDateChart';
+import { SpentPerTypeChart } from '../components/SpentPerTypeChart';
+import { YearSelect } from '@/components/common/year-select';
+import { Button } from '@/components/ui/button';
+import { SearchIcon } from 'lucide-react';
+import { getExpensesPerMonth } from '../api/get-expenses-per-month';
+import Loader from '@/components/common/loading';
+import { useState, useEffect } from 'react';
+import { IncomeMoney } from '../components/IncomeMoney';
+import { MonthBalance } from '../components/MonthBalance';
+import { SavedMoney } from '../components/SavedMoney';
 
 interface chartData {
   cards: any;
@@ -37,7 +37,7 @@ const DashboardPage = () => {
       setChartData(data);
       setTotalSpent(data.total_expenses);
     } catch (error) {
-      console.error("Erro ao carregar os dados:", error);
+      console.error('Erro ao carregar os dados:', error);
     } finally {
       setIsLoading(false);
     }
@@ -53,7 +53,7 @@ const DashboardPage = () => {
         <div className="grid grid-cols-3 gap-2 m-2 w-fit">
           <MonthSelect month={month} setMonth={setMonth} />
           <YearSelect year={year} setYear={setYear} />
-          <Button variant={"outline"} onClick={() => fetchChartData()}>
+          <Button variant={'outline'} onClick={() => fetchChartData()}>
             <SearchIcon /> Buscar
           </Button>
         </div>

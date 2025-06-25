@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   AlertDialog,
@@ -10,11 +10,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Objective } from "../types/objective";
-import { deleteObjective } from "../api/delete-objective";
-import { useToast } from "@/hooks/use-toast";
-import DeleteButton from "@/components/common/delete-button";
+} from '@/components/ui/alert-dialog';
+import { Objective } from '../types/objective';
+import { deleteObjective } from '../api/delete-objective';
+import { useToast } from '@/hooks/use-toast';
+import DeleteButton from '@/components/common/delete-button';
 
 export default function DeleteDialog({
   objective,
@@ -31,16 +31,16 @@ export default function DeleteDialog({
     try {
       await deleteObjective(objectiveId);
       toast({
-        variant: "default",
-        title: "Sucesso!",
-        description: "Objetivo deletado com sucesso!",
+        variant: 'default',
+        title: 'Sucesso!',
+        description: 'Objetivo deletado com sucesso!',
       });
       reloadObjectives?.();
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Erro!",
-        description: "Erro ao deletar objetivo.",
+        variant: 'destructive',
+        title: 'Erro!',
+        description: 'Erro ao deletar objetivo.',
       });
     }
   };

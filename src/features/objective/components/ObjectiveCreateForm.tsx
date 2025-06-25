@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -16,26 +16,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
-import { createObjective } from "../api/create-objective";
-import { Objective } from "../types/objective";
-import { toast } from "sonner";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import CreateButton from "@/components/common/create-button";
-import MoneyInput from "@/components/common/money-input";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FieldValues, useForm } from 'react-hook-form';
+import { createObjective } from '../api/create-objective';
+import { Objective } from '../types/objective';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import CreateButton from '@/components/common/create-button';
+import MoneyInput from '@/components/common/money-input';
 
 const formSchema = z.object({
   objective: z.string().min(2, {
-    message: "Objetivo precisa ter ao menos 2 caracteres.",
+    message: 'Objetivo precisa ter ao menos 2 caracteres.',
   }),
   description: z
     .string()
     .min(2, {
-      message: "Descrição precisa ter ao menos 2 caracteres.",
+      message: 'Descrição precisa ter ao menos 2 caracteres.',
     })
     .optional(),
   target_value: z.number().min(0).optional(),
@@ -51,8 +51,8 @@ export default function CreateForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      objective: "",
-      description: "",
+      objective: '',
+      description: '',
       target_value: undefined,
       saved_amount: undefined,
     },
@@ -64,7 +64,7 @@ export default function CreateForm({
 
     form.reset();
 
-    toast("Objetivo criado com sucesso.");
+    toast('Objetivo criado com sucesso.');
 
     onObjectiveCreated();
 

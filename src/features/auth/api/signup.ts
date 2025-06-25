@@ -1,5 +1,5 @@
-import { httpPost } from "@/services/api/http";
-import { MessageResponse } from "@/services/api/types";
+import { httpPost } from '@/services/api/http';
+import { MessageResponse } from '@/services/api/types';
 
 interface SignupData {
   name: string;
@@ -8,7 +8,7 @@ interface SignupData {
 }
 
 export async function signup(data: SignupData): Promise<MessageResponse> {
-  const API_URL = "/register";
+  const API_URL = '/register';
 
   const user = await httpPost(API_URL, {
     name: data.name,
@@ -18,11 +18,11 @@ export async function signup(data: SignupData): Promise<MessageResponse> {
 
   if (!user) {
     return {
-      message: "Ocorreu um erro ao criar o usuário.",
+      message: 'Ocorreu um erro ao criar o usuário.',
     };
   }
 
   return {
-    message: "Usuário criado com sucesso.",
+    message: 'Usuário criado com sucesso.',
   };
 }

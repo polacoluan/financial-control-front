@@ -1,10 +1,10 @@
-import { httpPatch } from "@/services/api/http";
-import { Card } from "../types/card";
-import { MessageResponse } from "@/services/api/types";
+import { httpPatch } from '@/services/api/http';
+import { Card } from '../types/card';
+import { MessageResponse } from '@/services/api/types';
 
 export async function editCard(data: Card): Promise<MessageResponse> {
   try {
-    const API_URL = "/cards/" + data.id;
+    const API_URL = '/cards/' + data.id;
 
     await httpPatch(API_URL, {
       card: data.card,
@@ -13,9 +13,9 @@ export async function editCard(data: Card): Promise<MessageResponse> {
     });
 
     return {
-      message: "Cartão criado com sucesso.",
+      message: 'Cartão criado com sucesso.',
     };
   } catch (error) {
-    throw new Error("Falha ao editar Cartão");
+    throw new Error('Falha ao editar Cartão');
   }
 }
