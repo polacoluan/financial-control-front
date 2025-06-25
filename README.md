@@ -21,6 +21,22 @@ This URL is used by Axios in `src/lib/axios.ts` to communicate with the backend.
 
 ## Setup
 
+## Linting and Formatting
+
+Run ESLint to check your code style:
+
+```bash
+npm run lint
+```
+
+Format the project with Prettier:
+
+```bash
+npm run format
+```
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
 1. Install dependencies
    ```bash
    npm install
@@ -29,7 +45,7 @@ This URL is used by Axios in `src/lib/axios.ts` to communicate with the backend.
    ```bash
    npm run dev
    ```
-   The app will be available at http://localhost:3000.
+The app will be available at http://localhost:3000.
 
 ## Build
 
