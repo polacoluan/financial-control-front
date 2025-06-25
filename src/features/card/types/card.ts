@@ -4,3 +4,4 @@ export type Card = {
     description: string;
     is_default: boolean;
 }
+export type CardResponse = Card[];

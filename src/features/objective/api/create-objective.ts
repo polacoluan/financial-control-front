@@ -1,7 +1,8 @@
 import { httpPost } from "@/services/api/http";
 import { Objective } from "../types/objective";
+import { MessageResponse } from "@/services/api/types";
 
-export async function createObjective(data: Objective): Promise<any> {
+export async function createObjective(data: Objective): Promise<MessageResponse> {
   try {
     const API_URL = "/objectives";
 

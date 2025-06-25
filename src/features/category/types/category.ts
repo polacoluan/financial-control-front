@@ -3,3 +3,4 @@ export type Category = {
     category: string;
     description: string;
 }
+export type CategoryResponse = Category[];

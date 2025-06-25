@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { getObjectives } from "@/features/objective/api/get-objectives";
+import { Objective } from "../types/objective";
 import { columns } from "./ObjectiveColumns";
 import { DataTable } from "./ObjectiveDataTable";
 import Loader from "@/components/common/loading";
 
 export default function ObjectiveList() {
-  const [objectives, setObjectives] = useState<any[]>([]);
+  const [objectives, setObjectives] = useState<Objective[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

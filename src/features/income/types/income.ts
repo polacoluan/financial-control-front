@@ -5,3 +5,4 @@ export type Income = {
     amount: number;
     date: string;
 }
+export type IncomeResponse = Income[];

@@ -9,3 +9,4 @@ export type Expense = {
     card_id: string;
     installments: number;
 }
+export type ExpenseResponse = Expense[];

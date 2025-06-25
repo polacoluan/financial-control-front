@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { getCards } from "@/features/card/api/get-cards";
+import { Card as CardType } from "../types/card";
 import { columns } from "../components/CardColumns";
 import { DataTable } from "../components/CardDataTable";
 import CreateForm from "../components/CardCreateForm";
 import Loader from "@/components/common/loading";
 
 const CardPage = () => {
-  const [cards, setCards] = useState<any[]>([]);
+  const [cards, setCards] = useState<CardType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchUsers = async () => {

@@ -5,3 +5,4 @@ export type Type = {
     is_default: boolean;
     installments: boolean;
 }
+export type TypeResponse = Type[];

@@ -1,4 +1,5 @@
 import { httpPost } from "@/services/api/http";
+import { MessageResponse } from "@/services/api/types";
 
 interface SignupData {
   name: string;
@@ -6,7 +7,7 @@ interface SignupData {
   password: string;
 }
 
-export async function signup(data: SignupData): Promise<any> {
+export async function signup(data: SignupData): Promise<MessageResponse> {
   const API_URL = "/register";
 
   const user = await httpPost(API_URL, {

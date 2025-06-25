@@ -10,9 +10,10 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { HandCoins } from "lucide-react";
 import { listTopCategories } from "../api/list-top-categories";
+import { TopCategory } from "../types/home";
 
 export default function BalanceCard() {
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<TopCategory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchCategories = async () => {

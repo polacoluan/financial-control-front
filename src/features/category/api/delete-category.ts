@@ -1,6 +1,7 @@
 import { httpDelete } from "@/services/api/http";
+import { MessageResponse } from "@/services/api/types";
 
-export async function deleteCategory(categoryId: String): Promise<any> {
+export async function deleteCategory(categoryId: String): Promise<MessageResponse> {
   try {
     const API_URL = "/categories/" + categoryId;
 

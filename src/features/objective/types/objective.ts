@@ -5,3 +5,4 @@ export type Objective = {
   target_value?: number;
   saved_amount?: number;
 };
+export type ObjectiveResponse = Objective[];
