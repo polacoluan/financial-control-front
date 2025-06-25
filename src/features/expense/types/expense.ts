@@ -9,3 +9,7 @@ export type Expense = {
     card_id: string;
     installments: number;
 }
+<<<<<<< codex/definir-tipos-de-resposta-para-api
+export type ExpenseResponse = Expense[];
+=======
+>>>>>>> main

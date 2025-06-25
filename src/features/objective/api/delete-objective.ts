@@ -1,7 +1,8 @@
 import { httpDelete } from "@/services/api/http";
 import { Objective } from "../types/objective";
+import { MessageResponse } from "@/services/api/types";
 
-export async function deleteObjective(objectiveId: String): Promise<any> {
+export async function deleteObjective(objectiveId: String): Promise<MessageResponse> {
   try {
     const API_URL = "/objectives/" + objectiveId;
 

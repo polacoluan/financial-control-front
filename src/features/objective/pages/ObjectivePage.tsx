@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { getObjectives } from "@/features/objective/api/get-objectives";
+import { Objective } from "../types/objective";
 import { columns } from "../components/ObjectiveColumns";
 import { DataTable } from "../components/ObjectiveDataTable";
 import CreateForm from "../components/ObjectiveCreateForm";
 import Loader from "@/components/common/loading";
 
 const ObjectivePage = () => {
-  const [objectives, setObjectives] = useState<any[]>([]);
+  const [objectives, setObjectives] = useState<Objective[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

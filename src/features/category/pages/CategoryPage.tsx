@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { getCategories } from "@/features/category/api/get-categories";
+import { Category } from "../types/category";
 import { columns } from "../components/CategoryColumns";
 import { DataTable } from "../components/CategoryDataTable";
 import CreateForm from "../components/CategoryCreateForm";
 import Loader from "@/components/common/loading";
 
 const CategoryPage = () => {
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchUsers = async () => {

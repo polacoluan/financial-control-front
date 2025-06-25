@@ -1,7 +1,8 @@
 import { httpPatch } from "@/services/api/http";
 import { Category } from "../types/category";
+import { MessageResponse } from "@/services/api/types";
 
-export async function editCategory(data: Category): Promise<any> {
+export async function editCategory(data: Category): Promise<MessageResponse> {
   try {
     const API_URL = "/categories/" + data.id;
 

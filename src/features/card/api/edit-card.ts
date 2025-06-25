@@ -1,7 +1,8 @@
 import { httpPatch } from "@/services/api/http";
 import { Card } from "../types/card";
+import { MessageResponse } from "@/services/api/types";
 
-export async function editCard(data: Card): Promise<any> {
+export async function editCard(data: Card): Promise<MessageResponse> {
   try {
     const API_URL = "/cards/" + data.id;
 

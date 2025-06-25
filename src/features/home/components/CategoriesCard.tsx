@@ -10,12 +10,13 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { HandCoins, SearchIcon } from "lucide-react";
 import { listTopCategories } from "../api/list-top-categories";
+import { TopCategory } from "../types/home";
 import { MonthSelect } from "@/components/common/month-select";
 import { YearSelect } from "@/components/common/year-select";
 import { Button } from "@/components/ui/button";
 
 export default function BalanceCard() {
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<TopCategory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
   const [year, setYear] = useState<number>(new Date().getFullYear());

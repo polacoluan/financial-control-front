@@ -5,3 +5,7 @@ export type Type = {
     is_default: boolean;
     installments: boolean;
 }
+<<<<<<< codex/definir-tipos-de-resposta-para-api
+export type TypeResponse = Type[];
+=======
+>>>>>>> main

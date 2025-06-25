@@ -1,7 +1,8 @@
 import { httpPost } from "@/services/api/http";
 import { Type } from "../types/type";
+import { MessageResponse } from "@/services/api/types";
 
-export async function createType(data: Type): Promise<any> {
+export async function createType(data: Type): Promise<MessageResponse> {
   try {
     const API_URL = "/types";
 

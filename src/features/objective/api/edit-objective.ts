@@ -1,7 +1,8 @@
 import { httpPut } from "@/services/api/http";
 import { Objective } from "../types/objective";
+import { MessageResponse } from "@/services/api/types";
 
-export async function editObjective(data: Objective): Promise<any> {
+export async function editObjective(data: Objective): Promise<MessageResponse> {
   try {
     const API_URL = "/objectives/" + data.id;
 

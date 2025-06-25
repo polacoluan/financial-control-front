@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { getExpenses } from "@/features/expense/api/get-expenses";
+import { Expense } from "../types/expense";
 import { columns } from "../components/ExpenseColumns";
 import { DataTable } from "../components/ExpenseDataTable";
 import CreateForm from "../components/ExpenseCreateForm";
 import Loader from "@/components/common/loading";
 
 const ExpensePage = () => {
-  const [expenses, setExpenses] = useState<any[]>([]);
+  const [expenses, setExpenses] = useState<Expense[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchUsers = async () => {

@@ -5,3 +5,7 @@ export type Income = {
     amount: number;
     date: string;
 }
+<<<<<<< codex/definir-tipos-de-resposta-para-api
+export type IncomeResponse = Income[];
+=======
+>>>>>>> main

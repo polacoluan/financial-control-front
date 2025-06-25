@@ -1,7 +1,8 @@
 import { httpPost } from "@/services/api/http";
 import { Income } from "../types/income";
+import { MessageResponse } from "@/services/api/types";
 
-export async function createIncome(data: Income): Promise<any> {
+export async function createIncome(data: Income): Promise<MessageResponse> {
   try {
     const API_URL = "/income";
 

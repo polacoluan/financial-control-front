@@ -9,10 +9,11 @@ import {
 } from "@/components/ui/card";
 import { ArrowDownLeft, ArrowUpRight, HandCoins } from "lucide-react";
 import { listRecentTransactions } from "../api/list-recent-transactions";
+import { RecentTransaction } from "../types/home";
 import { useEffect, useState } from "react";
 
 export default function TransactionsCard() {
-  const [recentTransactions, setRecentTransaction] = useState<any[]>([]);
+  const [recentTransactions, setRecentTransaction] = useState<RecentTransaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchTransactions = async () => {

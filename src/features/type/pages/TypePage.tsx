@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { getTypes } from "@/features/type/api/get-types";
+import { Type } from "../types/type";
 import { columns } from "../components/TypeColumns";
 import { DataTable } from "../components/TypeDataTable";
 import CreateForm from "../components/TypeCreateForm";
 import Loader from "@/components/common/loading";
 
 const TypePage = () => {
-  const [types, setTypes] = useState<any[]>([]);
+  const [types, setTypes] = useState<Type[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchUsers = async () => {
