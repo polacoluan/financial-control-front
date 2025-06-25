@@ -1,4 +1,4 @@
-// src/app/auth/signin/page.tsx
+// src/app/category/page.tsx
 import  CategoryPage from '@/features/category/pages/CategoryPage';
 
 export default function Page() {
