@@ -1,22 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Financial Control Front
 
-## Getting Started
+A web dashboard for managing personal finances. The app communicates with the Financial Control API and provides screens for authentication, viewing financial dashboards, and CRUD management of expenses, income, cards, categories, types and objectives.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Sign up and sign in forms with token storage
+- Dashboard with charts summarizing spending and income
+- Management screens for expenses, income, cards, categories, types and objectives
+- Dark mode built with Tailwind CSS and Radix UI components
+
+## Environment Variables
+
+Create a `.env.local` file and define:
+
+```
+NEXT_PUBLIC_API_URL=<Financial Control API base URL>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This URL is used by Axios in `src/lib/axios.ts` to communicate with the backend.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup
 
 ## Linting and Formatting
 
@@ -34,18 +37,30 @@ npm run format
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+1. Install dependencies
+   ```bash
+   npm install
+   ```
+2. Start the development server
+   ```bash
+   npm run dev
+   ```
+The app will be available at http://localhost:3000.
 
-To learn more about Next.js, take a look at the following resources:
+## Build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Generate a production build with:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+```
 
-## Deploy on Vercel
+Run the built app locally using:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# financial-control-front
+## Deployment
+
+The project is a standard Next.js application and can be deployed on platforms such as Vercel or any environment capable of running Node.js.
