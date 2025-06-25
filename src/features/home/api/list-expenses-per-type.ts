@@ -5,7 +5,7 @@ export async function listExpensesPerType(
   year: number
 ): Promise<any> {
   try {
-    const API_URL = `types/top-expenses/${month}/${year}`;
+    const API_URL = `types/top-expenses/${year}/${month}`;
 
     const response: any = await httpGet(API_URL);
 

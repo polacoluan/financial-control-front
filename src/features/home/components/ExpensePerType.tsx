@@ -14,6 +14,7 @@ import { listExpensesByType } from "../api/list-expenses-by-type";
 import Loader from "@/components/common/loading";
 import { MonthSelect } from "@/components/common/month-select";
 import { YearSelect } from "@/components/common/year-select";
+import { TypeSelect } from "@/components/common/type-select";
 import { Button } from "@/components/ui/button";
 
 export default function ExpensePerType() {
@@ -24,6 +25,7 @@ export default function ExpensePerType() {
   const [selectedType, setSelectedType] = useState<any | null>(null);
   const [typeExpenses, setTypeExpenses] = useState<any[]>([]);
   const [isTypeLoading, setIsTypeLoading] = useState(false);
+  const [selectedTypeId, setSelectedTypeId] = useState<string>("");
 
   const fetchTypes = async () => {
     try {
@@ -50,12 +52,21 @@ export default function ExpensePerType() {
     }
   };
 
+  const handleTypeChange = (value: string) => {
+    setSelectedTypeId(value);
+    const type = types.find((t) => t.id === value);
+    if (type) {
+      fetchTypeExpenses(type);
+    }
+  };
+
   useEffect(() => {
     fetchTypes();
   }, []);
   return (
     <div>
       <div className="flex justify-end gap-2 mb-2">
+        <TypeSelect typeId={selectedTypeId} setTypeId={handleTypeChange} />
         <MonthSelect month={month} setMonth={setMonth} />
         <YearSelect year={year} setYear={setYear} />
         <Button variant="outline" onClick={fetchTypes}>
