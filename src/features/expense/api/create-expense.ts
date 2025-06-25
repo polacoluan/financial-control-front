@@ -20,7 +20,7 @@ export async function createExpense(data: Expense): Promise<MessageResponse> {
     return {
       message: 'Despesa criada com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao realizar criar despesa');
   }
 }

@@ -29,7 +29,7 @@ export function SpentPerCategoryChart({
   totalSpent,
 }: {
   chartData: any;
-  totalSpent: Number;
+  totalSpent: number;
 }) {
   return (
     <div>

@@ -20,7 +20,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { FieldValues, useForm } from 'react-hook-form';
-import { useData } from '@/context/DataContext';
 import { Income } from '../types/income';
 import { editIncome } from '../api/edit-income';
 import { useToast } from '@/hooks/use-toast';

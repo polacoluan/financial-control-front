@@ -2,7 +2,7 @@ import { httpDelete } from '@/services/api/http';
 import { MessageResponse } from '@/services/api/types';
 
 export async function deleteCategory(
-  categoryId: String,
+  categoryId: string,
 ): Promise<MessageResponse> {
   try {
     const API_URL = '/categories/' + categoryId;
@@ -12,7 +12,7 @@ export async function deleteCategory(
     return {
       message: 'Categoria deletada com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao deletar Categoria');
   }
 }

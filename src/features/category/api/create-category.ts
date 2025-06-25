@@ -14,7 +14,7 @@ export async function createCategory(data: Category): Promise<MessageResponse> {
     return {
       message: 'Categoria criada com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao criar Categoria');
   }
 }

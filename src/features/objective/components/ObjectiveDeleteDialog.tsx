@@ -36,7 +36,7 @@ export default function DeleteDialog({
         description: 'Objetivo deletado com sucesso!',
       });
       reloadObjectives?.();
-    } catch (error) {
+    } catch {
       toast({
         variant: 'destructive',
         title: 'Erro!',

@@ -8,7 +8,7 @@ export async function getCategories(): Promise<CategoryResponse> {
     const response = await httpGet<CategoryResponse>(API_URL);
 
     return response;
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao buscar as categorias');
   }
 }

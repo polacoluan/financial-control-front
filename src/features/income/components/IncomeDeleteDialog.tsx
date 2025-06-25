@@ -13,7 +13,6 @@ import { Income } from '../types/income';
 import { formatCurrency } from '@/utils/mask-real';
 import { useToast } from '@/hooks/use-toast';
 import { deleteIncome } from '../api/delete-income';
-import { Trash } from 'lucide-react';
 import DeleteButton from '@/components/common/delete-button';
 
 export default function DeleteDialog({

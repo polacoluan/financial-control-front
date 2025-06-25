@@ -8,7 +8,7 @@ export async function getCards(): Promise<CardResponse> {
     const response = await httpGet<CardResponse>(API_URL);
 
     return response;
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao buscar os cartões');
   }
 }

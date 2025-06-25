@@ -1,7 +1,7 @@
 import { httpDelete } from '@/services/api/http';
 import { MessageResponse } from '@/services/api/types';
 
-export async function deleteType(typeId: String): Promise<MessageResponse> {
+export async function deleteType(typeId: string): Promise<MessageResponse> {
   try {
     const API_URL = '/types/' + typeId;
 
@@ -10,7 +10,7 @@ export async function deleteType(typeId: String): Promise<MessageResponse> {
     return {
       message: 'Tipo deletado com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao deletar Tipo');
   }
 }

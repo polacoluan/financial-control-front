@@ -16,7 +16,7 @@ export async function editObjective(data: Objective): Promise<MessageResponse> {
     return {
       message: 'Objetivo editado com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao editar objetivo');
   }
 }

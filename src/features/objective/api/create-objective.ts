@@ -18,7 +18,7 @@ export async function createObjective(
     return {
       message: 'Objetivo criado com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao criar objetivo');
   }
 }

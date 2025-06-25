@@ -15,7 +15,7 @@ export async function createCard(data: Card): Promise<MessageResponse> {
     return {
       message: 'Cartão criado com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao criar Cartão');
   }
 }

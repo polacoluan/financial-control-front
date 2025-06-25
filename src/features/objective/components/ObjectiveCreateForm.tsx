@@ -84,7 +84,7 @@ export default function CreateForm({
               <FormField
                 control={form.control}
                 name="objective"
-                render={({ field }) => (
+              render={() => (
                   <FormItem>
                     <FormLabel>Objetivo</FormLabel>
                     <FormControl>
@@ -100,7 +100,7 @@ export default function CreateForm({
               <FormField
                 control={form.control}
                 name="description"
-                render={({ field }) => (
+              render={() => (
                   <FormItem>
                     <FormLabel>Descrição</FormLabel>
                     <FormControl>
@@ -116,7 +116,7 @@ export default function CreateForm({
               <FormField
                 control={form.control}
                 name="target_value"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormControl>
                       <MoneyInput
@@ -134,7 +134,7 @@ export default function CreateForm({
               <FormField
                 control={form.control}
                 name="saved_amount"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormControl>
                       <MoneyInput
