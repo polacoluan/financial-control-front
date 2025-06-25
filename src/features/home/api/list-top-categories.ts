@@ -1,8 +1,12 @@
 import { httpGet } from "@/services/api/http";
 
-export async function listTopCategories(): Promise<any> {
+export async function listTopCategories(
+  limit: number,
+  month: number,
+  year: number,
+): Promise<any> {
   try {
-    const API_URL = "categories/top-expenses/6/2025";
+    const API_URL = `categories/top-expenses/${limit}/${year}/${month}`;
 
     const response: any = await httpGet(API_URL);
 
