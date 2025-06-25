@@ -3,7 +3,7 @@ import { Expense } from '../types/expense';
 import { MessageResponse } from '@/services/api/types';
 
 export async function deleteExpense(
-  expenseId: String,
+  expenseId: string,
 ): Promise<MessageResponse> {
   try {
     const API_URL = '/expenses/' + expenseId;
@@ -13,7 +13,7 @@ export async function deleteExpense(
     return {
       message: 'Despesa deletada com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao deletar despesa');
   }
 }

@@ -1,7 +1,7 @@
 import { httpDelete } from '@/services/api/http';
 import { MessageResponse } from '@/services/api/types';
 
-export async function deleteIncome(incomeId: String): Promise<MessageResponse> {
+export async function deleteIncome(incomeId: string): Promise<MessageResponse> {
   try {
     const API_URL = '/income/' + incomeId;
 
@@ -10,7 +10,7 @@ export async function deleteIncome(incomeId: String): Promise<MessageResponse> {
     return {
       message: 'Entrada deletada com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao deletar entrada');
   }
 }

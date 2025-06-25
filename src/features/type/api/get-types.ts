@@ -8,7 +8,7 @@ export async function getTypes(): Promise<TypeResponse> {
     const response = await httpGet<TypeResponse>(API_URL);
 
     return response;
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao buscar os tipos');
   }
 }

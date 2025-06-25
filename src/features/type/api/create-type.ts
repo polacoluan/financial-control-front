@@ -16,7 +16,7 @@ export async function createType(data: Type): Promise<MessageResponse> {
     return {
       message: 'Tipo criado com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao criar Tipo');
   }
 }

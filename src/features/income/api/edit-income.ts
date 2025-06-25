@@ -16,7 +16,7 @@ export async function editIncome(data: Income): Promise<MessageResponse> {
     return {
       message: 'Entrada criada com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao realizar criar entrada');
   }
 }

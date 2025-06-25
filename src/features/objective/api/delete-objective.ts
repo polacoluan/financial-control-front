@@ -1,9 +1,8 @@
 import { httpDelete } from '@/services/api/http';
-import { Objective } from '../types/objective';
 import { MessageResponse } from '@/services/api/types';
 
 export async function deleteObjective(
-  objectiveId: String,
+  objectiveId: string,
 ): Promise<MessageResponse> {
   try {
     const API_URL = '/objectives/' + objectiveId;
@@ -13,7 +12,7 @@ export async function deleteObjective(
     return {
       message: 'Objetivo deletado com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao deletar objetivo');
   }
 }

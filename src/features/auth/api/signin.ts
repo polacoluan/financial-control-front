@@ -35,7 +35,7 @@ export async function signin(data: SigninData): Promise<MessageResponse> {
     return {
       message: 'Login realizado com sucesso.',
     };
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao realizar login');
   }
 }

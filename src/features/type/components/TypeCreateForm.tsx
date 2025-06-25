@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { createType } from '../api/create-type';
 import { Type } from '../types/type';
 import { toast } from 'sonner';
