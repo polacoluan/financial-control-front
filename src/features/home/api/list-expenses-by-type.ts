@@ -12,7 +12,7 @@ export async function listExpensesByType(
     const response = await httpGet<ExpensesByTypeResponse>(API_URL);
 
     return response;
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao buscar as despesas do tipo');
   }
 }

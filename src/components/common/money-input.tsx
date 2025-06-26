@@ -1,5 +1,6 @@
 'use client';
-import { useReducer } from 'react';
+
+import React, { useReducer } from 'react';
 import {
   FormControl,
   FormField,
@@ -9,15 +10,7 @@ import {
   FormDescription,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import { UseFormReturn } from 'react-hook-form';
-
-type TextInputProps = {
-  form: UseFormReturn<any>;
-  name: string;
-  label: string;
-  placeholder: string;
-  description: string;
-};
+import { UseFormReturn, FieldValues, Path } from 'react-hook-form';
 
 const moneyFormatter = Intl.NumberFormat('pt-BR', {
   currency: 'BRL',
@@ -28,17 +21,34 @@ const moneyFormatter = Intl.NumberFormat('pt-BR', {
   maximumFractionDigits: 2,
 });
 
-export default function MoneyInput(props: TextInputProps) {
-  const initialValue = props.form.getValues()[props.name]
-    ? moneyFormatter.format(props.form.getValues()[props.name])
-    : '';
+type MoneyInputProps<TFieldValues extends FieldValues> = {
+  form: UseFormReturn<TFieldValues>;
+  name: Path<TFieldValues>;
+  label: string;
+  placeholder?: string;
+  description?: string;
+};
 
-  const [value, setValue] = useReducer((_: any, next: string) => {
+export default function MoneyInput<TFieldValues extends FieldValues>({
+  form,
+  name,
+  label,
+  placeholder = '',
+  description = '',
+}: MoneyInputProps<TFieldValues>) {
+  const rawValue = form.getValues()[name] as unknown;
+  const initialValue =
+    typeof rawValue === 'number' ? moneyFormatter.format(rawValue) : '';
+
+  const [value, setValue] = useReducer((_: string, next: string) => {
     const digits = next.replace(/\D/g, '');
     return moneyFormatter.format(Number(digits) / 100);
   }, initialValue);
 
-  function handleChange(realChangeFn: Function, formattedValue: string) {
+  function handleChange(
+    realChangeFn: (value: number) => void,
+    formattedValue: string,
+  ) {
     const digits = formattedValue.replace(/\D/g, '');
     const realValue = Number(digits) / 100;
     realChangeFn(realValue);
@@ -46,18 +56,17 @@ export default function MoneyInput(props: TextInputProps) {
 
   return (
     <FormField
-      control={props.form.control}
-      name={props.name}
+      control={form.control}
+      name={name}
       render={({ field }) => {
-        field.value = value;
-        const _change = field.onChange;
+        const _change = field.onChange as (value: number) => void;
 
         return (
           <FormItem>
-            <FormLabel>{props.label}</FormLabel>
+            <FormLabel>{label}</FormLabel>
             <FormControl>
               <Input
-                placeholder={props.placeholder}
+                placeholder={placeholder}
                 type="text"
                 {...field}
                 onChange={(ev) => {
@@ -67,7 +76,7 @@ export default function MoneyInput(props: TextInputProps) {
                 value={value}
               />
             </FormControl>
-            <FormDescription>{props.description}</FormDescription>
+            <FormDescription>{description}</FormDescription>
             <FormMessage />
           </FormItem>
         );

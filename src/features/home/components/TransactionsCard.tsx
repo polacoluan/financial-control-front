@@ -16,17 +16,13 @@ export default function TransactionsCard() {
   const [recentTransactions, setRecentTransaction] = useState<
     RecentTransaction[]
   >([]);
-  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        setIsLoading(true);
         const data = await listRecentTransactions();
         setRecentTransaction(data);
       } catch (error) {
         console.error('Erro ao carregar os dados:', error);
-      } finally {
-        setIsLoading(false);
       }
     };
 

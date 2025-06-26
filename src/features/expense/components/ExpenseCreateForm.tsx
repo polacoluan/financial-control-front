@@ -91,7 +91,7 @@ export default function CreateForm({
       setDefaultCardId(defaultCard.id);
       form.setValue('card_id', defaultCard.id);
     }
-  }, [types, cards]);
+  }, [types, cards, form]);
 
   const handleTypeChange = (selectedTypeId: string) => {
     const selectedType = types.find((type) => type.id === selectedTypeId);

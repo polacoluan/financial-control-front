@@ -1,5 +1,4 @@
 import { httpDelete } from '@/services/api/http';
-import { Expense } from '../types/expense';
 import { MessageResponse } from '@/services/api/types';
 
 export async function deleteExpense(

@@ -7,11 +7,15 @@ interface SigninData {
   password: string;
 }
 
+type ResponseType = {
+  access_token: string;
+};
+
 export async function signin(data: SigninData): Promise<MessageResponse> {
   try {
     const API_URL = '/clients/web/login';
 
-    const response: any = await httpPost(API_URL, {
+    const response: ResponseType = await httpPost(API_URL, {
       email: data.email,
       password: data.password,
     });

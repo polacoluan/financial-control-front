@@ -8,7 +8,7 @@ export async function listRecentTransactions(): Promise<RecentTransactionRespons
     const response = await httpGet<RecentTransactionResponse>(API_URL);
 
     return response;
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao buscar as transações recentes');
   }
 }

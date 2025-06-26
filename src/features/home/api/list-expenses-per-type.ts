@@ -11,7 +11,7 @@ export async function listExpensesPerType(
     const response = await httpGet<ExpensesPerTypeResponse>(API_URL);
 
     return response;
-  } catch (error) {
+  } catch {
     throw new Error('Falha ao buscar as despesas por tipo');
   }
 }

@@ -17,25 +17,21 @@ import { Button } from '@/components/ui/button';
 
 export default function BalanceCard() {
   const [categories, setCategories] = useState<TopCategory[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [limit] = useState<number>(6);
   const fetchCategories = async () => {
     try {
-      setIsLoading(true);
       const data = await listTopCategories(limit, month, year);
       setCategories(data);
     } catch (error) {
       console.error('Erro ao carregar os dados:', error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  });
   return (
     <div>
       <div className="flex justify-end gap-2 mb-2">

@@ -20,7 +20,6 @@ import { Button } from '@/components/ui/button';
 
 export default function ExpensePerType() {
   const [types, setTypes] = useState<ExpensesPerTypeItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [selectedType, setSelectedType] = useState<ExpensesPerTypeItem | null>(
@@ -32,17 +31,14 @@ export default function ExpensePerType() {
 
   const fetchTypes = async () => {
     try {
-      setIsLoading(true);
       const data = await listExpensesPerType(month, year);
       setTypes(data);
     } catch (error) {
       console.error('Erro ao carregar os dados:', error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const fetchTypeExpenses = async (type: any) => {
+  const fetchTypeExpenses = async (type: ExpensesPerTypeItem) => {
     try {
       setIsTypeLoading(true);
       setSelectedType(type);
@@ -65,7 +61,7 @@ export default function ExpensePerType() {
 
   useEffect(() => {
     fetchTypes();
-  }, []);
+  });
   return (
     <div>
       <div className="flex justify-end gap-2 mb-2">
