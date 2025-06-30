@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/card';
 import { BanknoteArrowDown } from 'lucide-react';
 
-export default function IncomeCard() {
+export default function IncomeCard({ income }: { income: number | undefined }) {
   return (
     <div>
       <Card>
@@ -18,7 +18,7 @@ export default function IncomeCard() {
           <CardDescription>Gastos totais no mês</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-2xl font-bold">R$ 100,00</p>
+          <p className="text-2xl font-bold">R$ {income ?? `0,00`}</p>
         </CardContent>
       </Card>
     </div>

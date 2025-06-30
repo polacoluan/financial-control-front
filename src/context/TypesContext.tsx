@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getTypes } from '@/features/type/api/get-types';
 import { Type } from '@/features/type/types/type';
@@ -25,9 +27,7 @@ export const TypesProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <TypesContext.Provider value={{ types }}>
-      {children}
-    </TypesContext.Provider>
+    <TypesContext.Provider value={{ types }}>{children}</TypesContext.Provider>
   );
 };
 
