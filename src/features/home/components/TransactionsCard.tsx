@@ -30,7 +30,7 @@ export default function TransactionsCard() {
   }, []);
   return (
     <div>
-      <Card>
+      <Card className="h-[400px]">
         <CardHeader>
           <CardTitle className="flex justify-between">
             Transações <HandCoins className="w-4 h-4" />

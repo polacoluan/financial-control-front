@@ -18,7 +18,7 @@ export function TypeSelect({
   const { types } = useData();
   return (
     <Select onValueChange={(value) => setTypeId(value)} value={typeId}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Selecione um tipo" />
       </SelectTrigger>
       <SelectContent>

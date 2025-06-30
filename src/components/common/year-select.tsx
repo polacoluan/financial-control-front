@@ -36,7 +36,7 @@ export function YearSelect({
       onValueChange={(value) => setYear(parseInt(value))}
       value={year.toString()}
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Selecione um ano" />
       </SelectTrigger>
       <SelectContent>

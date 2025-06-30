@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   Card,
   CardContent,
@@ -8,40 +8,25 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { HandCoins, SearchIcon } from 'lucide-react';
+import { HandCoins } from 'lucide-react';
 import { listTopCategories } from '../api/list-top-categories';
 import { TopCategory } from '../types/home';
-import { MonthSelect } from '@/components/common/month-select';
-import { YearSelect } from '@/components/common/year-select';
-import { Button } from '@/components/ui/button';
 
 export default function BalanceCard() {
   const [categories, setCategories] = useState<TopCategory[]>([]);
-  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
-  const [year, setYear] = useState<number>(new Date().getFullYear());
-  const [limit] = useState<number>(6);
-  const fetchCategories = async () => {
-    try {
-      const data = await listTopCategories(limit, month, year);
-      setCategories(data);
-    } catch (error) {
-      console.error('Erro ao carregar os dados:', error);
-    }
-  };
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+  const fetchCategories = useCallback(async () => {
+    const data = await listTopCategories(month, year);
+    setCategories(data);
+  }, [month, year]);
 
   useEffect(() => {
     fetchCategories();
-  });
+  }, [fetchCategories]);
   return (
     <div>
-      <div className="flex justify-end gap-2 mb-2">
-        <MonthSelect month={month} setMonth={setMonth} />
-        <YearSelect year={year} setYear={setYear} />
-        <Button variant="outline" onClick={fetchCategories}>
-          <SearchIcon className="w-4 h-4" /> Buscar
-        </Button>
-      </div>
-      <Card>
+      <Card className="h-[400px]">
         <CardHeader>
           <CardTitle className="flex justify-between">
             Categorias <HandCoins className="w-4 h-4" />

@@ -37,7 +37,7 @@ export function MonthSelect({
       onValueChange={(value) => setMonth(parseInt(value))}
       value={month.toString()}
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Selecione um mês" />
       </SelectTrigger>
       <SelectContent>

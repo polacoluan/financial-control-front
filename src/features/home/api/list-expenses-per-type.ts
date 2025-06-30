@@ -1,14 +1,15 @@
 import { httpGet } from '@/services/api/http';
-import { ExpensesPerTypeResponse } from '../types/home';
+import { Expense } from '@/features/expense/types/expense';
 
 export async function listExpensesPerType(
   month: number,
   year: number,
-): Promise<ExpensesPerTypeResponse> {
+  type_id: string,
+): Promise<Expense[]> {
   try {
-    const API_URL = `types/top-expenses/${year}/${month}`;
+    const API_URL = `expenses/by-type/${type_id}/${year}/${month}`;
 
-    const response = await httpGet<ExpensesPerTypeResponse>(API_URL);
+    const response = await httpGet<Expense[]>(API_URL);
 
     return response;
   } catch {
