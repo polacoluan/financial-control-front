@@ -27,7 +27,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { FieldValues, useForm } from 'react-hook-form';
-import { useData } from '@/context/DataContext';
+import { useCategories } from '@/context/CategoriesContext';
+import { useTypes } from '@/context/TypesContext';
+import { useCards } from '@/context/CardsContext';
 import { createExpense } from '../api/create-expense';
 import { Expense } from '../types/expense';
 import { toast } from 'sonner';
@@ -60,9 +62,9 @@ export default function CreateForm({
   const [installmentsEnabled, setInstallmentsEnabled] = useState(false);
   const [defaultTypeId, setDefaultTypeId] = useState('');
   const [defaultCardId, setDefaultCardId] = useState('');
-  const { categories } = useData();
-  const { types } = useData();
-  const { cards } = useData();
+  const { categories } = useCategories();
+  const { types } = useTypes();
+  const { cards } = useCards();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
