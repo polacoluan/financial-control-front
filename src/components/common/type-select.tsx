@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useData } from '@/context/DataContext';
+import { useTypes } from '@/context/TypesContext';
 
 export function TypeSelect({
   typeId,
@@ -15,7 +15,7 @@ export function TypeSelect({
   typeId: string;
   setTypeId: (value: string) => void;
 }) {
-  const { types } = useData();
+  const { types } = useTypes();
   return (
     <Select onValueChange={(value) => setTypeId(value)} value={typeId}>
       <SelectTrigger className="w-full">
