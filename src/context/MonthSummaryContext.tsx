@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { MonthSummary } from '@/types/month-summary';
 import { getMonthSummary } from '@/features/home/api/get-month-summary';

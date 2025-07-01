@@ -19,9 +19,9 @@ export default function ExpenseCard({
       <Card>
         <CardHeader>
           <CardTitle className="flex justify-between">
-            Ganhos <BanknoteArrowUpIcon className="w-4 h-4" />
+            Gastos <BanknoteArrowUpIcon className="w-4 h-4" />
           </CardTitle>
-          <CardDescription>Ganhos totais no mês</CardDescription>
+          <CardDescription>Gastos totais no mês</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-2xl font-bold">R$ {expense ?? `0,00`}</p>

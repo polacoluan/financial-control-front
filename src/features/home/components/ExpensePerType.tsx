@@ -7,6 +7,16 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { HandCoins } from 'lucide-react';
 import { listExpensesPerType } from '../api/list-expenses-per-type';
 import { MonthSelect } from '@/components/common/month-select';
@@ -48,13 +58,38 @@ export default function ExpensePerType() {
           </CardTitle>
           <CardDescription>Despesas por tipo</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          {types.map((type, index) => (
-            <div key={index} className="flex items-center justify-between">
-              <span className="text-sm ">{type.description}</span>
-              <span className="text-sm">R$ {type.amount}</span>
-            </div>
-          ))}
+        <CardContent>
+          <Table>
+            <TableCaption>Listagem das despesas por tipo.</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Despesa</TableHead>
+                <TableHead>Categoria</TableHead>
+                <TableHead className="text-center">Data</TableHead>
+                <TableHead className="text-center">Valor</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {types.map((type, index) => (
+                <TableRow key={index}>
+                  <TableCell className="font-medium">
+                    {type.description}
+                  </TableCell>
+                  <TableCell className="font-medium">{type.category}</TableCell>
+                  <TableCell className="text-center">{type.date}</TableCell>
+                  <TableCell className="text-center">
+                    R$ {type.amount}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={3}>Total</TableCell>
+                <TableCell className="text-right">$2,500.00</TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
         </CardContent>
       </Card>
     </div>

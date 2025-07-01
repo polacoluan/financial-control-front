@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getCards } from '@/features/card/api/get-cards';
 import { Card } from '@/features/card/types/card';
@@ -25,9 +27,7 @@ export const CardsProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <CardsContext.Provider value={{ cards }}>
-      {children}
-    </CardsContext.Provider>
+    <CardsContext.Provider value={{ cards }}>{children}</CardsContext.Provider>
   );
 };
 

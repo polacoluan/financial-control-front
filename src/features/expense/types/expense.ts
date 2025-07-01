@@ -8,6 +8,8 @@ export type Expense = {
   type_id: string;
   card_id: string;
   installments: number;
+  category: string;
+  type: string;
 };
 
 export type ExpenseResponse = Expense[];

@@ -12,8 +12,8 @@ export default function TopCards() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-4">
-        <ExpenseCard expense={monthSummary.monthSummary?.total_expenses} />
         <IncomeCard income={monthSummary.monthSummary?.total_incomes} />
+        <ExpenseCard expense={monthSummary.monthSummary?.total_expenses} />
         <BalanceCard balance={monthSummary.monthSummary?.balance} />
       </div>
       <div className="grid grid-cols-2 gap-4">
