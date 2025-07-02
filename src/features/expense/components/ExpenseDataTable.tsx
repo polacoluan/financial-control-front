@@ -54,16 +54,7 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
     },
-    initialState: {
-      pagination: {
-        pageSize: data.length,
-      },
-    },
   });
-
-  React.useEffect(() => {
-    table.setPageSize(data.length);
-  }, [data.length, table]);
 
   return (
     <div>
