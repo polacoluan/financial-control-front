@@ -11,29 +11,33 @@ import Loader from '@/components/common/loading';
 const ExpensePage = () => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getExpenses();
-        setExpenses(data);
-      } catch (error) {
-        console.error('Erro ao carregar os dados:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const PAGE_SIZE = 15;
 
-    fetchUsers();
+  const fetchAllExpenses = async () => {
+    try {
+      setIsLoading(true);
+      const allExpenses: Expense[] = [];
+      let page = 1;
+      let data: Expense[] = [];
+      do {
+        data = await getExpenses(page);
+        allExpenses.push(...data);
+        page += 1;
+      } while (data.length === PAGE_SIZE);
+      setExpenses(allExpenses);
+    } catch (error) {
+      console.error('Erro ao carregar os dados:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllExpenses();
   }, []);
 
   const reloadExpenses = async () => {
-    try {
-      const data = await getExpenses();
-      setExpenses(data);
-    } catch (error) {
-      console.error('Error reloading expenses:', error);
-    }
+    await fetchAllExpenses();
   };
 
   return (
