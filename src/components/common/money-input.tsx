@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import {
   FormControl,
   FormField,
@@ -10,7 +10,13 @@ import {
   FormDescription,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import { UseFormReturn, FieldValues, Path } from 'react-hook-form';
+import {
+  UseFormReturn,
+  FieldValues,
+  Path,
+  FieldPathValue,
+} from 'react-hook-form';
+import { parseCurrency } from '@/utils/parse-real';
 
 const moneyFormatter = Intl.NumberFormat('pt-BR', {
   currency: 'BRL',
@@ -38,7 +44,20 @@ export default function MoneyInput<TFieldValues extends FieldValues>({
 }: MoneyInputProps<TFieldValues>) {
   const rawValue = form.getValues()[name] as unknown;
   const initialValue =
-    typeof rawValue === 'number' ? moneyFormatter.format(rawValue) : '';
+    typeof rawValue === 'number'
+      ? moneyFormatter.format(rawValue)
+      : typeof rawValue === 'string'
+        ? moneyFormatter.format(parseCurrency(rawValue))
+        : '';
+
+  useEffect(() => {
+    if (typeof rawValue === 'string') {
+      form.setValue(
+        name,
+        parseCurrency(rawValue) as FieldPathValue<TFieldValues, Path<TFieldValues>>,
+      );
+    }
+  }, [rawValue, form, name]);
 
   const [value, setValue] = useReducer((_: string, next: string) => {
     const digits = next.replace(/\D/g, '');
