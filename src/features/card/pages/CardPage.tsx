@@ -11,29 +11,33 @@ import Loader from '@/components/common/loading';
 const CardPage = () => {
   const [cards, setCards] = useState<CardType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getCards();
-        setCards(data);
-      } catch (error) {
-        console.error('Erro ao carregar os dados:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const PAGE_SIZE = 15;
 
-    fetchUsers();
+  const fetchAllCards = async () => {
+    try {
+      setIsLoading(true);
+      const allCards: CardType[] = [];
+      let page = 1;
+      let data: CardType[] = [];
+      do {
+        data = await getCards(page);
+        allCards.push(...data);
+        page += 1;
+      } while (data.length === PAGE_SIZE);
+      setCards(allCards);
+    } catch (error) {
+      console.error('Erro ao carregar os dados:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllCards();
   }, []);
 
   const reloadCards = async () => {
-    try {
-      const data = await getCards();
-      setCards(data);
-    } catch (error) {
-      console.error('Error reloading cards:', error);
-    }
+    await fetchAllCards();
   };
 
   return (

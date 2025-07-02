@@ -11,29 +11,33 @@ import Loader from '@/components/common/loading';
 const CategoryPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getCategories();
-        setCategories(data);
-      } catch (error) {
-        console.error('Erro ao carregar os dados:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const PAGE_SIZE = 15;
 
-    fetchUsers();
+  const fetchAllCategories = async () => {
+    try {
+      setIsLoading(true);
+      const allCategories: Category[] = [];
+      let page = 1;
+      let data: Category[] = [];
+      do {
+        data = await getCategories(page);
+        allCategories.push(...data);
+        page += 1;
+      } while (data.length === PAGE_SIZE);
+      setCategories(allCategories);
+    } catch (error) {
+      console.error('Erro ao carregar os dados:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllCategories();
   }, []);
 
   const reloadCategories = async () => {
-    try {
-      const data = await getCategories();
-      setCategories(data);
-    } catch (error) {
-      console.error('Error reloading categories:', error);
-    }
+    await fetchAllCategories();
   };
 
   return (
