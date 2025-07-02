@@ -2,13 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
-import {
   Form,
   FormControl,
   FormDescription,
@@ -24,6 +17,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -36,7 +38,6 @@ import { toast } from 'sonner';
 import MoneyInput from '@/components/common/money-input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CirclePlus } from 'lucide-react';
 import CreateButton from '@/components/common/create-button';
 
 const formSchema = z.object({
@@ -118,15 +119,17 @@ export default function CreateForm({
   }
 
   return (
-    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-      <SheetTrigger asChild>
-        <CreateButton />
-      </SheetTrigger>
-      <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
-        <SheetHeader>
-          <SheetTitle>Cadastro de Despesa</SheetTitle>
+    <Dialog open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <DialogTrigger asChild>
+          <CreateButton />
+        </DialogTrigger>
+        <DialogContent className="max-w-[1000px] max-h-screen overflow-y-auto p-4">
+          <DialogHeader>
+            <DialogTitle>Cadastro de Despesa</DialogTitle>
+          </DialogHeader>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="expense"
@@ -297,18 +300,16 @@ export default function CreateForm({
                   </FormItem>
                 )}
               />
-              <Button
-                type="submit"
-                className="bg-green-600 rounded-full p-2 mr-2"
-              >
-                <p className="flex text-white font-medium">
-                  <CirclePlus color="#ffffff" height={20} /> Cadastrar
-                </p>
-              </Button>
-            </form>
+            </div>
+            <DialogFooter className="flex justify-end items-center">
+              <DialogClose asChild>
+                <Button variant={'outline'}>Cancelar</Button>
+              </DialogClose>
+              <Button type="submit">Cadastrar</Button>
+            </DialogFooter>
           </Form>
-        </SheetHeader>
-      </SheetContent>
-    </Sheet>
+        </DialogContent>
+      </form>
+    </Dialog>
   );
 }
