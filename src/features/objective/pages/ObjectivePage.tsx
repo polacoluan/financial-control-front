@@ -11,30 +11,33 @@ import Loader from '@/components/common/loading';
 const ObjectivePage = () => {
   const [objectives, setObjectives] = useState<Objective[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const PAGE_SIZE = 15;
+
+  const fetchAllObjectives = async () => {
+    try {
+      setIsLoading(true);
+      const allObjectives: Objective[] = [];
+      let page = 1;
+      let data: Objective[] = [];
+      do {
+        data = await getObjectives(page);
+        allObjectives.push(...data);
+        page += 1;
+      } while (data.length === PAGE_SIZE);
+      setObjectives(allObjectives);
+    } catch (error) {
+      console.error('Erro ao carregar os dados:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchObjectives = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getObjectives();
-        setObjectives(data);
-      } catch (error) {
-        console.error('Erro ao carregar os dados:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchObjectives();
+    fetchAllObjectives();
   }, []);
 
   const reloadObjectives = async () => {
-    try {
-      const data = await getObjectives();
-      setObjectives(data);
-    } catch (error) {
-      console.error('Error reloading objectives:', error);
-    }
+    await fetchAllObjectives();
   };
 
   return (

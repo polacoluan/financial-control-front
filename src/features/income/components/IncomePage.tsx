@@ -11,29 +11,33 @@ import Loader from '@/components/common/loading';
 const IncomePage = () => {
   const [encomes, setIncomes] = useState<Income[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getIncomes();
-        setIncomes(data);
-      } catch (error) {
-        console.error('Erro ao carregar os dados:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const PAGE_SIZE = 15;
 
-    fetchUsers();
+  const fetchAllIncomes = async () => {
+    try {
+      setIsLoading(true);
+      const allIncomes: Income[] = [];
+      let page = 1;
+      let data: Income[] = [];
+      do {
+        data = await getIncomes(page);
+        allIncomes.push(...data);
+        page += 1;
+      } while (data.length === PAGE_SIZE);
+      setIncomes(allIncomes);
+    } catch (error) {
+      console.error('Erro ao carregar os dados:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllIncomes();
   }, []);
 
   const reloadIncomes = async () => {
-    try {
-      const data = await getIncomes();
-      setIncomes(data);
-    } catch (error) {
-      console.error('Error reloading encomes:', error);
-    }
+    await fetchAllIncomes();
   };
 
   return (

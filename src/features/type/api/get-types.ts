@@ -1,9 +1,9 @@
 import { httpGet } from '@/services/api/http';
 import { TypeResponse } from '../types/type';
 
-export async function getTypes(): Promise<TypeResponse> {
+export async function getTypes(page = 1): Promise<TypeResponse> {
   try {
-    const API_URL = '/types';
+    const API_URL = `/types?page=${page}`;
 
     const response = await httpGet<TypeResponse>(API_URL);
 
