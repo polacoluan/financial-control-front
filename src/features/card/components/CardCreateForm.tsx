@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -26,7 +28,6 @@ import { Card } from '../types/card';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CirclePlus } from 'lucide-react';
 import CreateButton from '@/components/common/create-button';
 
 const formSchema = z.object({
@@ -44,7 +45,7 @@ export default function CreateForm({
 }: {
   onCardCreated: () => void;
 }) {
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,19 +65,21 @@ export default function CreateForm({
 
     onCardCreated();
 
-    setIsSheetOpen(false);
+    setIsDialogOpen(false);
   }
 
   return (
-    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-      <SheetTrigger asChild>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>
         <CreateButton />
-      </SheetTrigger>
-      <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
-        <SheetHeader>
-          <SheetTitle>Cadastro de Cartão</SheetTitle>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      </DialogTrigger>
+      <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
+        <DialogHeader>
+          <DialogTitle>Cadastro de Cartão</DialogTitle>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="card"
@@ -131,18 +134,16 @@ export default function CreateForm({
                   </FormItem>
                 )}
               />
-              <Button
-                type="submit"
-                className="bg-green-600 rounded-full p-2 mr-2"
-              >
-                <p className="flex text-white font-medium">
-                  <CirclePlus color="#ffffff" height={20} /> Cadastrar
-                </p>
-              </Button>
-            </form>
-          </Form>
-        </SheetHeader>
-      </SheetContent>
-    </Sheet>
+            </div>
+            <DialogFooter className="flex justify-end items-center">
+              <DialogClose asChild>
+                <Button variant={"outline"}>Cancelar</Button>
+              </DialogClose>
+              <Button type="submit">Cadastrar</Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 }

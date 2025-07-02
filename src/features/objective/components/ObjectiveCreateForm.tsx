@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -47,7 +49,7 @@ export default function CreateForm({
 }: {
   onObjectiveCreated: () => void;
 }) {
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,23 +70,25 @@ export default function CreateForm({
 
     onObjectiveCreated();
 
-    setIsSheetOpen(false);
+    setIsDialogOpen(false);
   }
 
   return (
-    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-      <SheetTrigger asChild>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>
         <CreateButton />
-      </SheetTrigger>
-      <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
-        <SheetHeader>
-          <SheetTitle>Cadastro de Objetivo</SheetTitle>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      </DialogTrigger>
+      <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
+        <DialogHeader>
+          <DialogTitle>Cadastro de Objetivo</DialogTitle>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="objective"
-              render={() => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Objetivo</FormLabel>
                     <FormControl>
@@ -100,7 +104,7 @@ export default function CreateForm({
               <FormField
                 control={form.control}
                 name="description"
-              render={() => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Descrição</FormLabel>
                     <FormControl>
@@ -149,11 +153,16 @@ export default function CreateForm({
                   </FormItem>
                 )}
               />
+            </div>
+            <DialogFooter className="flex justify-end items-center">
+              <DialogClose asChild>
+                <Button variant="outline">Cancelar</Button>
+              </DialogClose>
               <Button type="submit">Criar</Button>
-            </form>
-          </Form>
-        </SheetHeader>
-      </SheetContent>
-    </Sheet>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -25,7 +27,6 @@ import { editType } from '../api/edit-type';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Pencil } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import EditButton from '@/components/common/edit-button';
 
@@ -49,7 +50,7 @@ export default function EditForm({
   typeId: string;
   reloadTypes?: () => void;
 }) {
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,19 +75,21 @@ export default function EditForm({
 
     reloadTypes?.();
 
-    setIsSheetOpen(false);
+    setIsDialogOpen(false);
   }
 
   return (
-    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-      <SheetTrigger asChild>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>
         <EditButton />
-      </SheetTrigger>
-      <SheetContent className="w-[500px] max-h-screen overflow-y-auto p-4">
-        <SheetHeader>
-          <SheetTitle>Editar Tipo</SheetTitle>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      </DialogTrigger>
+      <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
+        <DialogHeader>
+          <DialogTitle>Editar Tipo</DialogTitle>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="type"
@@ -163,18 +166,16 @@ export default function EditForm({
                   </FormItem>
                 )}
               />
-              <Button
-                type="submit"
-                className="bg-blue-600 rounded-full p-2 mr-2"
-              >
-                <p className="flex text-white font-medium">
-                  <Pencil color="#ffffff" height={15} /> Editar
-                </p>
-              </Button>
-            </form>
-          </Form>
-        </SheetHeader>
-      </SheetContent>
-    </Sheet>
+            </div>
+            <DialogFooter className="flex justify-end items-center">
+              <DialogClose asChild>
+                <Button variant={"outline"}>Cancelar</Button>
+              </DialogClose>
+              <Button type="submit">Editar</Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 }
