@@ -24,11 +24,11 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { DialogFooter, DialogHeader } from '@/components/ui/dialog';
-import { Plus } from 'lucide-react';
 
 const formSchema = z.object({
   income: z.string().min(2, {
@@ -66,79 +66,75 @@ export default function CreateForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <DialogTrigger asChild>
-            <Button className="w-32">
-              <Plus />
-              Entrada
-            </Button>
+            <Button className="w-32">Entrada</Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
             <DialogHeader>
               <DialogTitle>Cadastrar uma entrada</DialogTitle>
               <DialogDescription>Cadastre uma nova entrada.</DialogDescription>
             </DialogHeader>
-
-            <FormField
-              control={form.control}
-              name="income"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Entrada</FormLabel>
-                  <FormControl>
-                    <Input required {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Este é o nome da sua entrada.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Descrição</FormLabel>
-                  <FormControl>
-                    <Input required {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Este é a descrição da sua entrada.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <MoneyInput
-              form={form}
-              label="Valor"
-              name="amount"
-              placeholder=""
-              description="Este é o valor da sua entrada."
-            />
-            <FormField
-              control={form.control}
-              name="date"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Date</FormLabel>
-                  <FormControl>
-                    <Input required type="date" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Esta é a data da sua entrada.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <DialogFooter>
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="income"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Entrada</FormLabel>
+                    <FormControl>
+                      <Input required {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Este é o nome da sua entrada.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Descrição</FormLabel>
+                    <FormControl>
+                      <Input required {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Este é a descrição da sua entrada.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <MoneyInput
+                form={form}
+                label="Valor"
+                name="amount"
+                placeholder=""
+                description="Este é o valor da sua entrada."
+              />
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Date</FormLabel>
+                    <FormControl>
+                      <Input required type="date" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Esta é a data da sua entrada.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <DialogFooter className="flex justify-end items-center">
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outline">Cancelar</Button>
               </DialogClose>
-              <Button type="submit" onClick={onSubmit}>
-                Salvar
-              </Button>
+              <Button type="submit">Salvar</Button>
             </DialogFooter>
           </DialogContent>
         </form>

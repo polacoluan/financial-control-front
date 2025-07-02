@@ -66,7 +66,7 @@ export default function CreateForm({
   const { categories } = useCategories();
   const { types } = useTypes();
   const { cards } = useCards();
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -115,20 +115,20 @@ export default function CreateForm({
 
     onExpenseCreated();
 
-    setIsSheetOpen(false);
+    setIsDialogOpen(false);
   }
 
   return (
-    <Dialog open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <DialogTrigger asChild>
-          <CreateButton />
-        </DialogTrigger>
-        <DialogContent className="max-w-[1000px] max-h-screen overflow-y-auto p-4">
-          <DialogHeader>
-            <DialogTitle>Cadastro de Despesa</DialogTitle>
-          </DialogHeader>
-          <Form {...form}>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>
+        <CreateButton />
+      </DialogTrigger>
+      <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
+        <DialogHeader>
+          <DialogTitle>Cadastro de Despesa</DialogTitle>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -307,9 +307,9 @@ export default function CreateForm({
               </DialogClose>
               <Button type="submit">Cadastrar</Button>
             </DialogFooter>
-          </Form>
-        </DialogContent>
-      </form>
+          </form>
+        </Form>
+      </DialogContent>
     </Dialog>
   );
 }
