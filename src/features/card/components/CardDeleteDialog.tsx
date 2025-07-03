@@ -39,7 +39,7 @@ export default function DeleteDialog({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <DeleteButton />
       </AlertDialogTrigger>
       <AlertDialogContent>

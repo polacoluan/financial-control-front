@@ -38,7 +38,6 @@ import { useToast } from '@/hooks/use-toast';
 import MoneyInput from '@/components/common/money-input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import EditButton from '@/components/common/edit-button';
 
 const formSchema = z.object({
   expense: z.string().min(2, {
@@ -109,7 +108,7 @@ export default function EditForm({
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <EditButton />
+        <Button variant={'outline'}>Editar</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
         <DialogHeader>
@@ -289,7 +288,7 @@ export default function EditForm({
             </div>
             <DialogFooter className="flex justify-end items-center">
               <DialogClose asChild>
-                <Button variant={"outline"}>Cancelar</Button>
+                <Button variant={'outline'}>Cancelar</Button>
               </DialogClose>
               <Button type="submit">Editar</Button>
             </DialogFooter>

@@ -51,7 +51,7 @@ export const columns: ColumnDef<Expense, unknown>[] = [
     },
   },
   {
-    accessorKey: 'date',
+    accessorKey: 'readable_date',
     header: ({ column }) => {
       return (
         <Button
@@ -126,7 +126,7 @@ export const columns: ColumnDef<Expense, unknown>[] = [
       const expense = row.original as Expense;
 
       return (
-        <div>
+        <div className="flex gap-2 justify-end items-center">
           <EditForm
             expense={expense}
             expenseId={expense.id}

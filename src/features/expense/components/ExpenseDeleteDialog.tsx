@@ -13,7 +13,7 @@ import { Expense } from '../types/expense';
 import { formatCurrency } from '@/utils/mask-real';
 import { useToast } from '@/hooks/use-toast';
 import { deleteExpense } from '../api/delete-expense';
-import DeleteButton from '@/components/common/delete-button';
+import { Button } from '@/components/ui/button';
 
 export default function DeleteDialog({
   expense,
@@ -41,7 +41,7 @@ export default function DeleteDialog({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <DeleteButton />
+        <Button variant={'destructive'}>Excluir</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

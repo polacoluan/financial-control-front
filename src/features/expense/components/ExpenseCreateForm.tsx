@@ -38,15 +38,12 @@ import { toast } from 'sonner';
 import MoneyInput from '@/components/common/money-input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import CreateButton from '@/components/common/create-button';
 
 const formSchema = z.object({
   expense: z.string().min(2, {
     message: 'Tipo precisa ter ao menos 2 caracteres.',
   }),
-  description: z.string().min(2, {
-    message: 'Descrição precisa ter ao menos 2 caracteres.',
-  }),
+  description: z.string(),
   amount: z.number(),
   date: z.string(),
   category_id: z.string(),
@@ -121,7 +118,7 @@ export default function CreateForm({
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <CreateButton />
+        <Button>Cadastrar Despesa</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
         <DialogHeader>
@@ -153,7 +150,7 @@ export default function CreateForm({
                   <FormItem>
                     <FormLabel>Descrição</FormLabel>
                     <FormControl>
-                      <Input required {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormDescription>
                       Este é a descrição da sua despesa.
