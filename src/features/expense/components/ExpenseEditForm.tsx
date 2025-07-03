@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -82,6 +82,11 @@ export default function EditForm({
       installments: expense.installments,
     },
   });
+
+  useEffect(() => {
+    const currentType = types.find((type) => type.id === expense.type_id);
+    setInstallmentsEnabled(currentType?.installments === true);
+  }, [types, expense.type_id]);
 
   function onSubmit(data: FieldValues) {
     const expenseData = data as Expense;

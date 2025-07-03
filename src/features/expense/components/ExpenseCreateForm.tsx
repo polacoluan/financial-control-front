@@ -85,6 +85,7 @@ export default function CreateForm({
     if (defaultType) {
       setDefaultTypeId(defaultType.id);
       form.setValue('type_id', defaultType.id);
+      setInstallmentsEnabled(defaultType.installments === true);
     }
 
     if (defaultCard) {
