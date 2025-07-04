@@ -49,7 +49,7 @@ const formSchema = z.object({
   category_id: z.string(),
   type_id: z.string(),
   card_id: z.string(),
-  installments: z.number(),
+  installments: z.coerce.number(),
 });
 
 export default function CreateForm({
