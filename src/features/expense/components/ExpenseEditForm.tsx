@@ -43,9 +43,7 @@ const formSchema = z.object({
   expense: z.string().min(2, {
     message: 'Tipo precisa ter ao menos 2 caracteres.',
   }),
-  description: z.string().min(2, {
-    message: 'Descrição precisa ter ao menos 2 caracteres.',
-  }),
+  description: z.string(),
   amount: z.number(),
   date: z.string(),
   category_id: z.string(),
@@ -63,7 +61,6 @@ export default function EditForm({
   expenseId: string;
   reloadExpenses?: () => void;
 }) {
-  const [installmentsEnabled, setInstallmentsEnabled] = useState(false);
   const { categories } = useCategories();
   const { types } = useTypes();
   const { cards } = useCards();
@@ -82,11 +79,6 @@ export default function EditForm({
       installments: expense.installments,
     },
   });
-
-  useEffect(() => {
-    const currentType = types.find((type) => type.id === expense.type_id);
-    setInstallmentsEnabled(currentType?.installments === true);
-  }, [types, expense.type_id]);
 
   function onSubmit(data: FieldValues) {
     const expenseData = data as Expense;
@@ -277,11 +269,7 @@ export default function EditForm({
                   <FormItem>
                     <FormLabel>Parcelas</FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        {...field}
-                        disabled={!installmentsEnabled}
-                      />
+                      <Input type="number" {...field} disabled={true} />
                     </FormControl>
                     <FormDescription>
                       Este é quantidade de parcelas da sua despesa.
