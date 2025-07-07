@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -70,7 +70,7 @@ export default function EditForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       expense: expense.expense,
-      description: expense.description,
+      description: expense.description ?? '',
       amount: expense.amount,
       date: expense.date,
       category_id: expense.category_id,
@@ -97,8 +97,6 @@ export default function EditForm({
   }
 
   const handleTypeChange = (selectedTypeId: string) => {
-    const selectedType = types.find((type) => type.id === selectedTypeId);
-    setInstallmentsEnabled(selectedType?.installments === true);
     form.setValue('type_id', selectedTypeId);
   };
 
@@ -272,7 +270,7 @@ export default function EditForm({
                       <Input type="number" {...field} disabled={true} />
                     </FormControl>
                     <FormDescription>
-                      Este é quantidade de parcelas da sua despesa.
+                      Este é número da parcela da sua despesa.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

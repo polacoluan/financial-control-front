@@ -10,6 +10,10 @@ export type Expense = {
   installments: number;
   category: string;
   type: string;
+  installments_quantity: number;
+  paid: number;
+  to_pay: number;
+  total: number;
 };
 
 export type ExpenseResponse = Expense[];

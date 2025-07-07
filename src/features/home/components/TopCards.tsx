@@ -6,6 +6,7 @@ import CategoriesCard from './CategoriesCard';
 import ExpenseCard from './ExpenseCard';
 import IncomeCard from './IncomeCard';
 import TransactionsCard from './TransactionsCard';
+import InstallmentsCard from './InstallmentsCard';
 
 export default function TopCards() {
   const monthSummary = useMonthSummary();
@@ -19,6 +20,9 @@ export default function TopCards() {
       <div className="grid grid-cols-2 gap-4">
         <CategoriesCard />
         <TransactionsCard />
+      </div>
+      <div>
+        <InstallmentsCard />
       </div>
     </div>
   );
