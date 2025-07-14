@@ -2,10 +2,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TopCards from './TopCards';
 import ObjectiveList from '@/features/objective/components/ObjectiveList';
 import ExpensePerType from './ExpensePerType';
+import CalendarRange from '@/components/common/calendar-range';
 
 export default function HomePage() {
   return (
     <div>
+      <div className="justify-between flex items-center mb-2">
+        <div className="font-bold text-2xl">Página Inicial</div>
+        <div className="grid grid-cols-2 gap-2">
+          <div>Período de gastos</div>
+          <CalendarRange />
+          <div>Período de ganhos</div>
+          <CalendarRange />
+        </div>
+      </div>
       <Tabs defaultValue="home">
         <TabsList className="w-full">
           <TabsTrigger className="flex-1" value="home">
