@@ -48,7 +48,7 @@ const IncomePage = () => {
       ) : (
         <div>
           <div className="text-right">
-            <CreateForm onIncomeCreated={reloadIncomes} />
+            <CreateForm />
           </div>
           <DataTable
             columns={columns}

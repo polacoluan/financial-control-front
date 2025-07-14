@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/card';
 import { ArrowDownLeft, ArrowUpRight, HandCoins } from 'lucide-react';
 import { listRecentTransactions } from '../api/list-recent-transactions';
+import { useHomeDateRange } from '@/context/HomeDateRangeContext';
 import { RecentTransaction } from '../types/home';
 import { useEffect, useState } from 'react';
 
@@ -16,10 +17,28 @@ export default function TransactionsCard() {
   const [recentTransactions, setRecentTransaction] = useState<
     RecentTransaction[]
   >([]);
+  const { expenseRange, incomeRange } = useHomeDateRange();
   useEffect(() => {
     const fetchTransactions = async () => {
+      if (
+        !expenseRange?.from ||
+        !expenseRange?.to ||
+        !incomeRange?.from ||
+        !incomeRange?.to
+      ) {
+        return;
+      }
       try {
-        const data = await listRecentTransactions();
+        const start =
+          expenseRange.from < incomeRange.from
+            ? expenseRange.from
+            : incomeRange.from;
+        const end =
+          expenseRange.to > incomeRange.to ? expenseRange.to : incomeRange.to;
+        const data = await listRecentTransactions(
+          start.toISOString().slice(0, 10),
+          end.toISOString().slice(0, 10),
+        );
         setRecentTransaction(data);
       } catch (error) {
         console.error('Erro ao carregar os dados:', error);
@@ -27,7 +46,7 @@ export default function TransactionsCard() {
     };
 
     fetchTransactions();
-  }, []);
+  }, [expenseRange, incomeRange]);
   return (
     <div>
       <Card className="h-[400px]">

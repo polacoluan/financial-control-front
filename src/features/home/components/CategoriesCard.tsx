@@ -10,16 +10,20 @@ import {
 import { Progress } from '@/components/ui/progress';
 import { HandCoins } from 'lucide-react';
 import { listTopCategories } from '../api/list-top-categories';
+import { useHomeDateRange } from '@/context/HomeDateRangeContext';
 import { TopCategory } from '../types/home';
 
 export default function BalanceCard() {
   const [categories, setCategories] = useState<TopCategory[]>([]);
-  const month = new Date().getMonth() + 1;
-  const year = new Date().getFullYear();
+  const { expenseRange } = useHomeDateRange();
+
   const fetchCategories = useCallback(async () => {
-    const data = await listTopCategories(month, year);
+    if (!expenseRange?.from || !expenseRange?.to) return;
+    const start = expenseRange.from.toISOString().slice(0, 10);
+    const end = expenseRange.to.toISOString().slice(0, 10);
+    const data = await listTopCategories(start, end);
     setCategories(data);
-  }, [month, year]);
+  }, [expenseRange]);
 
   useEffect(() => {
     fetchCategories();
