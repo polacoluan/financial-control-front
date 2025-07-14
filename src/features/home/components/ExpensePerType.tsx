@@ -19,21 +19,22 @@ import {
 } from '@/components/ui/table';
 import { HandCoins } from 'lucide-react';
 import { listExpensesPerType } from '../api/list-expenses-per-type';
-import { MonthSelect } from '@/components/common/month-select';
-import { YearSelect } from '@/components/common/year-select';
 import { TypeSelect } from '@/components/common/type-select';
 import { Expense } from '@/features/expense/types/expense';
+import { useHomeDateRange } from '@/context/HomeDateRangeContext';
 
 export default function ExpensePerType() {
   const [types, setTypes] = useState<Expense[]>([]);
-  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
-  const [year, setYear] = useState<number>(new Date().getFullYear());
   const [selectedTypeId, setSelectedTypeId] = useState<string>('');
+  const { expenseRange } = useHomeDateRange();
 
   const fetchTypes = useCallback(async () => {
-    const data = await listExpensesPerType(month, year, selectedTypeId);
+    if (!expenseRange?.from || !expenseRange?.to || !selectedTypeId) return;
+    const start = expenseRange.from.toISOString().slice(0, 10);
+    const end = expenseRange.to.toISOString().slice(0, 10);
+    const data = await listExpensesPerType(start, end, selectedTypeId);
     setTypes(data);
-  }, [month, year, selectedTypeId]);
+  }, [expenseRange, selectedTypeId]);
 
   const handleTypeChange = (value: string) => {
     setSelectedTypeId(value);
@@ -48,8 +49,6 @@ export default function ExpensePerType() {
     <div>
       <div className="flex justify-end gap-2 mb-2">
         <TypeSelect typeId={selectedTypeId} setTypeId={handleTypeChange} />
-        <MonthSelect month={month} setMonth={setMonth} />
-        <YearSelect year={year} setYear={setYear} />
       </div>
       <Card>
         <CardHeader>

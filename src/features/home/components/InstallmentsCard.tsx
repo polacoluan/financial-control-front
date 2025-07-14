@@ -17,16 +17,19 @@ import {
 } from '@/components/ui/table';
 import { HandCoins } from 'lucide-react';
 import { listExpensesWithInstallments } from '../api/list-expenses-with-installments';
+import { useHomeDateRange } from '@/context/HomeDateRangeContext';
 import { Expense } from '@/features/expense/types/expense';
 
 export default function InstallmentsCard() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
-  const month = new Date().getMonth() + 1;
-  const year = new Date().getFullYear();
+  const { expenseRange } = useHomeDateRange();
   const fetchExpenses = useCallback(async () => {
-    const data = await listExpensesWithInstallments(year, month);
+    if (!expenseRange?.from || !expenseRange?.to) return;
+    const start = expenseRange.from.toISOString().slice(0, 10);
+    const end = expenseRange.to.toISOString().slice(0, 10);
+    const data = await listExpensesWithInstallments(start, end);
     setExpenses(data);
-  }, [month, year]);
+  }, [expenseRange]);
 
   useEffect(() => {
     fetchExpenses();

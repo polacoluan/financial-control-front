@@ -96,7 +96,7 @@ export default function EditForm({
               <FormField
                 control={form.control}
                 name="objective"
-              render={() => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Objetivo</FormLabel>
                     <FormControl>
@@ -112,7 +112,7 @@ export default function EditForm({
               <FormField
                 control={form.control}
                 name="description"
-              render={() => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Descrição</FormLabel>
                     <FormControl>

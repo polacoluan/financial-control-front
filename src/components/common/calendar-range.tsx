@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { ChevronDownIcon } from 'lucide-react';
 import { type DateRange } from 'react-day-picker';
 
@@ -12,9 +12,12 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-export default function CalendarRange() {
-  const [range, setRange] = React.useState<DateRange | undefined>(undefined);
+interface CalendarRangeProps {
+  range: DateRange | undefined;
+  onChange: (range: DateRange | undefined) => void;
+}
 
+export default function CalendarRange({ range, onChange }: CalendarRangeProps) {
   return (
     <div className="flex flex-col gap-3">
       <Popover>
@@ -35,8 +38,8 @@ export default function CalendarRange() {
             mode="range"
             selected={range}
             captionLayout="dropdown"
-            onSelect={(range) => {
-              setRange(range);
+            onSelect={(newRange) => {
+              onChange(newRange);
             }}
           />
         </PopoverContent>
