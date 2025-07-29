@@ -4,7 +4,6 @@ import * as React from 'react';
 
 import {
   ColumnDef,
-  ColumnFiltersState,
   SortingState,
   flexRender,
   getCoreRowModel,
@@ -22,9 +21,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { DataTablePagination } from '@/components/common/data-table-pagination';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,12 +32,9 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-  reloadExpenses,
-}: DataTableProps<TData, TValue> & { reloadExpenses?: () => void }) {
+}: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
-  );
+  const [globalFilter, setGlobalFilter] = React.useState('');
 
   const table = useReactTable({
     data,
@@ -48,23 +43,20 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
-      columnFilters,
+      globalFilter,
     },
+    onGlobalFilterChange: setGlobalFilter,
   });
 
   return (
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filtrar despesas..."
-          value={(table.getColumn('expense')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('expense')?.setFilterValue(event.target.value)
-          }
+          placeholder="Pesquisar..."
+          onChange={(e) => table.setGlobalFilter(String(e.target.value))}
           className="max-w-sm"
         />
       </div>
@@ -80,7 +72,6 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(header.column.columnDef.header, {
                             ...header.getContext(),
-                            reloadExpenses,
                           })}
                     </TableHead>
                   );
@@ -99,7 +90,6 @@ export function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, {
                         ...cell.getContext(),
-                        reloadExpenses,
                       })}
                     </TableCell>
                   ))}
@@ -118,24 +108,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Anterior
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Próximo
-        </Button>
-      </div>
+      <DataTablePagination table={table} />
     </div>
   );
 }

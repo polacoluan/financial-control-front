@@ -6,7 +6,7 @@ export async function listExpensesWithInstallments(
   end: string,
 ): Promise<Expense[]> {
   try {
-    const API_URL = `expenses/with-installments?start=${start}&end=${end}`;
+    const API_URL = `expenses/with/installments?start=${start}&end=${end}`;
 
     const response = await httpGet<Expense[]>(API_URL);
 

@@ -15,5 +15,3 @@ export type Expense = {
   to_pay: number;
   total: number;
 };
-
-export type ExpenseResponse = Expense[];

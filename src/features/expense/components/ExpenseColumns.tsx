@@ -3,10 +3,9 @@
 import React from 'react';
 import { ColumnDef, CellContext } from '@tanstack/react-table';
 import { Expense } from '../types/expense';
-import { ArrowUpDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import EditForm from './ExpenseEditForm';
 import DeleteDialog from './ExpenseDeleteDialog';
+import { DataTableColumnHeader } from '@/components/common/data-table-column-header';
 
 interface CustomCellContext<TData> extends CellContext<TData, unknown> {
   reloadExpenses?: () => void;
@@ -16,29 +15,13 @@ export const columns: ColumnDef<Expense, unknown>[] = [
   {
     accessorKey: 'expense',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Despesa
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Despesa" />;
     },
   },
   {
     accessorKey: 'amount',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Valor
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Valor" />;
     },
     cell: ({ row }) => {
       return (
@@ -51,71 +34,31 @@ export const columns: ColumnDef<Expense, unknown>[] = [
   {
     accessorKey: 'readable_date',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Data
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Data" />;
     },
   },
   {
     accessorKey: 'category',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Categoria
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Categoria" />;
     },
   },
   {
     accessorKey: 'type',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Tipo
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Tipo" />;
     },
   },
   {
     accessorKey: 'card',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Cartão
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Cartão" />;
     },
   },
   {
     accessorKey: 'installments',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Parcelas
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Parcelas" />;
     },
   },
   {

@@ -6,7 +6,7 @@ export async function listTopCategories(
   end: string,
 ): Promise<TopCategoryResponse> {
   try {
-    const API_URL = `categories/top-expenses?start=${start}&end=${end}`;
+    const API_URL = `categories/top/expenses?start=${start}&end=${end}`;
 
     const response = await httpGet<TopCategoryResponse>(API_URL);
 
