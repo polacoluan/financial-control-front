@@ -2,11 +2,11 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TopCards from './TopCards';
-import ObjectiveList from '@/features/objective/components/ObjectivePage';
 import ExpensePerType from './ExpensePerType';
 import { CalendarRange } from '@/components/common/calendar-range';
 import { useHomeDateRange } from '@/context/HomeDateRangeContext';
 import InstallmentsCard from './InstallmentsCard';
+import ObjectiveCard from './ObjectiveCard';
 
 export default function HomePage() {
   const { dateRange, setDateRange } = useHomeDateRange();
@@ -44,7 +44,7 @@ export default function HomePage() {
           <InstallmentsCard />
         </TabsContent>
         <TabsContent value="targets">
-          <ObjectiveList />
+          <ObjectiveCard />
         </TabsContent>
       </Tabs>
     </div>

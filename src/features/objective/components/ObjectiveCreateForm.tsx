@@ -27,7 +27,6 @@ import { ICreateObjective } from '../types/objective';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import CreateButton from '@/components/common/create-button';
 import MoneyInput from '@/components/common/money-input';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
@@ -75,9 +74,9 @@ export default function ObjectiveCreateForm() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <CreateButton />
+        <Button>Novo Objetivo</Button>
       </DialogTrigger>
-      <DialogContent className="overflow-y-auto p-4">
+      <DialogContent className="p-4">
         <DialogHeader>
           <DialogTitle>Cadastro de Objetivo</DialogTitle>
         </DialogHeader>
