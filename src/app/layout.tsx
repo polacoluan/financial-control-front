@@ -6,6 +6,7 @@ import { MainLayout } from '@/layouts/MainLayout';
 import { usePathname } from 'next/navigation';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/common/theme-provider';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 export default function RootLayout({
   children,
@@ -18,7 +19,7 @@ export default function RootLayout({
 
   const isExcluded = excludedRoutes.includes(pathname);
 
-  const queryClient = new QueryClient();
+  const [queryClient] = React.useState(() => new QueryClient());
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
