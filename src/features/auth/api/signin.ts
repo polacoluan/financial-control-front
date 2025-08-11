@@ -1,17 +1,13 @@
 import { httpPost } from '@/services/api/http';
 import Cookies from 'js-cookie';
 import { MessageResponse } from '@/services/api/types';
-
-interface SigninData {
-  email: string;
-  password: string;
-}
+import { Auth } from '../types/auth';
 
 type ResponseType = {
   access_token: string;
 };
 
-export async function signin(data: SigninData): Promise<MessageResponse> {
+export async function signin(data: Auth): Promise<MessageResponse> {
   try {
     const API_URL = '/clients/web/login';
 

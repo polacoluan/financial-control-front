@@ -10,7 +10,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <AppSidebar />
       <main className={'w-full'}>
         <Header />
-        <div className="w-3/4 mx-auto p-4">{children}</div>
+        <div className="p-4">{children}</div>
       </main>
     </SidebarProvider>
   );

@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { DataTablePagination } from '@/components/common/data-table-pagination';
+import ExpenseCreateForm from './ExpenseCreateForm';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -52,13 +53,14 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center py-4">
+    <>
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Pesquisar..."
           onChange={(e) => table.setGlobalFilter(String(e.target.value))}
           className="max-w-sm"
         />
+        <ExpenseCreateForm />
       </div>
       <div className="rounded-md border">
         <Table>
@@ -109,6 +111,6 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <DataTablePagination table={table} />
-    </div>
+    </>
   );
 }

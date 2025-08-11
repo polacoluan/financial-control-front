@@ -3,7 +3,6 @@
 import React from 'react';
 import { columns } from '../components/ExpenseColumns';
 import { DataTable } from '../components/ExpenseDataTable';
-// import CreateForm from '../components/ExpenseCreateForm';
 import Loader from '@/components/common/loading';
 import { useQuery } from '@tanstack/react-query';
 import { getExpenses } from '../api/get-expenses';

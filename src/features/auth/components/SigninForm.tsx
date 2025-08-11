@@ -1,71 +1,113 @@
 'use client';
-import React, { useState } from 'react';
-import { signin } from '@/features/auth/api/signin';
+import React from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Auth } from '../types/auth';
+import { signin } from '../api/signin';
+import { toast } from 'sonner';
+
+const formSchema = z.object({
+  email: z.string({ required_error: 'Campo de e-mail obrigatório.' }).email(),
+  password: z.string({ required_error: 'Campo de senha obrigatório.' }),
+});
 
 const SigninForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
+  const router = useRouter();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const response = await signin(formData);
-    alert(response.message);
-    router.push('/');
-  };
+  const mutation = useMutation({
+    mutationFn: (values: Auth) => signin(values),
+    onSuccess: () => {
+      toast.success('Login realizado com sucesso!');
+      router.replace('/');
+    },
+    onError: (error: Error) => {
+      toast.error(error?.message ?? 'Erro ao logar');
+    },
+  });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="border-b pb-12">
-        <div className="cols-span-3 mt-3">
-          <label htmlFor="email" className="block font-medium">
-            Email
-          </label>
-          <div className="mt-3">
-            <input
-              id="email"
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit((vals) => mutation.mutate(vals))}>
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle>Realize o login na sua conta</CardTitle>
+            <CardDescription>
+              Insira o seu e-mail abaixo para acessar a sua conta
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-8">
+            <FormField
+              control={form.control}
               name="email"
-              type="email"
-              placeholder="Email"
-              className="block rounded-md w-full border px-3 py-1.5"
-              onChange={handleChange}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="example@email.com" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Este é o seu e-mail de login.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-        </div>
-        <div className="cols-span-3 mt-3">
-          <label htmlFor="password" className="block font-medium">
-            Senha
-          </label>
-          <div className="mt-3">
-            <input
-              id="password"
+            <FormField
+              control={form.control}
               name="password"
-              type="password"
-              className="block rounded-md w-full border px-3 py-1.5"
-              onChange={handleChange}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Senha</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="exemplo@email.com"
+                      {...field}
+                      type="password"
+                    />
+                  </FormControl>
+                  <FormDescription>Esta é a sua senha.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-        </div>
-      </div>
-      <div className="mt-4 flex justify-end">
-        <button
-          type="submit"
-          className="rounded-md py-2 px-3 text-semibold bg-sky-700 text-white hover:bg-sky-900"
-        >
-          Logar
-        </button>
-      </div>
-    </form>
+          </CardContent>
+          <CardFooter className="flex-col gap-2">
+            <Button type="submit" className="w-full">
+              Logar
+            </Button>
+          </CardFooter>
+        </Card>
+      </form>
+    </Form>
   );
 };
 

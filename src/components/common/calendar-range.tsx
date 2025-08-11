@@ -1,9 +1,11 @@
 'use client';
 
-import React from 'react';
-import { ChevronDownIcon } from 'lucide-react';
-import { type DateRange } from 'react-day-picker';
+import * as React from 'react';
+import { CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
+import type { DateRange } from 'react-day-picker';
 
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -17,30 +19,43 @@ interface CalendarRangeProps {
   onChange: (range: DateRange | undefined) => void;
 }
 
-export default function CalendarRange({ range, onChange }: CalendarRangeProps) {
+export function CalendarRange({ range, onChange }: CalendarRangeProps) {
   return (
-    <div className="flex flex-col gap-3">
+    <div className={cn('grid gap-2')}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
-            variant="outline"
-            id="dates"
-            className="w-56 justify-between font-normal"
+            id="date"
+            variant={'outline'}
+            className={cn(
+              'w-[300px] justify-start text-left font-normal',
+              !range && 'text-muted-foreground',
+            )}
           >
-            {range?.from && range?.to
-              ? `${range.from.toLocaleDateString()} - ${range.to.toLocaleDateString()}`
-              : 'Selecione a data'}
-            <ChevronDownIcon />
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {range?.from ? (
+              range.to ? (
+                <>
+                  {format(range.from, 'LLL dd, y')} -{' '}
+                  {format(range.to, 'LLL dd, y')}
+                </>
+              ) : (
+                format(range.from, 'LLL dd, y')
+              )
+            ) : (
+              <span>Selecione o período</span>
+            )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+        <PopoverContent className="w-auto p-0" align="start">
           <Calendar
             mode="range"
+            defaultMonth={range?.from}
             selected={range}
-            captionLayout="dropdown"
             onSelect={(newRange) => {
               onChange(newRange);
             }}
+            numberOfMonths={2}
           />
         </PopoverContent>
       </Popover>

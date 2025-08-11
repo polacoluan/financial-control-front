@@ -4,6 +4,7 @@ export type Expense = {
   description: string;
   amount: number;
   date: string;
+  readable_date: string;
   category_id: string;
   type_id: string;
   card_id: string;

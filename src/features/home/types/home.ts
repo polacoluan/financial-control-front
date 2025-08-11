@@ -24,6 +24,8 @@ export type RecentTransaction = {
 };
 
 export type TopCategoryResponse = TopCategory[];
+export type TopTypeResponse = TopCategory[];
+export type TopCardResponse = TopCategory[];
 export type ExpensesPerTypeResponse = ExpensesPerTypeItem[];
 export type ExpensesByTypeResponse = ExpensesByTypeItem[];
 export type RecentTransactionResponse = RecentTransaction[];

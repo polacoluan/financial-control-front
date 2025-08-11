@@ -2,13 +2,11 @@ import { httpGet } from '@/services/api/http';
 import { MonthSummary } from '@/types/month-summary';
 
 export async function getMonthSummary(
-  expenseStart: string,
-  expenseEnd: string,
-  incomeStart: string,
-  incomeEnd: string,
+  start: string,
+  end: string,
 ): Promise<MonthSummary> {
   try {
-    const API_URL = `monthly-summary?expense_start=${expenseStart}&expense_end=${expenseEnd}&income_start=${incomeStart}&income_end=${incomeEnd}`;
+    const API_URL = `monthly-summary?start=${start}&end=${end}`;
 
     const response = await httpGet<MonthSummary>(API_URL);
     return response;

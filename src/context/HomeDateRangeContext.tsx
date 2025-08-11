@@ -4,10 +4,8 @@ import React, { createContext, useContext, useState } from 'react';
 import { type DateRange } from 'react-day-picker';
 
 interface HomeDateRangeContextValue {
-  expenseRange: DateRange | undefined;
-  incomeRange: DateRange | undefined;
-  setExpenseRange: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
-  setIncomeRange: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
+  dateRange: DateRange | undefined;
+  setDateRange: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
 }
 
 const HomeDateRangeContext = createContext<HomeDateRangeContextValue | null>(
@@ -22,13 +20,12 @@ export const HomeDateRangeProvider = ({
   const today = new Date();
   const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
   const defaultRange: DateRange = { from: firstDay, to: today };
-  const [expenseRange, setExpenseRange] = useState<DateRange | undefined>(defaultRange);
-  const [incomeRange, setIncomeRange] = useState<DateRange | undefined>(defaultRange);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(
+    defaultRange,
+  );
 
   return (
-    <HomeDateRangeContext.Provider
-      value={{ expenseRange, incomeRange, setExpenseRange, setIncomeRange }}
-    >
+    <HomeDateRangeContext.Provider value={{ dateRange, setDateRange }}>
       {children}
     </HomeDateRangeContext.Provider>
   );

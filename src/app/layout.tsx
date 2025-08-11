@@ -32,10 +32,10 @@ export default function RootLayout({
             {isExcluded ? (
               children
             ) : (
-              <div>
+              <>
                 <MainLayout>{children}</MainLayout>
                 <Toaster />
-              </div>
+              </>
             )}
           </ThemeProvider>
         </QueryClientProvider>

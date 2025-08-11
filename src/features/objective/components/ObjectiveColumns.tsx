@@ -1,58 +1,29 @@
 'use client';
 
 import React from 'react';
-import { ColumnDef, CellContext } from '@tanstack/react-table';
+import { ColumnDef } from '@tanstack/react-table';
 import { Objective } from '../types/objective';
-import { ArrowUpDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import EditForm from './ObjectiveEditForm';
 import DeleteDialog from './ObjectiveDeleteDialog';
-
-interface CustomCellContext<TData> extends CellContext<TData, unknown> {
-  reloadObjectives?: () => void;
-}
+import { DataTableColumnHeader } from '@/components/common/data-table-column-header';
 
 export const columns: ColumnDef<Objective, unknown>[] = [
   {
     accessorKey: 'objective',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Objetivo
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Objetivo" />;
     },
   },
   {
     accessorKey: 'description',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Descrição
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Descrição" />;
     },
   },
   {
     accessorKey: 'target_value',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Valor Alvo
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <DataTableColumnHeader column={column} title="Valor Alvo" />;
     },
     cell: ({ row }) => {
       const value = row.getValue('target_value');
@@ -63,13 +34,7 @@ export const columns: ColumnDef<Objective, unknown>[] = [
     accessorKey: 'saved_amount',
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Valor Economizado
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <DataTableColumnHeader column={column} title="Valor Economizado" />
       );
     },
     cell: ({ row }) => {
@@ -79,20 +44,13 @@ export const columns: ColumnDef<Objective, unknown>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row, reloadObjectives }: CustomCellContext<Objective>) => {
-      const objective = row.original as Objective;
-
+    cell: ({ row }) => {
       return (
-        <div className="flex gap-2">
-          <EditForm
-            objective={objective}
-            objectiveId={objective.id}
-            reloadObjectives={reloadObjectives}
-          />
+        <div className="flex gap-2 justify-end items-center">
+          <EditForm objective={row.original} objectiveId={row.original.id} />
           <DeleteDialog
-            objective={objective}
-            objectiveId={objective.id}
-            reloadObjectives={reloadObjectives}
+            objective={row.original}
+            objectiveId={row.original.id}
           />
         </div>
       );

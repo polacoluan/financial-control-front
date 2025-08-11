@@ -52,11 +52,7 @@ const formSchema = z.object({
   installments: z.coerce.number(),
 });
 
-export default function CreateForm({
-  onExpenseCreated,
-}: {
-  onExpenseCreated: () => void;
-}) {
+export default function ExpenseCreateForm() {
   const [installmentsEnabled, setInstallmentsEnabled] = useState(false);
   const [defaultTypeId, setDefaultTypeId] = useState('');
   const [defaultCardId, setDefaultCardId] = useState('');
@@ -111,8 +107,6 @@ export default function CreateForm({
 
     toast('Despesa criada com sucesso.');
 
-    onExpenseCreated();
-
     setIsDialogOpen(false);
   }
 
@@ -121,7 +115,7 @@ export default function CreateForm({
       <DialogTrigger asChild>
         <Button>Cadastrar Despesa</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
+      <DialogContent className="max-w-[1000px] max-h-screen overflow-y-auto p-4">
         <DialogHeader>
           <DialogTitle>Cadastro de Despesa</DialogTitle>
         </DialogHeader>

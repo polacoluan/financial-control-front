@@ -1,17 +1,8 @@
 import { httpDelete } from '@/services/api/http';
-import { MessageResponse } from '@/services/api/types';
 
-export async function deleteObjective(
-  objectiveId: string,
-): Promise<MessageResponse> {
+export async function deleteObjective(objectiveId: number): Promise<void> {
   try {
-    const API_URL = '/objectives/' + objectiveId;
-
-    await httpDelete(API_URL);
-
-    return {
-      message: 'Objetivo deletado com sucesso.',
-    };
+    await httpDelete(`/objectives/${objectiveId}`);
   } catch {
     throw new Error('Falha ao deletar objetivo');
   }

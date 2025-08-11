@@ -17,24 +17,15 @@ export default function TransactionsCard() {
   const [recentTransactions, setRecentTransaction] = useState<
     RecentTransaction[]
   >([]);
-  const { expenseRange, incomeRange } = useHomeDateRange();
+  const { dateRange } = useHomeDateRange();
   useEffect(() => {
     const fetchTransactions = async () => {
-      if (
-        !expenseRange?.from ||
-        !expenseRange?.to ||
-        !incomeRange?.from ||
-        !incomeRange?.to
-      ) {
+      if (!dateRange?.from || !dateRange?.to) {
         return;
       }
       try {
-        const start =
-          expenseRange.from < incomeRange.from
-            ? expenseRange.from
-            : incomeRange.from;
-        const end =
-          expenseRange.to > incomeRange.to ? expenseRange.to : incomeRange.to;
+        const start = dateRange.from;
+        const end = dateRange.to;
         const data = await listRecentTransactions(
           start.toISOString().slice(0, 10),
           end.toISOString().slice(0, 10),
@@ -46,7 +37,7 @@ export default function TransactionsCard() {
     };
 
     fetchTransactions();
-  }, [expenseRange, incomeRange]);
+  }, [dateRange]);
   return (
     <div>
       <Card className="h-[400px]">

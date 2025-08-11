@@ -26,15 +26,15 @@ import { useHomeDateRange } from '@/context/HomeDateRangeContext';
 export default function ExpensePerType() {
   const [types, setTypes] = useState<Expense[]>([]);
   const [selectedTypeId, setSelectedTypeId] = useState<string>('');
-  const { expenseRange } = useHomeDateRange();
+  const { dateRange } = useHomeDateRange();
 
   const fetchTypes = useCallback(async () => {
-    if (!expenseRange?.from || !expenseRange?.to || !selectedTypeId) return;
-    const start = expenseRange.from.toISOString().slice(0, 10);
-    const end = expenseRange.to.toISOString().slice(0, 10);
+    if (!dateRange?.from || !dateRange?.to || !selectedTypeId) return;
+    const start = dateRange.from.toISOString().slice(0, 10);
+    const end = dateRange.to.toISOString().slice(0, 10);
     const data = await listExpensesPerType(start, end, selectedTypeId);
     setTypes(data);
-  }, [expenseRange, selectedTypeId]);
+  }, [dateRange, selectedTypeId]);
 
   const handleTypeChange = (value: string) => {
     setSelectedTypeId(value);
@@ -71,11 +71,11 @@ export default function ExpensePerType() {
             <TableBody>
               {types.map((type, index) => (
                 <TableRow key={index}>
-                  <TableCell className="font-medium">
-                    {type.description}
-                  </TableCell>
+                  <TableCell className="font-medium">{type.expense}</TableCell>
                   <TableCell className="font-medium">{type.category}</TableCell>
-                  <TableCell className="text-center">{type.date}</TableCell>
+                  <TableCell className="text-center">
+                    {type.readable_date}
+                  </TableCell>
                   <TableCell className="text-center">
                     R$ {type.amount}
                   </TableCell>

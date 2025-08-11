@@ -19,23 +19,16 @@ export const MonthSummaryProvider = ({
   children: React.ReactNode;
 }) => {
   const [monthSummary, setMonthSummary] = useState<MonthSummary>();
-  const { expenseRange, incomeRange } = useHomeDateRange();
+  const { dateRange } = useHomeDateRange();
   useEffect(() => {
     const fetchMonthSummary = async () => {
       try {
-        if (
-          !expenseRange?.from ||
-          !expenseRange?.to ||
-          !incomeRange?.from ||
-          !incomeRange?.to
-        ) {
+        if (!dateRange?.from || !dateRange?.to) {
           return;
         }
         const data = await getMonthSummary(
-          expenseRange.from.toISOString().slice(0, 10),
-          expenseRange.to.toISOString().slice(0, 10),
-          incomeRange.from.toISOString().slice(0, 10),
-          incomeRange.to.toISOString().slice(0, 10),
+          dateRange.from.toISOString().slice(0, 10),
+          dateRange.to.toISOString().slice(0, 10),
         );
         setMonthSummary(data);
       } catch (error) {
@@ -44,7 +37,7 @@ export const MonthSummaryProvider = ({
     };
 
     fetchMonthSummary();
-  }, [expenseRange, incomeRange]);
+  }, [dateRange]);
 
   return (
     <MonthSummaryContext.Provider value={{ monthSummary }}>

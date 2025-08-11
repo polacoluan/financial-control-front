@@ -13,42 +13,34 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Objective } from '../types/objective';
 import { deleteObjective } from '../api/delete-objective';
-import { useToast } from '@/hooks/use-toast';
-import DeleteButton from '@/components/common/delete-button';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 export default function DeleteDialog({
   objective,
   objectiveId,
-  reloadObjectives,
 }: {
   objective: Objective;
-  objectiveId: string;
-  reloadObjectives?: () => void;
+  objectiveId: number;
 }) {
-  const { toast } = useToast();
+  const queryClient = useQueryClient();
 
-  const handleDelete = async () => {
-    try {
-      await deleteObjective(objectiveId);
-      toast({
-        variant: 'default',
-        title: 'Sucesso!',
-        description: 'Objetivo deletado com sucesso!',
-      });
-      reloadObjectives?.();
-    } catch {
-      toast({
-        variant: 'destructive',
-        title: 'Erro!',
-        description: 'Erro ao deletar objetivo.',
-      });
-    }
-  };
+  const mutation = useMutation({
+    mutationFn: () => deleteObjective(objectiveId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getObjectives'] });
+      toast.success('Objetivo removido com sucesso!');
+    },
+    onError: (error: Error) => {
+      toast.error(error?.message ?? 'Erro ao remover objetivo');
+    },
+  });
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <DeleteButton />
+        <Button variant={'destructive'}>Excluir</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -60,7 +52,7 @@ export default function DeleteDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete}>
+          <AlertDialogAction onClick={() => mutation.mutate()}>
             Continuar
           </AlertDialogAction>
         </AlertDialogFooter>
