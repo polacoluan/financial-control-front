@@ -120,7 +120,7 @@ export default function EditForm({
             </div>
             <DialogFooter className="flex justify-end items-center">
               <DialogClose asChild>
-                <Button variant={"outline"}>Cancelar</Button>
+                <Button variant={"outline-solid"}>Cancelar</Button>
               </DialogClose>
               <Button type="submit">Editar</Button>
             </DialogFooter>

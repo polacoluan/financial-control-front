@@ -8,7 +8,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export const Header = () => {
   return (
-    <header className="border-b px-4 py-2 flex items-center justify-between shadow-sm bg-sidebar">
+    <header className="border-b px-4 py-2 flex items-center justify-between shadow-xs bg-sidebar">
       <div className="text-lg font-bold">
         <SidebarTrigger />
       </div>

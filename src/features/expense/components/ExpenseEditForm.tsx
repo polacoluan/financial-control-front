@@ -103,7 +103,7 @@ export default function EditForm({
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant={'outline'}>Editar</Button>
+        <Button variant={'outline-solid'}>Editar</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
         <DialogHeader>
@@ -279,7 +279,7 @@ export default function EditForm({
             </div>
             <DialogFooter className="flex justify-end items-center">
               <DialogClose asChild>
-                <Button variant={'outline'}>Cancelar</Button>
+                <Button variant={'outline-solid'}>Cancelar</Button>
               </DialogClose>
               <Button type="submit">Editar</Button>
             </DialogFooter>
