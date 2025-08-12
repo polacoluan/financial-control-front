@@ -137,9 +137,9 @@ export default function CreateForm({
             </div>
             <DialogFooter className="flex justify-end items-center">
               <DialogClose asChild>
-                <Button variant={"outline"}>Cancelar</Button>
+                <Button variant={'outline'}>Cancelar</Button>
               </DialogClose>
-              <Button type="submit">Cadastrar</Button>
+              <Button type="submit">Salvar</Button>
             </DialogFooter>
           </form>
         </Form>

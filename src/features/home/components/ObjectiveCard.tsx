@@ -26,20 +26,26 @@ export default function ObjectiveCard() {
   }
 
   return (
-    <div className="m-4 grid grid-cols-12 gap-4">
+    <div className="grid grid-cols-12 gap-4">
       {data?.map((objective) => (
         <Card key={objective.id} className="col-span-2">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div>{objective.objective}</div>
+          <CardHeader className="p-6 pb-4">
+            <div className="grid grid-cols-[1fr_auto] items-start gap-2">
               <div>
+                <CardTitle className="leading-tight">
+                  {objective.objective}
+                </CardTitle>
+                <CardDescription className="mt-0.5">
+                  {objective.description}
+                </CardDescription>
+              </div>
+              <div className="justify-self-end self-start">
                 <ObjectiveEditForm
                   objective={objective}
                   objectiveId={objective.id}
                 />
               </div>
-            </CardTitle>
-            <CardDescription>{objective.description}</CardDescription>
+            </div>
           </CardHeader>
           <CardContent>
             <Progress value={objective.progress} />

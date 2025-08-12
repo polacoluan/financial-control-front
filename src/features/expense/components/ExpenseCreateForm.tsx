@@ -38,6 +38,7 @@ import { toast } from 'sonner';
 import MoneyInput from '@/components/common/money-input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Plus } from 'lucide-react';
 
 const formSchema = z.object({
   expense: z.string().min(2, {
@@ -52,7 +53,11 @@ const formSchema = z.object({
   installments: z.coerce.number(),
 });
 
-export default function ExpenseCreateForm() {
+export default function ExpenseCreateForm({
+  home = false,
+}: {
+  home?: boolean;
+}) {
   const [installmentsEnabled, setInstallmentsEnabled] = useState(false);
   const [defaultTypeId, setDefaultTypeId] = useState('');
   const [defaultCardId, setDefaultCardId] = useState('');
@@ -113,7 +118,17 @@ export default function ExpenseCreateForm() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button>Cadastrar Despesa</Button>
+        {!home ? (
+          <Button variant="outline">Nova Despesa</Button>
+        ) : (
+          <Button
+            size="icon"
+            variant="secondary"
+            className="ml-auto size-8 rounded-full"
+          >
+            <Plus />
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="max-w-[1000px] max-h-screen overflow-y-auto p-4">
         <DialogHeader>
@@ -297,7 +312,7 @@ export default function ExpenseCreateForm() {
               <DialogClose asChild>
                 <Button variant={'outline'}>Cancelar</Button>
               </DialogClose>
-              <Button type="submit">Cadastrar</Button>
+              <Button type="submit">Salvar</Button>
             </DialogFooter>
           </form>
         </Form>

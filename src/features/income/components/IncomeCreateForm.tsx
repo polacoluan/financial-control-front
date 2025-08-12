@@ -29,6 +29,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Plus } from 'lucide-react';
 
 const formSchema = z.object({
   income: z.string().min(2, {
@@ -41,7 +42,7 @@ const formSchema = z.object({
   date: z.string(),
 });
 
-export default function CreateForm() {
+export default function IncomeCreateForm({ home = false }: { home?: boolean }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -66,11 +67,21 @@ export default function CreateForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <DialogTrigger asChild>
-            <Button className="w-32">Entrada</Button>
+            {!home ? (
+              <Button variant="outline">Nova Entrada</Button>
+            ) : (
+              <Button
+                size="icon"
+                variant="secondary"
+                className="ml-auto size-8 rounded-full"
+              >
+                <Plus />
+              </Button>
+            )}
           </DialogTrigger>
           <DialogContent className="max-w-[1200px] max-h-screen overflow-y-auto p-4">
             <DialogHeader>
-              <DialogTitle>Cadastrar uma entrada</DialogTitle>
+              <DialogTitle>Cadastro de entrada</DialogTitle>
               <DialogDescription>Cadastre uma nova entrada.</DialogDescription>
             </DialogHeader>
             <div className="grid grid-cols-2 gap-4">

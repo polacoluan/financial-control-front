@@ -26,8 +26,7 @@ export const columns: ColumnDef<Objective, unknown>[] = [
       return <DataTableColumnHeader column={column} title="Valor Alvo" />;
     },
     cell: ({ row }) => {
-      const value = row.getValue('target_value');
-      return value ? `R$ ${Number(value).toFixed(2)}` : '-';
+      return `R$ ${row.getValue('target_value')}`;
     },
   },
   {
@@ -38,8 +37,7 @@ export const columns: ColumnDef<Objective, unknown>[] = [
       );
     },
     cell: ({ row }) => {
-      const value = row.getValue('saved_amount');
-      return value ? `R$ ${Number(value).toFixed(2)}` : 'R$ 0,00';
+      return `R$ ${row.getValue('saved_amount')}`;
     },
   },
   {

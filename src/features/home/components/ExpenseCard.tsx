@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { BanknoteArrowUpIcon } from 'lucide-react';
+import ExpenseCreateForm from '@/features/expense/components/ExpenseCreateForm';
 
 export default function ExpenseCard({
   expense,
@@ -17,11 +17,18 @@ export default function ExpenseCard({
   return (
     <div>
       <Card>
-        <CardHeader>
-          <CardTitle className="flex justify-between">
-            Gastos <BanknoteArrowUpIcon className="w-4 h-4" />
-          </CardTitle>
-          <CardDescription>Gastos totais no mês</CardDescription>
+        <CardHeader className="p-6 pb-4">
+          <div className="grid grid-cols-[1fr_auto] items-start gap-2">
+            <div>
+              <CardTitle className="leading-tight">Gastos</CardTitle>
+              <CardDescription className="mt-0.5">
+                Gastos totais no mês
+              </CardDescription>
+            </div>
+            <div className="justify-self-end self-start">
+              <ExpenseCreateForm home={true} />
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <p className="text-2xl font-bold">R$ {expense ?? `0,00`}</p>

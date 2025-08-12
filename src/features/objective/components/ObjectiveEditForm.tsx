@@ -67,8 +67,6 @@ export default function ObjectiveEditForm({
     mutationFn: (values: IEditObjective) => editObjective(objectiveId, values),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getObjectives'] });
-      form.reset();
-      form.clearErrors();
       setIsDialogOpen(false);
       toast.success('Objetivo atualizado com sucesso!');
     },
@@ -80,7 +78,7 @@ export default function ObjectiveEditForm({
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant={'outline'}>Editar</Button>
+        <Button variant={'secondary'}>Editar</Button>
       </DialogTrigger>
       <DialogContent className="overflow-y-auto p-4">
         <DialogHeader>
