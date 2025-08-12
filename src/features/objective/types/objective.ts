@@ -9,6 +9,7 @@ export type IEditObjective = ICreateObjective;
 
 export interface Objective extends ICreateObjective {
   id: number;
+  progress: number;
 }
 
 export type ObjectiveResponse = Objective[];

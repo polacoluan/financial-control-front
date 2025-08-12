@@ -44,7 +44,7 @@ const formSchema = z.object({
   saved_amount: z.number().min(0).optional(),
 });
 
-export default function EditForm({
+export default function ObjectiveEditForm({
   objective,
   objectiveId,
 }: {

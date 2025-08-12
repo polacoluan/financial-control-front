@@ -5,10 +5,11 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import ObjectiveEditForm from '@/features/objective/components/ObjectiveEditForm';
 
 export default function ObjectiveCard() {
   const { isPending, data } = useQuery({
@@ -27,17 +28,25 @@ export default function ObjectiveCard() {
   return (
     <div className="m-4 grid grid-cols-12 gap-4">
       {data?.map((objective) => (
-        <Card key={objective.id} className="col-span-4">
+        <Card key={objective.id} className="col-span-2">
           <CardHeader>
-            <CardTitle>{objective.objective}</CardTitle>
+            <CardTitle className="flex items-center justify-between">
+              <div>{objective.objective}</div>
+              <div>
+                <ObjectiveEditForm
+                  objective={objective}
+                  objectiveId={objective.id}
+                />
+              </div>
+            </CardTitle>
             <CardDescription>{objective.description}</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>Progresso: {objective.saved_amount}%</p>
+            <Progress value={objective.progress} />
+            <p className="text-muted-foreground text-right w-full">
+              R$ {objective.saved_amount}/R$ {objective.target_value}
+            </p>
           </CardContent>
-          <CardFooter>
-            <p>Valor objetivo: {objective.target_value}</p>
-          </CardFooter>
         </Card>
       ))}
     </div>
